@@ -30,7 +30,7 @@ const EMAILJS_CONFIG = {
 
 // Tracker per timeout EmailJS
 let emailjsInitAttempts = 0;
-const MAX_EMAILJS_ATTEMPTS = 50; // ~5 secondi di tentativi
+const MAX_EMAILJS_ATTEMPTS = 5; // Solo 5 tentativi (500ms totali)
 
 /**
  * Inizializza EmailJS
