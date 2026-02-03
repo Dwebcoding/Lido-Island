@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="50" height="50">
+  <!-- Ombrellone -->
+  <path d="M50 20 L30 45 L70 45 Z" fill="#74b9ff" stroke="#0984e3" stroke-width="2"/>
+  <!-- Palo -->
+  <rect x="48" y="45" width="4" height="35" fill="#2d3436"/>
+  <!-- Base -->
+  <ellipse cx="50" cy="80" rx="15" ry="3" fill="#00b894"/>
+  <!-- Onde -->
+  <path d="M10 85 Q20 80, 30 85 T50 85 T70 85 T90 85" fill="none" stroke="#0984e3" stroke-width="2"/>
+</svg>

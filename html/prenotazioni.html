@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sistema di Prenotazione - Isola Lido">
+    <title>Prenotazioni - Isola Lido</title>
+    
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheet principale -->
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- ============ HEADER DINAMICO ============ -->
+    <header class="header"></header>
+    </header>
+
+    <!-- ============ MAIN CONTENT ============ -->
+    <main>
+        <!-- HERO SECTION PRENOTAZIONI -->
+        <section class="hero" style="background-image: url('../images/banner%20index/pool%201.png');">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h2 class="hero-title">Prenota Ora</h2>
+                <p class="hero-subtitle">Tavoli e Sdraio - Riserva i tuoi posti</p>
+            </div>
+        </section>
+
+        <!-- SEZIONE PRENOTAZIONI -->
+        <section class="booking-section">
+            <div class="container">
+                <h2 class="section-title">Sistema di Prenotazione</h2>
+
+                <div class="booking-container">
+                    <!-- SINISTRA: FORM -->
+                    <div class="booking-form-column">
+                        <div class="booking-card">
+                            <h3>📅 Seleziona Data</h3>
+                            <input 
+                                type="date" 
+                                id="bookingDate" 
+                                class="booking-date-input"
+                                min=""
+                                required
+                            >
+                            <p class="booking-hint">Scegli una data da domani in poi</p>
+                        </div>
+
+                        <!-- TAVOLI -->
+                        <div class="booking-card">
+                            <h3>🍽️ Tavoli (8 persone)</h3>
+                            <p class="booking-price">€ 8,00 per tavolo</p>
+                            <div class="booking-quantity">
+                                <button type="button" class="qty-btn" id="tableMinus">−</button>
+                                <input 
+                                    type="number" 
+                                    id="tableQty" 
+                                    value="0" 
+                                    min="0" 
+                                    max="110" 
+                                    readonly
+                                    class="qty-input"
+                                >
+                                <button type="button" class="qty-btn" id="tablePlus">+</button>
+                            </div>
+                            <p class="availability" id="tableAvailability">Disponibili: 110 tavoli</p>
+                            <p class="booking-subtotal" id="tableSubtotal">Subtotale: € 0,00</p>
+                        </div>
+
+                        <!-- SDRAIO E OMBRELLONI -->
+                        <div class="booking-card">
+                            <h3>☀️ Sdraio e Ombrelloni</h3>
+                            <p class="booking-price">€ 5,00 per sdraio</p>
+                            <div class="booking-quantity">
+                                <button type="button" class="qty-btn" id="chairMinus">−</button>
+                                <input 
+                                    type="number" 
+                                    id="chairQty" 
+                                    value="0" 
+                                    min="0" 
+                                    max="65" 
+                                    readonly
+                                    class="qty-input"
+                                >
+                                <button type="button" class="qty-btn" id="chairPlus">+</button>
+                            </div>
+                            <p class="availability" id="chairAvailability">Disponibili: 65 sdraio</p>
+                            <p class="booking-subtotal" id="chairSubtotal">Subtotale: € 0,00</p>
+                        </div>
+
+                        <!-- RIEPILOGO TOTALE -->
+                        <div class="booking-card booking-summary">
+                            <h3>💰 Riepilogo Prenotazione</h3>
+                            <div class="summary-row">
+                                <span>Tavoli (<span id="summaryTableQty">0</span>):</span>
+                                <strong id="summaryTablePrice">€ 0,00</strong>
+                            </div>
+                            <div class="summary-row">
+                                <span>Sdraio (<span id="summaryChairQty">0</span>):</span>
+                                <strong id="summaryChairPrice">€ 0,00</strong>
+                            </div>
+                            <div class="summary-divider"></div>
+                            <div class="summary-row total">
+                                <span>TOTALE:</span>
+                                <strong id="summaryTotal">€ 0,00</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- DESTRA: DATI PERSONALI -->
+                    <div class="booking-form-column">
+                        <form id="bookingForm" class="booking-form">
+                            <h3>👤 Tuoi Dati</h3>
+
+                            <div class="form-group">
+                                <label for="bookingName">Nome Completo *</label>
+                                <input 
+                                    type="text" 
+                                    id="bookingName" 
+                                    name="name" 
+                                    placeholder="Es: Mario Rossi"
+                                    required
+                                >
+                                <span class="form-error"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="bookingEmail">Email *</label>
+                                <input 
+                                    type="email" 
+                                    id="bookingEmail" 
+                                    name="email" 
+                                    placeholder="Es: mario@example.com"
+                                    required
+                                >
+                                <span class="form-error"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="bookingPhone">Telefono *</label>
+                                <input 
+                                    type="tel" 
+                                    id="bookingPhone" 
+                                    name="phone" 
+                                    placeholder="Es: +39 3501234567"
+                                    required
+                                >
+                                <span class="form-error"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="bookingNotes">Note Speciali (opzionale)</label>
+                                <textarea 
+                                    id="bookingNotes" 
+                                    name="notes" 
+                                    placeholder="Es: Vogliamo i tavoli vicino alla piscina"
+                                    rows="4"
+                                ></textarea>
+                            </div>
+
+                            <!-- INFORMATIVE -->
+                            <div class="booking-info">
+                                <p><strong>📌 Importante:</strong></p>
+                                <ul>
+                                    <li>Prenotazione valida fino a 2 ore prima dell'arrivo</li>
+                                    <li>Conferma via email dopo la prenotazione</li>
+                                    <li>È possibile modificare la prenotazione fino a 24 ore prima</li>
+                                    <li>Cancellazione gratuita fino a 48 ore prima</li>
+                                </ul>
+                            </div>
+
+                            <!-- PULSANTE SUBMIT -->
+                            <button type="submit" class="booking-submit" id="submitBooking">
+                                ✓ Conferma Prenotazione
+                            </button>
+
+                            <p class="form-disclaimer">
+                                Compilando il form accetti i nostri <a href="termini.html">termini e condizioni</a>
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE MESSAGGI -->
+        <section class="booking-messages" id="bookingMessages">
+            <div class="container">
+                <div id="successMessage" class="booking-success-message hidden">
+                    <h3>✅ Prenotazione Confermata!</h3>
+                    <p>La tua prenotazione è stata registrata. Riceverai una email di conferma a breve.</p>
+                    <p>ID Prenotazione: <strong id="bookingId"></strong></p>
+                    <button type="button" class="primary-button" onclick="window.location.href='../index.html'">
+                        Torna alla Home
+                    </button>
+                </div>
+
+                <div id="errorMessage" class="booking-error-message hidden">
+                    <h3>⚠️ Errore nella Prenotazione</h3>
+                    <p id="errorText"></p>
+                    <button type="button" class="primary-button" onclick="this.parentElement.classList.add('hidden')">
+                        Chiudi
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE INFO PRENOTAZIONI -->
+        <section class="booking-info-section">
+            <div class="container">
+                <h2 class="section-title">Informazioni Utili</h2>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3>🍽️ Tavoli</h3>
+                        <p><strong>Capacità:</strong> 8 persone per tavolo</p>
+                        <p><strong>Disponibili:</strong> 110 tavoli</p>
+                        <p><strong>Prezzo:</strong> €8,00 per tavolo</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>☀️ Sdraio e Ombrelloni</h3>
+                        <p><strong>Tipo:</strong> Sdraio con ombrellone incluso</p>
+                        <p><strong>Disponibili:</strong> 65 sdraio</p>
+                        <p><strong>Prezzo:</strong> €5,00 per sdraio</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>⏰ Orari</h3>
+                        <p><strong>Lun-Ven:</strong> 9:30 - 20:00</p>
+                        <p><strong>Sab-Dom:</strong> 9:30 - 21:00</p>
+                        <p><strong>Check-in:</strong> 30 min prima dell'orario</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>❓ Domande Frequenti</h3>
+                        <p><strong>Cancellamene:</strong> Gratuito fino a 48 ore</p>
+                        <p><strong>Modifiche:</strong> Permesse fino a 24 ore</p>
+                        <p><strong>Conferma:</strong> Via email e SMS</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CALL TO ACTION -->
+        <section class="cta-section">
+            <div class="container">
+                <h2 class="section-title">Hai Domande?</h2>
+                <div class="cta-buttons">
+                    <a href="servizi.html" class="primary-button">Vedi Servizi</a>
+                    <a href="contatti.html" class="secondary-button">Contattaci</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ============ FOOTER DINAMICO ============ -->
+    <footer class="footer"></footer>
+
+    <!-- EmailJS CDN -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/index.min.js"></script>
+    
+    <!-- Script Componenti Dinamici -->
+    <script src="../js/components.js"></script>
+    
+    <!-- Script JavaScript Principale -->
+    <script src="../js/main.js"></script>
+    
+    <!-- Script Booking (PRIMA di inizializzazione pagina) -->
+    <script src="../js/booking.js"></script>
+    
+    <!-- Script Inizializzazione Pagina -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            initializePageComponents('prenotazioni');
+        });
+    </script>
+</body>
+</html>

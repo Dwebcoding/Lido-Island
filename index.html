@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Isola Lido - Piscina e relax per tutta la famiglia. Scopri i nostri servizi e il nostro listino prezzi.">
+    <title>Isola Lido - Piscina e Relax</title>
+    
+    <!-- Google Font - Poppins per modernità e Playfair Display per titoli eleganti -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheet principale -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- ============ HEADER DINAMICO ============ -->
+    <header class="header"></header>
+
+    <!-- ============ MAIN CONTENT ============ -->
+    <main>
+        <!-- HERO SECTION -->
+        <section class="hero" style="background-image: url('images/banner%20index/pool%201.png');">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h2 class="hero-title">Isola Lido</h2>
+                <p class="hero-subtitle">Piscina e relax per tutta la famiglia</p>
+                <a href="html/servizi.html" class="cta-button">Scopri i nostri servizi</a>
+            </div>
+        </section>
+
+        <!-- GALLERIA SEZIONE -->
+        <section class="gallery-section">
+            <div class="container">
+                <h2 class="section-title">La Nostra Galleria</h2>
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <img src="images/banner%20index/pool%201.png" alt="Piscina principale - Isola Lido">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="images/banner%20index/pool%202.png" alt="Area relax - Isola Lido">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="images/banner%20index/pool%203.png" alt="Zona ombra - Isola Lido">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="images/banner%20index/lido%201.png" alt="Vista esterna - Isola Lido">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="images/banner%20index/lido%202.png" alt="Area giochi bambini - Isola Lido">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="images/banner%20index/pic%20nic%201.png" alt="Area picnic - Isola Lido">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DESCRIZIONE SEZIONE -->
+        <section class="about-section">
+            <div class="container">
+                <h2 class="section-title">Benvenuti a Isola Lido</h2>
+                <p class="about-text">
+                    Isola Lido è il luogo perfetto dove rilassarsi e divertirsi in famiglia. 
+                    Con le nostre moderne piscine, aree verdi ombreggiate e servizi completi, 
+                    offriamo un'esperienza indimenticabile per adulti e bambini.
+                </p>
+                <p class="about-text">
+                    Che si tratti di una giornata di nuoto, un pomeriggio leggendo un libro all'ombra, 
+                    o un momento divertente con i bambini nella nostra area dedicata, 
+                    Isola Lido è la destinazione ideale per ogni occasione.
+                </p>
+                <p class="about-text">
+                    Disponibilità di bar, spogliatoi moderni, docce e servizi igienici di prima qualità 
+                    rendono la tua visita ancora più confortevole.
+                </p>
+                <div class="about-cta">
+                    <a href="html/servizi.html" class="primary-button">Vedi Listino Prezzi</a>
+                    <a href="html/contatti.html" class="secondary-button">Contattaci</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SERVIZI OFFERTI -->
+        <section class="services-preview">
+            <div class="container">
+                <h2 class="section-title">I Nostri Servizi</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">🏊</div>
+                        <h3>Piscina</h3>
+                        <p>Piscina principale con profondità regolamentare</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">☀️</div>
+                        <h3>Area Relax</h3>
+                        <p>Zona ombra con lettini e sedie a sdraio</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🍹</div>
+                        <h3>Bar</h3>
+                        <p>Bevande e snack durante tutta la giornata</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">👶</div>
+                        <h3>Area Bambini</h3>
+                        <p>Zona sicura e divertente per i più piccoli</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ============ FOOTER DINAMICO ============ -->
+    <footer class="footer"></footer>
+
+    <!-- Script Componenti Dinamici -->
+    <script src="js/components.js"></script>
+    
+    <!-- Script Inizializzazione Pagina -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            initializePageComponents('home');
+        });
+    </script>
+
+    <!-- Script JavaScript Principale -->
+    <script src="js/main.js"></script>
+</body>
+</html>

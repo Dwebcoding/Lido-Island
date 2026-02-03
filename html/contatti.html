@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contatti Isola Lido - Piscina per tutta la famiglia">
+    <title>Contatti - Isola Lido</title>
+    
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheet principale -->
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- ============ HEADER DINAMICO ============ -->
+    <header class="header"></header>
+    </header>
+
+    <!-- ============ MAIN CONTENT ============ -->
+    <main>
+        <!-- HERO SECTION CONTATTI -->
+        <section class="hero" style="background-image: url('../images/banner%20index/lido%201.png');">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h2 class="hero-title">Contattaci</h2>
+                <p class="hero-subtitle">Siamo qui per rispondere alle tue domande</p>
+            </div>
+        </section>
+
+        <!-- SEZIONE CONTATTI -->
+        <section class="contacts-section">
+            <div class="container">
+                <h2 class="section-title">Informazioni di Contatto</h2>
+
+                <!-- INFO CONTATTI -->
+                <div class="contact-info">
+                    <div class="contact-info-card">
+                        <div class="info-icon">📍</div>
+                        <h3>Indirizzo</h3>
+                        <p>
+                            Via Rivolta, 20062<br>
+                            Cassano d'Adda (MI) - Italia
+                        </p>
+                    </div>
+
+                    <div class="contact-info-card">
+                        <div class="info-icon">📞</div>
+                        <h3>Telefono</h3>
+                        <p>
+                            <a href="tel:333-499-3469">333-499-3469</a><br>
+                            <span class="small">Lun-Dom: 9:00 - 18:00</span>
+                        </p>
+                    </div>
+
+                    <div class="contact-info-card">
+                        <div class="info-icon">📧</div>
+                        <h3>Email</h3>
+                        <p>
+                            <a href="mailto:postamaster@isolalido.it">postamaster@isolalido.it</a><br>
+                            <span class="small">Risposta entro 24 ore</span>
+                        </p>
+                    </div>
+
+                    <div class="contact-info-card">
+                        <div class="info-icon">🕐</div>
+                        <h3>Orari di Apertura</h3>
+                        <p>
+                            <strong>Lun-Ven:</strong> 9:30 - 20:00<br>
+                            <strong>Sab-Dom:</strong> 9:30 - 21:00<br>
+                            <span class="small">Aperto tutto l'anno*</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE FORM CONTATTI -->
+        <section class="form-section">
+            <div class="container">
+                <h2 class="section-title">Inviaci un Messaggio</h2>
+                <p class="form-description">Compila il form sottostante e ti risponderemo al più presto</p>
+
+                <form id="contactForm" class="contact-form">
+                    <div class="form-group">
+                        <label for="nome">Nome *</label>
+                        <input 
+                            type="text" 
+                            id="nome" 
+                            name="nome" 
+                            placeholder="Inserisci il tuo nome" 
+                            required
+                        >
+                        <span class="form-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            placeholder="Inserisci la tua email" 
+                            required
+                        >
+                        <span class="form-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="telefono">Telefono (Opzionale)</label>
+                        <input 
+                            type="tel" 
+                            id="telefono" 
+                            name="telefono" 
+                            placeholder="Inserisci il tuo numero di telefono"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="soggetto">Soggetto</label>
+                        <input 
+                            type="text" 
+                            id="soggetto" 
+                            name="soggetto" 
+                            placeholder="Es: Prenotazione, Informazioni, Altro"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="messaggio">Messaggio *</label>
+                        <textarea 
+                            id="messaggio" 
+                            name="messaggio" 
+                            placeholder="Scrivi il tuo messaggio..." 
+                            required
+                        ></textarea>
+                        <span class="form-error"></span>
+                    </div>
+
+                    <button type="submit" class="form-submit">Invia Messaggio</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- SEZIONE MAPPA -->
+        <section class="map-section">
+            <div class="container">
+                <h2 class="section-title">Dove Trovarci</h2>
+                <div class="map-container">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2808.9346!2d9.5195899!3d45.5147554!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47814a896cced18f%3A0x9b872969ec704a32!2sIsola%20Lido!5e0!3m2!1sit!2sit!4v1234567890" 
+                        width="100%" 
+                        height="450" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade"
+                    ></iframe>
+                </div>
+                <p class="map-note">
+                    📍 Isola Lido - Cassano d'Adda (MI) - Clicca sulla mappa per le indicazioni stradali complete
+                </p>
+            </div>
+        </section>
+
+        <!-- SEZIONE FAQ -->
+        <section class="faq-section">
+            <div class="container">
+                <h2 class="section-title">Domande Frequenti</h2>
+                <div class="faq-grid">
+                    <div class="faq-card">
+                        <h3>Quali sono gli orari di apertura?</h3>
+                        <p>Apriamo alle 9:30 dal lunedì al venerdì, alle 9:30 il sabato e la domenica. Chiudiamo a mezzanotte nei giorni feriali e a mezzanotte nei weekend.</p>
+                    </div>
+
+                    <div class="faq-card">
+                        <h3>Che prezzi avete?</h3>
+                        <p>I prezzi variano a seconda del giorno e dell'orario. Dai un'occhiata alla pagina "Servizi" per il listino completo. I bambini sotto 1 metro entrano gratis!</p>
+                    </div>
+
+                    <div class="faq-card">
+                        <h3>Accettate prenotazioni?</h3>
+                        <p>Sì! Puoi contattarci via email o telefono per prenotare lettini, gazebo o aree dedicate. Contattaci almeno 24 ore prima.</p>
+                    </div>
+
+                    <div class="faq-card">
+                        <h3>C'è parcheggio?</h3>
+                        <p>Sì, abbiamo un ampio parcheggio gratuito disponibile per tutti i nostri ospiti. Posti auto per disabili disponibili.</p>
+                    </div>
+
+                    <div class="faq-card">
+                        <h3>Potete ospitare feste?</h3>
+                        <p>Certo! Offriamo pacchetti speciali per compleanni, anniversari e eventi. Contattaci per discutere le vostre esigenze.</p>
+                    </div>
+
+                    <div class="faq-card">
+                        <h3>Quali sono le politiche di sicurezza?</h3>
+                        <p>La sicurezza è la nostra priorità. Abbiamo personale qualificato, sistemi di sorveglianza e rispettiamo tutti gli standard igienici e di salute.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CALL TO ACTION -->
+        <section class="cta-section">
+            <div class="container">
+                <h2 class="section-title">Non aspettare! Visitaci Oggi</h2>
+                <div class="cta-buttons">
+                    <a href="servizi.html" class="primary-button">Vedi i Nostri Prezzi</a>
+                    <a href="../index.html" class="secondary-button">Torna alla Home</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ============ FOOTER DINAMICO ============ -->
+    <footer class="footer"></footer>
+
+    <!-- Script Componenti Dinamici -->
+    <script src="../js/components.js"></script>
+    
+    <!-- Script Inizializzazione Pagina -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            initializePageComponents('contatti');
+        });
+    </script>
+
+    <!-- Script JavaScript Principale -->
+    <script src="../js/main.js"></script>
+</body>
+</html>
