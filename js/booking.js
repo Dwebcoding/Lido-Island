@@ -619,6 +619,7 @@ function sendBookingEmail(booking) {
         };
         
         console.log('[Email] Invio a EmailJS API...');
+        console.log('[Email] Dati inviati:', JSON.stringify(emailData, null, 2));
         
         // Chiama l'API REST di EmailJS
         fetch('https://api.emailjs.com/api/v1.0/email/send', {
