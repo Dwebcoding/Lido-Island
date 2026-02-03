@@ -603,6 +603,11 @@ function sendBookingEmail(booking) {
             template_id: EMAILJS_CONFIG.TEMPLATE_ID,
             user_id: EMAILJS_CONFIG.PUBLIC_KEY,
             template_params: {
+                // Parametri standard EmailJS
+                from_name: booking.name,
+                to_name: 'Isola Lido',
+                reply_to: booking.email,
+                // Parametri personalizzati prenotazione
                 customer_name: booking.name,
                 customer_email: booking.email,
                 customer_phone: booking.phone,
@@ -620,9 +625,6 @@ function sendBookingEmail(booking) {
         
         console.log('[Email] Invio a EmailJS API...');
         console.log('[Email] Dati inviati:', JSON.stringify(emailData, null, 2));
-        
-        // DEBUG: Mostra i dati in un alert
-        alert('DATI EMAILJS:\n\n' + JSON.stringify(emailData.template_params, null, 2));
         
         // Chiama l'API REST di EmailJS
         fetch('https://api.emailjs.com/api/v1.0/email/send', {
