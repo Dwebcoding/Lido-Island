@@ -603,29 +603,18 @@ function sendBookingEmail(booking) {
             template_id: EMAILJS_CONFIG.TEMPLATE_ID,
             user_id: EMAILJS_CONFIG.PUBLIC_KEY,
             template_params: {
-                from_name: booking.name,
-                from_email: booking.email,
-                to_name: 'Isola Lido',
                 customer_name: booking.name,
                 customer_email: booking.email,
                 customer_phone: booking.phone,
-                reply_to: booking.email,
                 booking_id: booking.id,
                 booking_date: formatDate(booking.date),
-                date: formatDate(booking.date),
                 tables_count: booking.tables.toString(),
-                chairs_count: booking.chairs.toString(),
-                tables: booking.tables.toString(),
-                chairs: booking.chairs.toString(),
                 tables_price: tablesTotal.toFixed(2),
+                chairs_count: booking.chairs.toString(),
                 chairs_price: chairsTotal.toFixed(2),
                 total_price: total.toFixed(2),
-                total: total.toFixed(2),
                 booking_notes: booking.notes || 'Nessuna nota',
-                notes: booking.notes || 'Nessuna nota',
-                message: `Nuova prenotazione da ${booking.name}\n\nData: ${formatDate(booking.date)}\nTavoli: ${booking.tables}\nSdraio: ${booking.chairs}\nTotale: €${total.toFixed(2)}\n\nNote: ${booking.notes || 'Nessuna'}`,
-                booking_timestamp: new Date(booking.timestamp).toLocaleString('it-IT'),
-                timestamp: new Date(booking.timestamp).toLocaleString('it-IT')
+                booking_timestamp: new Date(booking.timestamp).toLocaleString('it-IT')
             }
         };
         
