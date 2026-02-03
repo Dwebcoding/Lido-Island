@@ -256,26 +256,8 @@
     <!-- ============ FOOTER DINAMICO ============ -->
     <footer class="footer"></footer>
 
-    <!-- EmailJS CDN - Caricamento con timeout -->
-    <script>
-        // Carica EmailJS da CDN
-        (function() {
-            const script = document.createElement('script');
-            script.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/build/index.min.js';
-            script.async = true;
-            script.onerror = function() {
-                console.warn('[EmailJS] ⚠️ CDN primario fallito, provo CDN alternativo...');
-                const script2 = document.createElement('script');
-                script2.src = 'https://unpkg.com/@emailjs/browser@4/dist/build/index.min.js';
-                script2.async = true;
-                script2.onerror = function() {
-                    console.error('[EmailJS] ❌ Nessun CDN disponibile');
-                };
-                document.head.appendChild(script2);
-            };
-            document.head.appendChild(script);
-        })();
-    </script>
+    <!-- EmailJS CDN - Caricamento DIRETTO (non asincrono) -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/build/index.min.js"></script>
     
     <!-- Script Componenti Dinamici -->
     <script src="../js/components.js"></script>

@@ -30,37 +30,36 @@ const EMAILJS_CONFIG = {
 
 // Tracker per timeout EmailJS
 let emailjsInitAttempts = 0;
-const MAX_EMAILJS_ATTEMPTS = 5; // Solo 5 tentativi (500ms totali)
+const MAX_EMAILJS_ATTEMPTS = 10; // 1 secondo di tentativi
 
 /**
  * Inizializza EmailJS
  */
 function initEmailJS() {
-    // Attendere che emailjs sia caricato
-    if (typeof emailjs === 'undefined') {
-        emailjsInitAttempts++;
-        
-        if (emailjsInitAttempts >= MAX_EMAILJS_ATTEMPTS) {
-            console.warn('[EmailJS] ⚠️ CDN non disponibile. Prenotazioni funzioneranno senza email.');
-            return;
+    // Se EmailJS è già caricato, inizializza
+    if (typeof emailjs !== 'undefined') {
+        try {
+            emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
+            console.log('[EmailJS] ✅ Inizializzato con successo!');
+            console.log('[EmailJS] Service ID:', EMAILJS_CONFIG.SERVICE_ID);
+            console.log('[EmailJS] Template ID:', EMAILJS_CONFIG.TEMPLATE_ID);
+            console.log('[EmailJS] Owner Email:', EMAILJS_CONFIG.OWNER_EMAIL);
+            return true;
+        } catch (error) {
+            console.error('[EmailJS] ❌ Errore nell\'inizializzazione:', error);
+            return false;
         }
-        
-        setTimeout(() => initEmailJS(), 100);
-        return;
     }
     
-    try {
-        emailjs.init({
-            publicKey: EMAILJS_CONFIG.PUBLIC_KEY,
-            limitRate: {
-                id: 'app',
-                throttle: 50,
-            },
-        });
-        console.log('[EmailJS] ✅ Inizializzato correttamente');
-    } catch (error) {
-        console.error('[EmailJS] ❌ Errore durante inizializzazione:', error);
+    // Se non è ancora caricato, riprova
+    emailjsInitAttempts++;
+    if (emailjsInitAttempts >= MAX_EMAILJS_ATTEMPTS) {
+        console.error('[EmailJS] ❌ CDN non disponibile dopo ' + MAX_EMAILJS_ATTEMPTS + ' tentativi');
+        return false;
     }
+    
+    setTimeout(() => initEmailJS(), 100);
+    return false;
 }
 
 // ============ VARIABILI GLOBALI ============
@@ -610,27 +609,26 @@ function saveBooking(booking) {
  * @param {Object} booking - Dati della prenotazione
  */
 function sendBookingEmail(booking) {
-    console.log('[EmailJS] Inizio invio email per prenotazione:', booking.id);
-    
-    // Se EmailJS non è caricato, aspetta e riprova
+    // Se EmailJS non è caricato, esci
     if (typeof emailjs === 'undefined') {
-        console.warn('[EmailJS] ⚠️ EmailJS non ancora caricato, riprovo tra 500ms...');
-        setTimeout(() => sendBookingEmail(booking), 500);
+        console.warn('[Email] ⚠️ EmailJS non disponibile. Prenotazione salvata ma email non inviata.');
         return;
     }
     
     try {
-        // Calcola il totale
+        console.log('[Email] Invio email per prenotazione:', booking.id);
+        
+        // Calcola i totali
         const tablesTotal = booking.tables * BOOKING_CONFIG.TABLES.price;
         const chairsTotal = booking.chairs * BOOKING_CONFIG.CHAIRS.price;
         const total = tablesTotal + chairsTotal;
         
-        // Prepara i dati per EmailJS
-        const templateParams = {
+        // Prepara i parametri per il template EmailJS
+        const emailParams = {
             to_email: EMAILJS_CONFIG.OWNER_EMAIL,
             customer_name: booking.name,
             customer_email: booking.email,
-            customer_phone: booking.phone || 'Non fornito',
+            customer_phone: booking.phone,
             booking_date: formatDate(booking.date),
             tables_count: booking.tables,
             chairs_count: booking.chairs,
@@ -642,31 +640,25 @@ function sendBookingEmail(booking) {
             booking_timestamp: new Date(booking.timestamp).toLocaleString('it-IT')
         };
         
-        console.log('[EmailJS] Invio email con parametri:', templateParams);
+        console.log('[Email] Parametri:', emailParams);
         
-        // Invia l'email
+        // Invia l'email tramite EmailJS
         emailjs.send(
             EMAILJS_CONFIG.SERVICE_ID,
             EMAILJS_CONFIG.TEMPLATE_ID,
-            templateParams
-        ).then((response) => {
-            console.log('[EmailJS] ✅ Email inviata con successo', response);
-            logBooking('Email inviata con successo a ' + EMAILJS_CONFIG.OWNER_EMAIL, {
-                status: response.status,
-                booking_id: booking.id
-            });
-        }).catch((error) => {
-            console.error('[EmailJS] ❌ Errore nell\'invio email:', error);
-            logBooking('Errore nell\'invio email: ' + error.message, {
-                booking_id: booking.id
-            });
-            
-            // Se EmailJS fallisce, log comunque salvato su localStorage
-            alert('⚠️ Email non inviata, ma prenotazione salvata.\n\nContatta il proprietario per confermare.');
-        });
+            emailParams
+        ).then(
+            function(response) {
+                console.log('[Email] ✅ Email inviata con successo!');
+                console.log('[Email] Response:', response);
+            },
+            function(error) {
+                console.error('[Email] ❌ Errore nell\'invio:', error);
+            }
+        );
+        
     } catch (error) {
-        console.error('[EmailJS] ❌ ERRORE CRITICO:', error);
-        logBooking('Errore critico nell\'invio email', error);
+        console.error('[Email] ❌ Errore critico:', error);
     }
 }
 
