@@ -36,25 +36,25 @@ const MAX_EMAILJS_ATTEMPTS = 10; // 1 secondo di tentativi
  * Inizializza EmailJS
  */
 function initEmailJS() {
-    // Se EmailJS è già caricato, inizializza
+    // EmailJS è locale, usa la sintassi vecchia
     if (typeof emailjs !== 'undefined') {
         try {
             emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
-            console.log('[EmailJS] ✅ Inizializzato con successo!');
-            console.log('[EmailJS] Service ID:', EMAILJS_CONFIG.SERVICE_ID);
-            console.log('[EmailJS] Template ID:', EMAILJS_CONFIG.TEMPLATE_ID);
-            console.log('[EmailJS] Owner Email:', EMAILJS_CONFIG.OWNER_EMAIL);
+            console.log('[EmailJS] ✅ Inizializzato!');
+            console.log('[EmailJS] Service:', EMAILJS_CONFIG.SERVICE_ID);
+            console.log('[EmailJS] Template:', EMAILJS_CONFIG.TEMPLATE_ID);
+            console.log('[EmailJS] To:', EMAILJS_CONFIG.OWNER_EMAIL);
             return true;
         } catch (error) {
-            console.error('[EmailJS] ❌ Errore nell\'inizializzazione:', error);
+            console.error('[EmailJS] ❌ Errore inizializzazione:', error);
             return false;
         }
     }
     
-    // Se non è ancora caricato, riprova
+    // Se non è caricato, riprova
     emailjsInitAttempts++;
     if (emailjsInitAttempts >= MAX_EMAILJS_ATTEMPTS) {
-        console.error('[EmailJS] ❌ CDN non disponibile dopo ' + MAX_EMAILJS_ATTEMPTS + ' tentativi');
+        console.error('[EmailJS] ❌ Non disponibile dopo 10 tentativi');
         return false;
     }
     
