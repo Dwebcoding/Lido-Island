@@ -123,9 +123,16 @@ function initBookingSystem() {
     });
     
     // Event listener per form
-    document.getElementById('bookingForm')?.addEventListener('submit', (e) => {
-        handleBookingSubmit(e);
-    });
+    const bookingForm = document.getElementById('bookingForm');
+    if (bookingForm) {
+        console.log('[Booking System] Form trovato, attaching submit listener...');
+        bookingForm.addEventListener('submit', (e) => {
+            console.log('[Booking] SUBMIT EVENT TRIGGERED');
+            handleBookingSubmit(e);
+        });
+    } else {
+        console.error('[Booking System] ❌ Form NON trovato! ID: bookingForm');
+    }
     
     // Aggiorna disponibilità inizialmente
     updateAvailability();
@@ -423,10 +430,13 @@ function handleBookingSubmit(e) {
     console.log('[Booking] Submit form iniziato');
     e.preventDefault();
     
+    alert('✓ Prenotazione ricevuta!'); // DEBUG: Verifica che il click funziona
+    
     try {
         // Valida il form
         if (!validateBookingForm()) {
             console.log('[Booking] ❌ Validazione fallita');
+            alert('❌ Errore: Compila correttamente tutti i campi!');
             return;
         }
         
@@ -450,7 +460,8 @@ function handleBookingSubmit(e) {
         // Salva la prenotazione
         saveBooking(booking);
         
-        console.log('[Booking] ✅ Booking salvato e email inviata');
+        console.log('[Booking] ✅ Booking salvato');
+        alert(`✅ Prenotazione confermata!\nID: ${booking.id}`); // DEBUG: Mostra successo
         
         // Mostra successo
         showBookingSuccess(booking);
@@ -459,6 +470,7 @@ function handleBookingSubmit(e) {
         resetBookingForm();
     } catch (error) {
         console.error('[Booking] ❌ ERRORE CRITICO:', error);
+        alert(`❌ ERRORE: ${error.message}`); // DEBUG: Mostra errore
         showError('Errore nella Prenotazione', 'Si è verificato un errore imprevisto. Controlla la console per i dettagli.');
     }
 }
