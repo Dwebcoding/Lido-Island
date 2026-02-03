@@ -1,0 +1,23 @@
+{
+  "name": "lido-island",
+  "version": "1.0.0",
+  "description": "Sito web moderno e responsive per una piscina balneare con area relax e servizi completi.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dwebcoding/Lido-island.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dwebcoding/Lido-island/issues"
+  },
+  "homepage": "https://github.com/Dwebcoding/Lido-island#readme",
+  "dependencies": {
+    "@emailjs/browser": "^4.4.1"
+  }
+}
