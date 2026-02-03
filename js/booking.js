@@ -610,7 +610,14 @@ function saveBooking(booking) {
  * @param {Object} booking - Dati della prenotazione
  */
 function sendBookingEmail(booking) {
-    console.log('[Email] Inizio invio email per prenotazione:', booking.id);
+    console.log('[EmailJS] Inizio invio email per prenotazione:', booking.id);
+    
+    // Se EmailJS non è caricato, aspetta e riprova
+    if (typeof emailjs === 'undefined') {
+        console.warn('[EmailJS] ⚠️ EmailJS non ancora caricato, riprovo tra 500ms...');
+        setTimeout(() => sendBookingEmail(booking), 500);
+        return;
+    }
     
     try {
         // Calcola il totale
@@ -618,112 +625,49 @@ function sendBookingEmail(booking) {
         const chairsTotal = booking.chairs * BOOKING_CONFIG.CHAIRS.price;
         const total = tablesTotal + chairsTotal;
         
-        // Prepara i dati per l'email
-        const emailData = {
-            subject: `Nuova Prenotazione - ${booking.name}`,
-            message: `
-NUOVA PRENOTAZIONE - ISOLA LIDO
-
-ID Prenotazione: ${booking.id}
-Data: ${formatDate(booking.date)}
-
-CLIENTE:
-Nome: ${booking.name}
-Email: ${booking.email}
-Telefono: ${booking.phone}
-
-ARTICOLI:
-Tavoli (€${BOOKING_CONFIG.TABLES.price.toFixed(2)} cad): ${booking.tables} × €${BOOKING_CONFIG.TABLES.price.toFixed(2)} = €${tablesTotal.toFixed(2)}
-Sdraio (€${BOOKING_CONFIG.CHAIRS.price.toFixed(2)} cad): ${booking.chairs} × €${BOOKING_CONFIG.CHAIRS.price.toFixed(2)} = €${chairsTotal.toFixed(2)}
-
-TOTALE: €${total.toFixed(2)}
-
-NOTE: ${booking.notes || 'Nessuna nota'}
-
-Timestamp: ${new Date(booking.timestamp).toLocaleString('it-IT')}
-            `
+        // Prepara i dati per EmailJS
+        const templateParams = {
+            to_email: EMAILJS_CONFIG.OWNER_EMAIL,
+            customer_name: booking.name,
+            customer_email: booking.email,
+            customer_phone: booking.phone || 'Non fornito',
+            booking_date: formatDate(booking.date),
+            tables_count: booking.tables,
+            chairs_count: booking.chairs,
+            tables_price: tablesTotal.toFixed(2),
+            chairs_price: chairsTotal.toFixed(2),
+            total_price: total.toFixed(2),
+            booking_notes: booking.notes || 'Nessuna nota',
+            booking_id: booking.id,
+            booking_timestamp: new Date(booking.timestamp).toLocaleString('it-IT')
         };
         
-        // Metodo 1: Prova EmailJS se disponibile
-        if (typeof emailjs !== 'undefined') {
-            console.log('[Email] EmailJS disponibile, uso il servizio');
-            sendViaEmailJS(booking);
-        } else {
-            console.log('[Email] EmailJS non disponibile, uso Formspree');
-            sendViaFormspree(emailData);
-        }
+        console.log('[EmailJS] Invio email con parametri:', templateParams);
         
-    } catch (error) {
-        console.error('[Email] ❌ ERRORE nell\'invio email:', error);
-    }
-}
-
-/**
- * Invia email via EmailJS
- * @param {Object} booking - Dati della prenotazione
- */
-function sendViaEmailJS(booking) {
-    const tablesTotal = booking.tables * BOOKING_CONFIG.TABLES.price;
-    const chairsTotal = booking.chairs * BOOKING_CONFIG.CHAIRS.price;
-    const total = tablesTotal + chairsTotal;
-    
-    const templateParams = {
-        to_email: EMAILJS_CONFIG.OWNER_EMAIL,
-        customer_name: booking.name,
-        customer_email: booking.email,
-        customer_phone: booking.phone || 'Non fornito',
-        booking_date: formatDate(booking.date),
-        tables_count: booking.tables,
-        chairs_count: booking.chairs,
-        tables_price: tablesTotal.toFixed(2),
-        chairs_price: chairsTotal.toFixed(2),
-        total_price: total.toFixed(2),
-        booking_notes: booking.notes || 'Nessuna nota',
-        booking_id: booking.id,
-        booking_timestamp: new Date(booking.timestamp).toLocaleString('it-IT')
-    };
-    
-    emailjs.send(
-        EMAILJS_CONFIG.SERVICE_ID,
-        EMAILJS_CONFIG.TEMPLATE_ID,
-        templateParams
-    ).then((response) => {
-        console.log('[EmailJS] ✅ Email inviata con successo', response);
-    }).catch((error) => {
-        console.error('[EmailJS] ❌ Errore nell\'invio via EmailJS:', error);
-        // Fallback a Formspree
-        sendViaFormspree({
-            subject: `Nuova Prenotazione - ${booking.name}`,
-            message: `Prenotazione ${booking.id} - ${booking.name} - €${(booking.tables * 8 + booking.chairs * 5).toFixed(2)}`
+        // Invia l'email
+        emailjs.send(
+            EMAILJS_CONFIG.SERVICE_ID,
+            EMAILJS_CONFIG.TEMPLATE_ID,
+            templateParams
+        ).then((response) => {
+            console.log('[EmailJS] ✅ Email inviata con successo', response);
+            logBooking('Email inviata con successo a ' + EMAILJS_CONFIG.OWNER_EMAIL, {
+                status: response.status,
+                booking_id: booking.id
+            });
+        }).catch((error) => {
+            console.error('[EmailJS] ❌ Errore nell\'invio email:', error);
+            logBooking('Errore nell\'invio email: ' + error.message, {
+                booking_id: booking.id
+            });
+            
+            // Se EmailJS fallisce, log comunque salvato su localStorage
+            alert('⚠️ Email non inviata, ma prenotazione salvata.\n\nContatta il proprietario per confermare.');
         });
-    });
-}
-
-/**
- * Invia email via Formspree (servizio esterno)
- * @param {Object} data - Dati dell'email
- */
-function sendViaFormspree(data) {
-    // Usa Formspree per inviare email
-    const formData = new FormData();
-    formData.append('email', EMAILJS_CONFIG.OWNER_EMAIL);
-    formData.append('subject', data.subject);
-    formData.append('message', data.message);
-    
-    fetch('https://formspree.io/f/mbjwzbzk', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => {
-        if (response.ok) {
-            console.log('[Formspree] ✅ Email inviata con successo');
-        } else {
-            console.error('[Formspree] ❌ Errore:', response.status);
-        }
-    })
-    .catch(error => {
-        console.error('[Formspree] ❌ Errore di connessione:', error);
-    });
+    } catch (error) {
+        console.error('[EmailJS] ❌ ERRORE CRITICO:', error);
+        logBooking('Errore critico nell\'invio email', error);
+    }
 }
 
 /**
