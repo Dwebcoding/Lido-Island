@@ -190,15 +190,14 @@ a:hover {
     transition: all 0.3s ease;
 }
 
-/* ============ WAVE HERO SECTION ============ */
+/* ============ MESH GRADIENT HERO SECTION ============ */
 
 main {
     margin-top: 70px;
 }
 
-.wave-hero {
+.mesh-hero {
     height: 600px;
-    background: linear-gradient(135deg, rgba(0, 168, 232, 0.8) 0%, rgba(0, 217, 255, 0.6) 100%);
     position: relative;
     display: flex;
     align-items: center;
@@ -206,33 +205,71 @@ main {
     text-align: center;
     color: var(--color-white);
     overflow: hidden;
+    background: #0a1f2e;
 }
 
-.wave-container {
+.mesh-container {
     position: absolute;
-    bottom: 0;
+    top: 0;
     left: 0;
     right: 0;
-    height: 150px;
-    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120'%3E%3Cpath d='M0,50 Q300,0 600,50 T1200,50 L1200,120 L0,120 Z' fill='rgba(255,255,255,0.1)'/%3E%3Cpath d='M0,60 Q300,10 600,60 T1200,60 L1200,120 L0,120 Z' fill='rgba(255,255,255,0.2)'/%3E%3Cpath d='M0,70 Q300,20 600,70 T1200,70 L1200,120 L0,120 Z' fill='rgba(255,255,255,0.3)'/%3E%3C/svg%3E");
-    background-repeat: repeat-x;
-    animation: wave 15s linear infinite;
-}
-
-@keyframes wave {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(100%); }
-}
-
-.wave {
+    bottom: 0;
     width: 100%;
-    height: 120px;
-    animation: float 3s ease-in-out infinite;
+    height: 100%;
 }
 
-@keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
+.mesh-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(70px);
+    mix-blend-mode: screen;
+    opacity: 0.7;
+}
+
+.mesh-blob-1 {
+    width: 400px;
+    height: 400px;
+    background: rgba(0, 168, 232, 0.6);
+    top: -100px;
+    left: -100px;
+    animation: float1 20s ease-in-out infinite;
+}
+
+.mesh-blob-2 {
+    width: 350px;
+    height: 350px;
+    background: rgba(0, 217, 255, 0.5);
+    bottom: -50px;
+    right: -50px;
+    animation: float2 25s ease-in-out infinite;
+}
+
+.mesh-blob-3 {
+    width: 320px;
+    height: 320px;
+    background: rgba(0, 168, 232, 0.4);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: float3 22s ease-in-out infinite;
+}
+
+@keyframes float1 {
+    0%, 100% { transform: translate(0px, 0px); }
+    33% { transform: translate(30px, -50px); }
+    66% { transform: translate(-20px, 30px); }
+}
+
+@keyframes float2 {
+    0%, 100% { transform: translate(0px, 0px); }
+    33% { transform: translate(-30px, 40px); }
+    66% { transform: translate(20px, -30px); }
+}
+
+@keyframes float3 {
+    0%, 100% { transform: translate(-50%, -50%); }
+    33% { transform: translate(-30%, -60%); }
+    66% { transform: translate(-70%, -40%); }
 }
 
 .hero-overlay {
@@ -241,7 +278,7 @@ main {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(26, 58, 74, 0.3);
+    background: rgba(10, 31, 46, 0.4);
     z-index: 1;
 }
 
@@ -303,11 +340,11 @@ main {
 }
 
 .stat-item {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     padding: 20px;
     border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     text-align: center;
     animation: slideUp 1s ease 0.3s both;
 }
@@ -817,8 +854,23 @@ main {
 
 /* Tablet (768px e inferiori) */
 @media (max-width: 768px) {
-    .wave-hero {
+    .mesh-hero {
         height: 550px;
+    }
+
+    .mesh-blob-1 {
+        width: 280px;
+        height: 280px;
+    }
+
+    .mesh-blob-2 {
+        width: 250px;
+        height: 250px;
+    }
+
+    .mesh-blob-3 {
+        width: 220px;
+        height: 220px;
     }
 
     .hero-title {
