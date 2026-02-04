@@ -197,7 +197,7 @@ main {
 }
 
 .glassmorphism-hero {
-    height: 600px;
+    height: 700px;
     background: linear-gradient(135deg, rgba(0, 168, 232, 0.9) 0%, rgba(0, 217, 255, 0.7) 100%);
     position: relative;
     display: flex;
@@ -219,7 +219,7 @@ main {
     border-radius: 24px;
     padding: 60px 50px;
     max-width: 600px;
-    margin-bottom: 100px;
+    margin-bottom: 60px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     animation: slideUp 0.8s ease;
 }
@@ -233,9 +233,9 @@ main {
 }
 
 .hero-subtitle {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     color: rgba(255, 255, 255, 0.95);
-    margin-bottom: 30px;
+    margin-bottom: 25px;
     font-weight: 300;
 }
 
@@ -263,7 +263,7 @@ main {
 
 .counter-stats-glass {
     position: absolute;
-    bottom: 60px;
+    bottom: 40px;
     left: 0;
     right: 0;
     display: grid;
@@ -299,7 +299,7 @@ main {
 }
 
 .stat-icon {
-    font-size: 3.5rem;
+    font-size: 3rem;
     display: block;
     animation: bounce 2s ease-in-out infinite;
 }
@@ -326,7 +326,7 @@ main {
 }
 
 .stat-number {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     font-weight: 700;
     color: var(--color-secondary);
     display: block;
@@ -831,7 +831,7 @@ main {
 /* Tablet (768px e inferiori) */
 @media (max-width: 768px) {
     .glassmorphism-hero {
-        height: 700px;
+        height: 750px;
     }
 
     .hero-content-card {
@@ -842,19 +842,19 @@ main {
     }
 
     .hero-title {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
         margin-bottom: 10px;
     }
 
     .hero-subtitle {
-        font-size: 1.1rem;
-        margin-bottom: 20px;
+        font-size: 1rem;
+        margin-bottom: 15px;
     }
 
     .counter-stats-glass {
         grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-        bottom: 15px;
+        gap: 20px;
+        bottom: 30px;
         padding: 0 15px;
         max-width: 100%;
     }
@@ -866,11 +866,11 @@ main {
     }
 
     .stat-icon {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
     }
 
     .stat-number {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
         margin-bottom: 0px;
     }
 
