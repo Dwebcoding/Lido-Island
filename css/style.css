@@ -190,23 +190,49 @@ a:hover {
     transition: all 0.3s ease;
 }
 
-/* ============ HERO SECTION ============ */
+/* ============ WAVE HERO SECTION ============ */
 
 main {
-    margin-top: 70px; /* Spazio per header fisso */
+    margin-top: 70px;
 }
 
-.hero {
-    height: 500px;
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+.wave-hero {
+    height: 600px;
+    background: linear-gradient(135deg, rgba(0, 168, 232, 0.8) 0%, rgba(0, 217, 255, 0.6) 100%);
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     color: var(--color-white);
+    overflow: hidden;
+}
+
+.wave-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 150px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120'%3E%3Cpath d='M0,50 Q300,0 600,50 T1200,50 L1200,120 L0,120 Z' fill='rgba(255,255,255,0.1)'/%3E%3Cpath d='M0,60 Q300,10 600,60 T1200,60 L1200,120 L0,120 Z' fill='rgba(255,255,255,0.2)'/%3E%3Cpath d='M0,70 Q300,20 600,70 T1200,70 L1200,120 L0,120 Z' fill='rgba(255,255,255,0.3)'/%3E%3C/svg%3E");
+    background-repeat: repeat-x;
+    animation: wave 15s linear infinite;
+}
+
+@keyframes wave {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(100%); }
+}
+
+.wave {
+    width: 100%;
+    height: 120px;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
 }
 
 .hero-overlay {
@@ -215,14 +241,14 @@ main {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(26, 58, 74, 0.6);
+    background: rgba(26, 58, 74, 0.3);
     z-index: 1;
 }
 
 .hero-content {
     position: relative;
     z-index: 2;
-    animation: fadeInUp 1s ease;
+    animation: fadeInDown 1s ease;
 }
 
 .hero-title {
@@ -230,6 +256,7 @@ main {
     color: var(--color-white);
     margin-bottom: var(--spacing-md);
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+    font-weight: 700;
 }
 
 .hero-subtitle {
@@ -243,18 +270,89 @@ main {
     display: inline-block;
     background-color: var(--color-secondary);
     color: var(--color-dark);
-    padding: var(--spacing-sm) var(--spacing-lg);
+    padding: 12px 35px;
     border-radius: var(--radius-md);
     font-weight: 700;
     transition: all 0.3s ease;
     box-shadow: var(--shadow-md);
+    border: none;
+    cursor: pointer;
 }
 
 .cta-button:hover {
     background-color: var(--color-accent);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(255, 196, 0, 0.3);
     color: var(--color-dark);
+}
+
+/* COUNTER STATS */
+
+.counter-stats {
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+    right: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 0 20px;
+    z-index: 3;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.stat-item {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    text-align: center;
+    animation: slideUp 1s ease 0.3s both;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-secondary);
+    display: block;
+    margin-bottom: 8px;
+    font-family: 'Courier New', monospace;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: var(--color-light);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fadeInDown 1s ease;
 }
 
 /* ============ SEZIONE TITOLI COMUNI ============ */
@@ -719,6 +817,37 @@ main {
 
 /* Tablet (768px e inferiori) */
 @media (max-width: 768px) {
+    .wave-hero {
+        height: 550px;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.2rem;
+    }
+
+    .counter-stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        bottom: 20px;
+        padding: 0 15px;
+    }
+
+    .stat-item {
+        padding: 15px;
+    }
+
+    .stat-number {
+        font-size: 2rem;
+    }
+
+    .stat-label {
+        font-size: 0.8rem;
+    }
+
     .menu-toggle {
         display: flex;
     }

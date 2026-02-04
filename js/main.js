@@ -278,6 +278,48 @@ function log(message, data = null) {
 // ============ INIZIALIZZAZIONE PRINCIPALE ============
 
 /**
+ * Anima i numeri del counter stats
+ */
+function initCounterAnimation() {
+    const stats = document.querySelectorAll('.stat-number');
+    let animated = false;
+
+    function animateCounter() {
+        stats.forEach(stat => {
+            const target = parseInt(stat.getAttribute('data-target'));
+            const increment = target / 30; // 30 frames di animazione
+            let current = 0;
+
+            const updateCounter = () => {
+                current += increment;
+                if (current < target) {
+                    stat.textContent = Math.floor(current);
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    stat.textContent = target;
+                }
+            };
+
+            updateCounter();
+        });
+    }
+
+    // Intersectino Observer per attivare l'animazione quando la sezione è visibile
+    const waveHero = document.querySelector('.wave-hero');
+    if (waveHero && !animated) {
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting && !animated) {
+                animated = true;
+                animateCounter();
+                observer.unobserve(waveHero);
+            }
+        }, { threshold: 0.5 });
+
+        observer.observe(waveHero);
+    }
+}
+
+/**
  * Inizializza tutti i componenti JavaScript
  * Viene eseguita quando il DOM è completamente caricato
  */
@@ -291,6 +333,7 @@ function initializeApp() {
     initScrollAnimations();
     initSmoothScroll();
     initCardHoverEffects();
+    initCounterAnimation();
 
     log('Applicazione caricata con successo!');
 }
