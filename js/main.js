@@ -285,9 +285,9 @@ function initCounterAnimation() {
     let animated = false;
 
     function animateCounter() {
-        stats.forEach(stat => {
+        stats.forEach((stat, index) => {
             const target = parseInt(stat.getAttribute('data-target'));
-            const increment = target / 30; // 30 frames di animazione
+            const increment = target / 40; // 40 frames di animazione
             let current = 0;
 
             const updateCounter = () => {
@@ -300,22 +300,25 @@ function initCounterAnimation() {
                 }
             };
 
-            updateCounter();
+            // Stagger animation per ogni card
+            setTimeout(() => {
+                updateCounter();
+            }, index * 100);
         });
     }
 
-    // Intersectino Observer per attivare l'animazione quando la sezione è visibile
-    const waveHero = document.querySelector('.wave-hero');
-    if (waveHero && !animated) {
+    // Intersection Observer per attivare l'animazione quando la sezione è visibile
+    const heroSection = document.querySelector('.glassmorphism-hero, .wave-hero, .mesh-hero');
+    if (heroSection && !animated) {
         const observer = new IntersectionObserver((entries) => {
             if (entries[0].isIntersecting && !animated) {
                 animated = true;
                 animateCounter();
-                observer.unobserve(waveHero);
+                observer.unobserve(heroSection);
             }
-        }, { threshold: 0.5 });
+        }, { threshold: 0.3 });
 
-        observer.observe(waveHero);
+        observer.observe(heroSection);
     }
 }
 
