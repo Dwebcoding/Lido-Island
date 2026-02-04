@@ -197,14 +197,14 @@ main {
 }
 
 .glassmorphism-hero {
-    height: clamp(680px, 80vh, 820px);
+    height: clamp(620px, 72vh, 760px);
     background: linear-gradient(135deg, rgba(0, 168, 232, 0.9) 0%, rgba(0, 217, 255, 0.7) 100%);
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding-top: 120px;
+    padding-top: 110px;
     text-align: center;
     color: var(--color-white);
     overflow: hidden;
@@ -829,8 +829,8 @@ main {
 /* Tablet (768px e inferiori) */
 @media (max-width: 768px) {
     .glassmorphism-hero {
-        height: clamp(760px, 100vh, 900px);
-        padding-top: 100px;
+        height: clamp(700px, 92vh, 840px);
+        padding-top: 90px;
         justify-content: flex-start;
     }
 
