@@ -15,7 +15,7 @@ const allowedOrigins = [
 app.use(cors({
   origin: function(origin, callback) {
     if (!origin) return callback(null, true); // allow non-browser tools
-    if (allowedOrigins.some(o => (typeof o === 'string' ? o === origin : o.test(origin)))) {
+    if (allowedOrigins.includes(origin)) {
       return callback(null, true);
     }
     callback(new Error('Not allowed by CORS'));
