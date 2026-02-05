@@ -75,9 +75,10 @@ function initBookingSystem() {
     // Event listener per data
     document.getElementById('bookingDate')?.addEventListener('change', (e) => {
         currentBooking.date = e.target.value;
+        updateAvailability();
         // EmailJS rimossa: la funzione non invia più email direttamente
         // La logica di invio email è ora gestita solo dal backend
-    }
+    });
 }
 
 // ============ GESTIONE QUANTITÀ SDRAIO ============
@@ -85,6 +86,35 @@ function initBookingSystem() {
 /**
  * Aumenta la quantità di sdraio
  */
+/**
+ * Aumenta la quantità di tavoli
+ */
+function incrementTable() {
+    console.log('[Booking] incrementTable - Prima:', {
+        currentTables: currentBooking.tables,
+        availableTables: getAvailableTables()
+    });
+    const availableTables = getAvailableTables();
+    if (currentBooking.tables < availableTables) {
+        currentBooking.tables++;
+        updateDisplay();
+        console.log('[Booking] incrementTable - Dopo:', currentBooking.tables);
+    } else {
+        console.log('[Booking] incrementTable - BLOCCATO: non ci sono altri tavoli disponibili');
+    }
+}
+
+/**
+ * Diminuisce la quantità di tavoli
+ */
+function decrementTable() {
+    console.log('[Booking] decrementTable - Prima:', currentBooking.tables);
+    if (currentBooking.tables > 0) {
+        currentBooking.tables--;
+        updateDisplay();
+        console.log('[Booking] decrementTable - Dopo:', currentBooking.tables);
+    }
+}
 function incrementChair() {
     console.log('[Booking] incrementChair - Prima:', {
         currentChairs: currentBooking.chairs,
@@ -192,44 +222,52 @@ function updateDisplay() {
  * Aggiorna la visualizzazione della disponibilità
  */
 function updateAvailability() {
-    const availableTables = getAvailableTables();
-    const availableChairs = getAvailableChairs();
-    
-    // Aggiorna testo disponibilità
-    document.getElementById('tableAvailability').textContent = 
-        `Disponibili: ${availableTables} tavoli`;
-    document.getElementById('chairAvailability').textContent = 
-        `Disponibili: ${availableChairs} sdraio`;
-    
-    // Gestisci i pulsanti + usando una classe invece di disabled
-    const tablePlusBtn = document.getElementById('tablePlus');
-    const chairPlusBtn = document.getElementById('chairPlus');
-    
-    if (availableTables === 0) {
-        tablePlusBtn.classList.add('disabled-btn');
-        tablePlusBtn.setAttribute('disabled', 'disabled');
-    } else {
-        tablePlusBtn.classList.remove('disabled-btn');
-        tablePlusBtn.removeAttribute('disabled');
+    // Recupera la data selezionata
+    const date = currentBooking.date;
+    if (!date) {
+        // Se la data non è selezionata, mostra i massimali statici
+        document.getElementById('tableAvailability').textContent = `Disponibili: 110 tavoli`;
+        document.getElementById('chairAvailability').textContent = `Disponibili: 65 sdraio`;
+        return;
     }
-    
-    if (availableChairs === 0) {
-        chairPlusBtn.classList.add('disabled-btn');
-        chairPlusBtn.setAttribute('disabled', 'disabled');
-    } else {
-        chairPlusBtn.classList.remove('disabled-btn');
-        chairPlusBtn.removeAttribute('disabled');
-    }
-    
-    // Reset quantità se non disponibili
-    if (currentBooking.tables > availableTables) {
-        currentBooking.tables = availableTables;
-    }
-    if (currentBooking.chairs > availableChairs) {
-        currentBooking.chairs = availableChairs;
-    }
-    
-    updateDisplay();
+    fetch(`/api/prenotazioni/availability?date=${encodeURIComponent(date)}`)
+        .then(res => res.json())
+        .then(data => {
+            const availableTables = data.tables.available;
+            const availableChairs = data.chairs.available;
+            // Aggiorna testo disponibilità
+            document.getElementById('tableAvailability').textContent = `Disponibili: ${availableTables} tavoli`;
+            document.getElementById('chairAvailability').textContent = `Disponibili: ${availableChairs} sdraio`;
+            // Gestisci i pulsanti + usando una classe invece di disabled
+            const tablePlusBtn = document.getElementById('tablePlus');
+            const chairPlusBtn = document.getElementById('chairPlus');
+            if (availableTables === 0) {
+                tablePlusBtn.classList.add('disabled-btn');
+                tablePlusBtn.setAttribute('disabled', 'disabled');
+            } else {
+                tablePlusBtn.classList.remove('disabled-btn');
+                tablePlusBtn.removeAttribute('disabled');
+            }
+            if (availableChairs === 0) {
+                chairPlusBtn.classList.add('disabled-btn');
+                chairPlusBtn.setAttribute('disabled', 'disabled');
+            } else {
+                chairPlusBtn.classList.remove('disabled-btn');
+                chairPlusBtn.removeAttribute('disabled');
+            }
+            // Reset quantità se non disponibili
+            if (currentBooking.tables > availableTables) {
+                currentBooking.tables = availableTables;
+            }
+            if (currentBooking.chairs > availableChairs) {
+                currentBooking.chairs = availableChairs;
+            }
+            updateDisplay();
+        })
+        .catch(err => {
+            document.getElementById('tableAvailability').textContent = 'Errore disponibilità tavoli';
+            document.getElementById('chairAvailability').textContent = 'Errore disponibilità sdraio';
+        });
 }
 
 // ============ VALIDAZIONE FORM ============
@@ -339,35 +377,44 @@ function handleBookingSubmit(e) {
             alert('❌ Errore: Compila correttamente tutti i campi!');
             return;
         }
-        
-        console.log('[Booking] ✅ Validazione passata, creazione booking...');
-        
-        // Crea la prenotazione
-        const booking = {
-            id: generateBookingId(),
-            date: currentBooking.date,
-            tables: currentBooking.tables,
-            chairs: currentBooking.chairs,
-            name: document.querySelector('input[name="name"]').value,
-            email: document.querySelector('input[name="email"]').value,
-            phone: document.querySelector('input[name="phone"]').value,
-            notes: document.querySelector('textarea[name="notes"]').value,
-            timestamp: new Date().toISOString()
-        };
-        
-        console.log('[Booking] Booking creato:', booking);
-        
-        // Salva la prenotazione
-        saveBooking(booking);
-        
-        console.log('[Booking] ✅ Booking salvato');
-        alert(`✅ Prenotazione confermata!\nID: ${booking.id}`); // DEBUG: Mostra successo
-        
-        // Mostra successo
-        showBookingSuccess(booking);
-        
-        // Resetta il form
-        resetBookingForm();
+
+        // Controllo disponibilità aggiornata dal backend
+        fetch(`/api/prenotazioni/availability?date=${encodeURIComponent(currentBooking.date)}`)
+            .then(res => res.json())
+            .then(data => {
+                const availableTables = data.tables.available;
+                const availableChairs = data.chairs.available;
+                if (currentBooking.tables > availableTables || currentBooking.chairs > availableChairs) {
+                    showError('Disponibilità esaurita', 'La quantità richiesta supera la disponibilità attuale. Aggiorna la pagina e riprova.');
+                    alert('❌ Errore: disponibilità esaurita o cambiata.');
+                    return;
+                }
+                // Crea la prenotazione
+                const booking = {
+                    id: generateBookingId(),
+                    date: currentBooking.date,
+                    tables: currentBooking.tables,
+                    chairs: currentBooking.chairs,
+                    name: document.querySelector('input[name="name"]').value,
+                    email: document.querySelector('input[name="email"]').value,
+                    phone: document.querySelector('input[name="phone"]').value,
+                    notes: document.querySelector('textarea[name="notes"]').value,
+                    timestamp: new Date().toISOString()
+                };
+                console.log('[Booking] Booking creato:', booking);
+                // Salva la prenotazione
+                saveBooking(booking);
+                console.log('[Booking] ✅ Booking salvato');
+                alert(`✅ Prenotazione confermata!\nID: ${booking.id}`); // DEBUG: Mostra successo
+                // Mostra successo
+                showBookingSuccess(booking);
+                // Resetta il form
+                resetBookingForm();
+            })
+            .catch(error => {
+                console.error('[Booking] ❌ ERRORE DISPONIBILITÀ:', error);
+                alert('❌ Errore di disponibilità. Riprova più tardi.');
+            });
     } catch (error) {
         console.error('[Booking] ❌ ERRORE CRITICO:', error);
         alert(`❌ ERRORE: ${error.message}`); // DEBUG: Mostra errore
