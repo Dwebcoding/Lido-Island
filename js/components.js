@@ -12,10 +12,10 @@ function renderHeader(activePage = 'home') {
     const headerHTML = `
         <div class="header-container">
             <div class="logo-section">
-                <div class="brand-block" aria-label="Isola Lido">
+                <a class="brand-block" aria-label="Isola Lido" href="${getHomePath()}">
                     <h1 class="brand-name"><span class="brand-main">Isola</span><span class="brand-highlight">Lido</span></h1>
                     <span class="brand-tagline">Pool · Grill · Relax</span>
-                </div>
+                </a>
             </div>
             
             <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
