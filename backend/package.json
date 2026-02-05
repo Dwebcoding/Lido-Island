@@ -2,11 +2,10 @@
   "name": "isola-lido-backend",
   "version": "1.0.0",
   "description": "Backend API per prenotazioni Isola Lido",
-  "main": "server.js",
-  "type": "module",
+  "main": "server.cjs",
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js"
+    "start": "node server.cjs",
+    "dev": "nodemon server.cjs"
   },
   "dependencies": {
     "cors": "^2.8.6",
