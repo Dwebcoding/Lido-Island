@@ -1,3 +1,27 @@
+// ============ CACHE DISPONIBILITÀ ============
+let cachedAvailability = null;
+let cachedAvailabilityTimestamp = 0;
+const AVAILABILITY_CACHE_DURATION = 5 * 60 * 1000; // 5 minuti in ms
+
+function fetchAvailability(date) {
+    const now = Date.now();
+    // Se la cache è valida e per la stessa data, restituisci la cache
+    if (
+        cachedAvailability &&
+        cachedAvailability.date === date &&
+        (now - cachedAvailabilityTimestamp) < AVAILABILITY_CACHE_DURATION
+    ) {
+        return Promise.resolve(cachedAvailability.data);
+    }
+    // Altrimenti, fetch e aggiorna la cache
+    return fetch(`https://lido-island-31d5k91hc-dwebcodings-projects.vercel.app/api/prenotazioni/availability?date=${encodeURIComponent(date)}`)
+        .then(res => res.json())
+        .then(data => {
+            cachedAvailability = { date, data };
+            cachedAvailabilityTimestamp = now;
+            return data;
+        });
+}
 /* ============================================
    ISOLA LIDO - BOOKING SYSTEM
    Sistema di Prenotazione Tavoli e Sdraio
@@ -246,12 +270,10 @@ function updateAvailability() {
         document.getElementById('chairAvailability').textContent = `Disponibili: 65 sdraio`;
         return;
     }
-    fetch(`https://lido-island-31d5k91hc-dwebcodings-projects.vercel.app/api/prenotazioni/availability?date=${encodeURIComponent(date)}`)
-        .then(res => res.json())
+    fetchAvailability(date)
         .then(data => {
             const availableTables = data.tables.available;
             const availableChairs = data.chairs.available;
-            // Aggiorna testo disponibilità
             document.getElementById('tableAvailability').textContent = `Disponibili: ${availableTables} tavoli`;
             document.getElementById('chairAvailability').textContent = `Disponibili: ${availableChairs} sdraio`;
             // Gestisci i pulsanti + usando una classe invece di disabled
@@ -279,6 +301,12 @@ function updateAvailability() {
                 currentBooking.chairs = availableChairs;
             }
             updateDisplay();
+            // Mostra timestamp ultimo aggiornamento
+            const tsDiv = document.getElementById('availabilityTimestamp');
+            if (tsDiv) {
+                const d = new Date(cachedAvailabilityTimestamp);
+                tsDiv.textContent = `Ultimo aggiornamento: ${d.toLocaleTimeString('it-IT')}`;
+            }
         })
         .catch(err => {
             document.getElementById('tableAvailability').textContent = 'Errore disponibilità tavoli';
@@ -394,9 +422,8 @@ function handleBookingSubmit(e) {
             return;
         }
 
-        // Controllo disponibilità aggiornata dal backend
-        fetch(`https://lido-island-31d5k91hc-dwebcodings-projects.vercel.app/api/prenotazioni/availability?date=${encodeURIComponent(currentBooking.date)}`)
-            .then(res => res.json())
+        // Controllo disponibilità aggiornata dalla cache locale
+        fetchAvailability(currentBooking.date)
             .then(data => {
                 const availableTables = data.tables.available;
                 const availableChairs = data.chairs.available;
