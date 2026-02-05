@@ -10,7 +10,7 @@ const allowedOrigins = [
   'https://dwebcoding.github.io',
   'https://lido-island.vercel.app',
   'https://lido-island-git-main-dwebcoding.vercel.app',
-  /https:\/\/lido-island-[\w-]+-dwebcodings-projects\.vercel\.app/
+  'https://lido-island-31d5k91hc-dwebcodings-projects.vercel.app'
 ];
 app.use(cors({
   origin: function(origin, callback) {
