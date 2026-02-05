@@ -3,8 +3,25 @@ const express = require('express');
 const cors = require('cors');
 const bookingRoutes = require('./routes/booking.cjs');
 
+
 const app = express();
-app.use(cors());
+// CORS: consenti GitHub Pages e frontend Vercel
+const allowedOrigins = [
+  'https://dwebcoding.github.io',
+  'https://lido-island.vercel.app',
+  'https://lido-island-git-main-dwebcoding.vercel.app',
+  /https:\/\/lido-island-[\w-]+-dwebcodings-projects\.vercel\.app/
+];
+app.use(cors({
+  origin: function(origin, callback) {
+    if (!origin) return callback(null, true); // allow non-browser tools
+    if (allowedOrigins.some(o => (typeof o === 'string' ? o === origin : o.test(origin)))) {
+      return callback(null, true);
+    }
+    callback(new Error('Not allowed by CORS'));
+  },
+  credentials: true
+}));
 app.use(express.json());
 app.use('/api/prenotazioni', bookingRoutes);
 
