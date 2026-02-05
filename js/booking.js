@@ -19,28 +19,6 @@ const BOOKING_CONFIG = {
     STORAGE_KEY: 'isolaLido_bookings'
 };
 
-// ============ CONFIGURAZIONE EMAILJS ============
-
-const EMAILJS_CONFIG = {
-    SERVICE_ID: 'service_ln6w547',
-    TEMPLATE_ID: 'template_gqbalv6',
-    PUBLIC_KEY: 'WmW6GZu0mgbFXIXgw',
-    OWNER_EMAIL: 'd.webcoding@gmail.com'
-};
-
-// Tracker per timeout EmailJS
-let emailjsReady = true; // Nessun SDK da caricare
-
-/**
- * Inizializza EmailJS (non necessario con API REST)
- */
-function initEmailJS() {
-    console.log('[EmailJS] ✅ API REST pronta');
-    console.log('[EmailJS] Service:', EMAILJS_CONFIG.SERVICE_ID);
-    console.log('[EmailJS] Template:', EMAILJS_CONFIG.TEMPLATE_ID);
-    console.log('[EmailJS] To:', EMAILJS_CONFIG.OWNER_EMAIL);
-    return true;
-}
 
 // ============ VARIABILI GLOBALI ============
 
@@ -58,8 +36,7 @@ let currentBooking = {
 function initBookingSystem() {
     console.log('[Booking System] Inizio inizializzazione...');
     
-    // Inizializza EmailJS
-    initEmailJS();
+    // EmailJS rimosso: la logica email è ora gestita solo dal backend
     
     // Imposta la data minima (domani)
     setMinDate();
@@ -98,64 +75,8 @@ function initBookingSystem() {
     // Event listener per data
     document.getElementById('bookingDate')?.addEventListener('change', (e) => {
         currentBooking.date = e.target.value;
-        updateAvailability();
-    });
-    
-    // Event listener per form
-    const bookingForm = document.getElementById('bookingForm');
-    if (bookingForm) {
-        console.log('[Booking System] Form trovato, attaching submit listener...');
-        bookingForm.addEventListener('submit', (e) => {
-            console.log('[Booking] SUBMIT EVENT TRIGGERED');
-            handleBookingSubmit(e);
-        });
-    } else {
-        console.error('[Booking System] ❌ Form NON trovato! ID: bookingForm');
-    }
-    
-    // Aggiorna disponibilità inizialmente
-    updateAvailability();
-    console.log('[Booking System] Inizializzazione completata');
-}
-
-// ============ GESTIONE DATE ============
-
-/**
- * Imposta la data minima (domani)
- */
-function setMinDate() {
-    const dateInput = document.getElementById('bookingDate');
-    if (!dateInput) return;
-    
-    const tomorrow = new Date();
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    
-    const formattedDate = tomorrow.toISOString().split('T')[0];
-    dateInput.min = formattedDate;
-    dateInput.value = formattedDate;
-    currentBooking.date = formattedDate;
-}
-
-// ============ GESTIONE QUANTITÀ TAVOLI ============
-
-/**
- * Aumenta la quantità di tavoli
- */
-function incrementTable() {
-    const availableTables = getAvailableTables();
-    if (currentBooking.tables < availableTables) {
-        currentBooking.tables++;
-        updateDisplay();
-    }
-}
-
-/**
- * Diminuisce la quantità di tavoli
- */
-function decrementTable() {
-    if (currentBooking.tables > 0) {
-        currentBooking.tables--;
-        updateDisplay();
+        // EmailJS rimossa: la funzione non invia più email direttamente
+        // La logica di invio email è ora gestita solo dal backend
     }
 }
 
