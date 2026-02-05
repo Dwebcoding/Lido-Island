@@ -1365,8 +1365,8 @@ main {
 /* Tablet (768px e inferiori) */
 @media (max-width: 768px) {
     .glassmorphism-hero {
-        height: clamp(540px, 92vh, 700px);
-        padding-top: 52px;
+        height: clamp(600px, 96vh, 760px);
+        padding-top: 56px;
         justify-content: flex-start;
     }
 
@@ -1452,20 +1452,13 @@ main {
         left: 0;
         right: 0;
         background-color: var(--color-white);
-        max-height: 0;
-        overflow: hidden;
-        opacity: 0;
-        pointer-events: none;
-        transition: max-height 0.3s ease, opacity 0.25s ease;
+        display: none;
         box-shadow: var(--shadow-md);
-        z-index: 1200;
+        z-index: 1300;
     }
 
     .nav.active {
-        max-height: 320px;
-        opacity: 1;
-        pointer-events: auto;
-        z-index: 1300;
+        display: block;
     }
 
     .nav-list {
@@ -1541,8 +1534,8 @@ main {
 /* Phablet (<=640px) */
 @media (max-width: 640px) {
     .glassmorphism-hero {
-        height: clamp(520px, 94vh, 660px);
-        padding-top: 48px;
+        height: clamp(560px, 97vh, 720px);
+        padding-top: 52px;
     }
 
     .hero-layout {
@@ -1635,8 +1628,8 @@ main {
     }
 
     .glassmorphism-hero {
-        height: clamp(500px, 96vh, 620px);
-        padding-top: 46px;
+        height: clamp(540px, 100vh, 700px);
+        padding-top: 50px;
     }
 
     .hero-actions {
