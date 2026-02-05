@@ -641,7 +641,7 @@ main {
 .stat-card:nth-child(4) .stat-icon { animation-delay: 0.6s; }
 
 .icon-tables { --stat-icon-bg: #ff9f6e; }
-.icon-chairs { --stat-icon-bg: #7fe3ff; }
+.icon-chairs { --stat-icon-bg: #1f6fa3; }
 .icon-services { --stat-icon-bg: #9bd18b; }
 .icon-hours { --stat-icon-bg: #ffd580; }
 
