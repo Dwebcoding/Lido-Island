@@ -29,6 +29,19 @@ let currentBooking = {
 };
 
 // ============ INIZIALIZZAZIONE ============
+/**
+ * Imposta la data minima del campo data a domani
+ */
+function setMinDate() {
+    const dateInput = document.getElementById('bookingDate');
+    if (!dateInput) return;
+    const today = new Date();
+    today.setDate(today.getDate() + 1); // domani
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const dd = String(today.getDate()).padStart(2, '0');
+    dateInput.min = `${yyyy}-${mm}-${dd}`;
+}
 
 /**
  * Inizializza il sistema di prenotazione
@@ -196,9 +209,9 @@ function getBookedChairsByDate(date) {
  * Aggiorna l'interfaccia con i valori correnti
  */
 function updateDisplay() {
-    // Aggiorna input quantity
-    document.getElementById('tableQty').value = currentBooking.tables;
-    document.getElementById('chairQty').value = currentBooking.chairs;
+    // Aggiorna quantità visualizzata
+    document.getElementById('tableQty').textContent = currentBooking.tables;
+    document.getElementById('chairQty').textContent = currentBooking.chairs;
     
     // Aggiorna subtotali
     const tableSubtotal = currentBooking.tables * BOOKING_CONFIG.TABLES.price;
