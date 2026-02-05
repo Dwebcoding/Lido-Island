@@ -1458,12 +1458,14 @@ main {
         pointer-events: none;
         transition: max-height 0.3s ease, opacity 0.25s ease;
         box-shadow: var(--shadow-md);
+        z-index: 1200;
     }
 
     .nav.active {
         max-height: 320px;
         opacity: 1;
         pointer-events: auto;
+        z-index: 1300;
     }
 
     .nav-list {
