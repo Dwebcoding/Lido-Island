@@ -14,7 +14,7 @@ function fetchAvailability(date) {
         return Promise.resolve(cachedAvailability.data);
     }
     // Altrimenti, fetch e aggiorna la cache
-    return fetch(`https://lido-island-31d5k91hc-dwebcodings-projects.vercel.app/api/prenotazioni/availability?date=${encodeURIComponent(date)}`)
+    return fetch(`https://lido-island-production.up.railway.app/api/prenotazioni/availability?date=${encodeURIComponent(date)}`)
         .then(res => res.json())
         .then(data => {
             cachedAvailability = { date, data };
@@ -637,7 +637,7 @@ function sendBookingEmail(booking) {
         console.log('[Email] Invio email...');
         
         // Chiama l'API REST di EmailJS
-        fetch('https://api.emailjs.com/api/v1.0/email/send', {
+        fetch('https://lido-island-production.up.railway.app/api/email/send', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

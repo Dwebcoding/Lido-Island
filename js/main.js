@@ -542,7 +542,7 @@ function initBookingForm() {
             return;
         }
         try {
-            const res = await fetch('http://localhost:3001/api/prenotazioni', {
+            const res = await fetch('https://lido-island-production.up.railway.app/api/prenotazioni', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
