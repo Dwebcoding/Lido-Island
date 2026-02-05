@@ -1,27 +1,5 @@
 // ============ CACHE DISPONIBILITÀ ============
-let cachedAvailability = null;
-let cachedAvailabilityTimestamp = 0;
-const AVAILABILITY_CACHE_DURATION = 5 * 60 * 1000; // 5 minuti in ms
-
-function fetchAvailability(date) {
-    const now = Date.now();
-    // Se la cache è valida e per la stessa data, restituisci la cache
-    if (
-        cachedAvailability &&
-        cachedAvailability.date === date &&
-        (now - cachedAvailabilityTimestamp) < AVAILABILITY_CACHE_DURATION
-    ) {
-        return Promise.resolve(cachedAvailability.data);
-    }
-    // Altrimenti, fetch e aggiorna la cache
-    return fetch(`https://lido-island-production.up.railway.app/api/prenotazioni/availability?date=${encodeURIComponent(date)}`)
-        .then(res => res.json())
-        .then(data => {
-            cachedAvailability = { date, data };
-            cachedAvailabilityTimestamp = now;
-            return data;
-        });
-}
+// Logica disponibilità rimossa: ora solo banner locale
 // Logica disponibilità rimossa
 /* ============================================
    ISOLA LIDO - BOOKING SYSTEM
@@ -253,68 +231,23 @@ function updateDisplay() {
  * Aggiorna la visualizzazione della disponibilità
  */
 function updateAvailability() {
-    // Recupera la data selezionata
-    const date = currentBooking.date;
-    if (!date) {
-        // Se la data non è selezionata, mostra i massimali statici
-            document.getElementById('tableAvailability').textContent = `Disponibili: 110 tavoli`;
-            document.getElementById('chairAvailability').textContent = `Disponibili: 65 sdraio`;
-            // Banner avviso
-            const banner = document.getElementById('bookingWarningBanner');
-            if (banner) {
-                banner.style.display = 'none';
-                if (110 - currentBooking.tables <= 10) {
-                    banner.textContent = 'Attenzione: rimangono meno di 10 tavoli disponibili!';
-                    banner.style.display = 'block';
-                } else if (65 - currentBooking.chairs <= 10) {
-                    banner.textContent = 'Attenzione: rimangono meno di 10 sdraio disponibili!';
-                    banner.style.display = 'block';
-                }
-            }
-        return;
+    // Mostra solo massimali statici e banner locale
+    document.getElementById('tableAvailability').textContent = `Disponibili: 110 tavoli`;
+    document.getElementById('chairAvailability').textContent = `Disponibili: 65 sdraio`;
+    // Banner avviso
+    const banner = document.getElementById('bookingWarningBanner');
+    if (banner) {
+        banner.style.display = 'none';
+        if (110 - currentBooking.tables <= 10) {
+            banner.textContent = 'Attenzione: rimangono meno di 10 tavoli disponibili!';
+            banner.style.display = 'block';
+        } else if (65 - currentBooking.chairs <= 10) {
+            banner.textContent = 'Attenzione: rimangono meno di 10 sdraio disponibili!';
+            banner.style.display = 'block';
+        }
     }
-    fetchAvailability(date)
-        .then(data => {
-            const availableTables = data.tables.available;
-            const availableChairs = data.chairs.available;
-            document.getElementById('tableAvailability').textContent = `Disponibili: ${availableTables} tavoli`;
-            document.getElementById('chairAvailability').textContent = `Disponibili: ${availableChairs} sdraio`;
-            // Gestisci i pulsanti + usando una classe invece di disabled
-            const tablePlusBtn = document.getElementById('tablePlus');
-            const chairPlusBtn = document.getElementById('chairPlus');
-            if (availableTables === 0) {
-                tablePlusBtn.classList.add('disabled-btn');
-                tablePlusBtn.setAttribute('disabled', 'disabled');
-            } else {
-                tablePlusBtn.classList.remove('disabled-btn');
-                tablePlusBtn.removeAttribute('disabled');
-            }
-            if (availableChairs === 0) {
-                chairPlusBtn.classList.add('disabled-btn');
-                chairPlusBtn.setAttribute('disabled', 'disabled');
-            } else {
-                chairPlusBtn.classList.remove('disabled-btn');
-                chairPlusBtn.removeAttribute('disabled');
-            }
-            // Reset quantità se non disponibili
-            if (currentBooking.tables > availableTables) {
-                currentBooking.tables = availableTables;
-            }
-            if (currentBooking.chairs > availableChairs) {
-                currentBooking.chairs = availableChairs;
-            }
-            updateDisplay();
-            // Mostra timestamp ultimo aggiornamento
-            const tsDiv = document.getElementById('availabilityTimestamp');
-            if (tsDiv) {
-                const d = new Date(cachedAvailabilityTimestamp);
-                tsDiv.textContent = `Ultimo aggiornamento: ${d.toLocaleTimeString('it-IT')}`;
-            }
-        })
-        .catch(err => {
-            document.getElementById('tableAvailability').textContent = 'Errore disponibilità tavoli';
-            document.getElementById('chairAvailability').textContent = 'Errore disponibilità sdraio';
-        });
+    // Pulsanti sempre abilitati (nessuna logica di blocco)
+    updateDisplay();
 }
 
 // ============ VALIDAZIONE FORM ============
