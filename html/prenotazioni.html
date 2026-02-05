@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
+        <!-- Flatpickr Calendar -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/it.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Sistema di Prenotazione - Isola Lido">
@@ -236,6 +240,22 @@
             </div>
         </section>
     </main>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        if (window.flatpickr) {
+            flatpickr("#bookingDate", {
+                minDate: new Date(Date.now() + 86400000), // domani
+                dateFormat: "Y-m-d",
+                locale: "it",
+                disableMobile: true,
+                allowInput: false,
+                weekNumbers: true,
+                altInput: true,
+                altFormat: "l, d F Y",
+            });
+        }
+    });
+    </script>
 
     <!-- ============ FOOTER DINAMICO ============ -->
     <footer class="footer"></footer>
