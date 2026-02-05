@@ -6,6 +6,13 @@ const bookingRoutes = require('./routes/booking.cjs');
 
 
 const app = express();
+// Forza header CORS su tutte le risposte (test rapido)
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'https://dwebcoding.github.io');
+  res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type,Authorization');
+  next();
+});
 // CORS: deve essere il PRIMO middleware
 const allowedOrigins = [
   'https://dwebcoding.github.io',
