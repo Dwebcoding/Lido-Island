@@ -33,7 +33,7 @@ async function sendBookingEmail(booking) {
   const html = renderTemplate(bookingEmailTemplate, booking);
   const mailOptions = {
     from: 'Isola Lido <d.webcoding@gmail.com>',
-    to: 'd.webcoding@gmail.com', // mail di test, da sostituire in produzione
+    to: 'd.webcoding@gmail.com', // mail destinatario aggiornato
     subject: `Nuova Prenotazione - ${booking.customer_name}`,
     html
   };

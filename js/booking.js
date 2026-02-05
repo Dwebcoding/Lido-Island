@@ -246,7 +246,7 @@ function updateAvailability() {
         document.getElementById('chairAvailability').textContent = `Disponibili: 65 sdraio`;
         return;
     }
-    fetch(`/api/prenotazioni/availability?date=${encodeURIComponent(date)}`)
+    fetch(`https://lido-island-31d5k91hc-dwebcodings-projects.vercel.app/api/prenotazioni/availability?date=${encodeURIComponent(date)}`)
         .then(res => res.json())
         .then(data => {
             const availableTables = data.tables.available;
@@ -395,7 +395,7 @@ function handleBookingSubmit(e) {
         }
 
         // Controllo disponibilità aggiornata dal backend
-        fetch(`/api/prenotazioni/availability?date=${encodeURIComponent(currentBooking.date)}`)
+        fetch(`https://lido-island-31d5k91hc-dwebcodings-projects.vercel.app/api/prenotazioni/availability?date=${encodeURIComponent(currentBooking.date)}`)
             .then(res => res.json())
             .then(data => {
                 const availableTables = data.tables.available;
