@@ -186,14 +186,6 @@ a:hover {
     font-weight: 600;
     color: var(--color-text);
     position: relative;
-
-    .cookie-banner__content {
-        grid-template-columns: 1fr;
-    }
-
-    .cookie-banner__actions {
-        justify-content: flex-start;
-    }
     transition: color 0.3s ease;
 }
 
@@ -1536,10 +1528,27 @@ main {
     .cookie-banner {
         width: calc(100vw - 20px);
         bottom: 10px;
-        padding: var(--spacing-sm) var(--spacing-md);
+        padding: var(--spacing-sm);
+    }
+
+    .cookie-banner__content {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-sm);
     }
 
     .cookie-banner__text {
+        font-size: 0.88rem;
+        line-height: 1.5;
+    }
+
+    .cookie-banner__actions {
+        flex-direction: column;
+        gap: var(--spacing-xs);
+    }
+
+    .cookie-banner__actions button {
+        width: 100%;
+        padding: var(--spacing-sm);
         font-size: 0.9rem;
     }
 
@@ -1778,6 +1787,24 @@ main {
     /* Mobile - FAQ */
     .faq-grid {
         grid-template-columns: 1fr;
+    }
+
+    /* Mobile - Cookie Banner */
+    .cookie-banner {
+        width: calc(100vw - 16px);
+        bottom: 8px;
+        padding: var(--spacing-sm);
+        border-radius: var(--radius-md);
+    }
+
+    .cookie-banner__text {
+        font-size: 0.85rem;
+        line-height: 1.4;
+    }
+
+    .cookie-banner__actions button {
+        padding: 10px;
+        font-size: 0.85rem;
     }
 }
 
