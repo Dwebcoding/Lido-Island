@@ -806,7 +806,7 @@ main {
 /* ============ SERVIZI PREVIEW ============ */
 
 .services-preview {
-    padding: var(--spacing-xxl) 0;
+    padding: calc(var(--spacing-xxl) + 0.5rem) 0;
     background-color: var(--color-light);
 }
 
