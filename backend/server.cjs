@@ -4,8 +4,9 @@ const cors = require('cors');
 const bookingRoutes = require('./routes/booking.cjs');
 
 
+
 const app = express();
-// CORS: consenti GitHub Pages e frontend Vercel
+// CORS: deve essere il PRIMO middleware
 const allowedOrigins = [
   'https://dwebcoding.github.io',
   'https://lido-island.vercel.app',
@@ -22,6 +23,7 @@ app.use(cors({
   },
   credentials: true
 }));
+
 app.use(express.json());
 app.use('/api/prenotazioni', bookingRoutes);
 
