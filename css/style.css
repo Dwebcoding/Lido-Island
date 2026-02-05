@@ -1365,8 +1365,8 @@ main {
 /* Tablet (768px e inferiori) */
 @media (max-width: 768px) {
     .glassmorphism-hero {
-        height: clamp(600px, 96vh, 760px);
-        padding-top: 56px;
+        height: clamp(650px, 100vh, 820px);
+        padding-top: 60px;
         justify-content: flex-start;
     }
 
@@ -1534,8 +1534,8 @@ main {
 /* Phablet (<=640px) */
 @media (max-width: 640px) {
     .glassmorphism-hero {
-        height: clamp(560px, 97vh, 720px);
-        padding-top: 52px;
+        height: clamp(620px, 100vh, 780px);
+        padding-top: 56px;
     }
 
     .hero-layout {
@@ -1628,8 +1628,8 @@ main {
     }
 
     .glassmorphism-hero {
-        height: clamp(540px, 100vh, 700px);
-        padding-top: 50px;
+        height: clamp(600px, 102vh, 760px);
+        padding-top: 54px;
     }
 
     .hero-actions {
