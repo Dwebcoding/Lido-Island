@@ -357,43 +357,27 @@ function handleBookingSubmit(e) {
             alert('❌ Errore: Compila correttamente tutti i campi!');
             return;
         }
-
-        // Controllo disponibilità aggiornata dalla cache locale
-        fetchAvailability(currentBooking.date)
-            .then(data => {
-                const availableTables = data.tables.available;
-                const availableChairs = data.chairs.available;
-                if (currentBooking.tables > availableTables || currentBooking.chairs > availableChairs) {
-                    showError('Disponibilità esaurita', 'La quantità richiesta supera la disponibilità attuale. Aggiorna la pagina e riprova.');
-                    alert('❌ Errore: disponibilità esaurita o cambiata.');
-                    return;
-                }
-                // Crea la prenotazione
-                const booking = {
-                    id: generateBookingId(),
-                    date: currentBooking.date,
-                    tables: currentBooking.tables,
-                    chairs: currentBooking.chairs,
-                    name: document.querySelector('input[name="name"]').value,
-                    email: document.querySelector('input[name="email"]').value,
-                    phone: document.querySelector('input[name="phone"]').value,
-                    notes: document.querySelector('textarea[name="notes"]').value,
-                    timestamp: new Date().toISOString()
-                };
-                console.log('[Booking] Booking creato:', booking);
-                // Salva la prenotazione
-                saveBooking(booking);
-                console.log('[Booking] ✅ Booking salvato');
-                alert(`✅ Prenotazione confermata!\nID: ${booking.id}`); // DEBUG: Mostra successo
-                // Mostra successo
-                showBookingSuccess(booking);
-                // Resetta il form
-                resetBookingForm();
-            })
-            .catch(error => {
-                console.error('[Booking] ❌ ERRORE DISPONIBILITÀ:', error);
-                alert('❌ Errore di disponibilità. Riprova più tardi.');
-            });
+        // Crea la prenotazione locale
+        const booking = {
+            id: generateBookingId(),
+            date: currentBooking.date,
+            tables: currentBooking.tables,
+            chairs: currentBooking.chairs,
+            name: document.querySelector('input[name="name"]').value,
+            email: document.querySelector('input[name="email"]').value,
+            phone: document.querySelector('input[name="phone"]').value,
+            notes: document.querySelector('textarea[name="notes"]').value,
+            timestamp: new Date().toISOString()
+        };
+        console.log('[Booking] Booking creato:', booking);
+        // Salva la prenotazione
+        saveBooking(booking);
+        console.log('[Booking] ✅ Booking salvato');
+        alert(`✅ Prenotazione confermata!\nID: ${booking.id}`); // DEBUG: Mostra successo
+        // Mostra successo
+        showBookingSuccess(booking);
+        // Resetta il form
+        resetBookingForm();
     } catch (error) {
         console.error('[Booking] ❌ ERRORE CRITICO:', error);
         alert(`❌ ERRORE: ${error.message}`); // DEBUG: Mostra errore
