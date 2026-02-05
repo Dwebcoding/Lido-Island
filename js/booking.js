@@ -34,6 +34,9 @@ let currentBooking = {
  * Inizializza il sistema di prenotazione
  */
 function initBookingSystem() {
+        // Impedisci modifica manuale degli input quantità
+        document.getElementById('tableQty')?.addEventListener('keydown', e => e.preventDefault());
+        document.getElementById('chairQty')?.addEventListener('keydown', e => e.preventDefault());
     console.log('[Booking System] Inizio inizializzazione...');
     
     // EmailJS rimosso: la logica email è ora gestita solo dal backend
