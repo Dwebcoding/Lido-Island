@@ -1,3 +1,4 @@
+// Renamed to booking.cjs for CommonJS compatibility
 import { getDb } from '../config/db.js';
 
 export async function initBookingModel() {

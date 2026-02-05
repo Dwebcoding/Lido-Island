@@ -1,3 +1,4 @@
+// Renamed to server.cjs for CommonJS compatibility
 import express from 'express';
 import cors from 'cors';
 import { initBookingModel } from './models/booking.js';

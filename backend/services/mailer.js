@@ -1,5 +1,5 @@
-import nodemailer from 'nodemailer';
-import { bookingEmailTemplate } from './template.js';
+const nodemailer = require('nodemailer');
+const bookingEmailTemplate = require('./template.cjs');
 
 // Configurazione SMTP (modifica con i tuoi dati reali)
 const transporter = nodemailer.createTransport({
@@ -12,8 +12,12 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-export async function sendBookingEmail(booking) {
-  const html = bookingEmailTemplate(booking);
+async function sendBookingEmail(booking) {
+  // Replace placeholders in the template with booking data
+  let html = bookingEmailTemplate;
+  for (const [key, value] of Object.entries(booking)) {
+    html = html.replace(new RegExp(`{{${key}}}`, 'g'), value);
+  }
   await transporter.sendMail({
     from: 'Isola Lido <noreply@isolalido.it>',
     to: 'proprietario@isolalido.it',
@@ -21,3 +25,5 @@ export async function sendBookingEmail(booking) {
     html
   });
 }
+
+module.exports = { sendBookingEmail };

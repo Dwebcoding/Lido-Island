@@ -1,6 +1,7 @@
+// Renamed to booking.cjs for CommonJS compatibility
 import express from 'express';
 import { createBooking, getAllBookings } from '../models/booking.js';
-import { sendBookingEmail } from '../services/mailer.js';
+const { sendBookingEmail } = require('../services/mailer.cjs');
 
 const router = express.Router();
 
