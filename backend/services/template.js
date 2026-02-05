@@ -1,0 +1,235 @@
+// Template HTML per email di prenotazione (personalizza secondo il tuo stile)
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family:'Poppins', Arial, sans-serif;
+      background-color:#f5f5f5;
+      padding:20px;
+      line-height:1.6;
+      color:#333;
+    }
+    .email-container {
+      max-width:600px;
+      margin:0 auto;
+      background:#fff;
+      border-radius:12px;
+      box-shadow:0 4px 6px rgba(0,0,0,0.1);
+      overflow:hidden;
+    }
+    .header {
+      background:linear-gradient(135deg,#00a8e8 0%,#00d9ff 100%);
+      color:#fff;
+      padding:40px 20px;
+      text-align:center;
+    }
+    .header h1 { font-size:28px; margin-bottom:8px; text-shadow:1px 1px 2px rgba(0,0,0,0.1); }
+    .header p { font-size:14px; opacity:.95; }
+    .content { padding:30px 20px; }
+    .section { margin-bottom:25px; }
+    .section-title {
+      font-size:16px;
+      font-weight:700;
+      color:#00a8e8;
+      margin-bottom:15px;
+      padding-bottom:10px;
+      border-bottom:2px solid #00d9ff;
+      text-transform:uppercase;
+      letter-spacing:1px;
+    }
+    .customer-info { display:grid; grid-template-columns:1fr 1fr; gap:15px; }
+    .info-item {
+      background:#f8f9fa;
+      padding:12px;
+      border-radius:8px;
+      border-left:4px solid #00a8e8;
+    }
+    .info-label { font-size:12px; color:#7a8fa3; text-transform:uppercase; font-weight:600; margin-bottom:4px; }
+    .info-value { font-size:14px; color:#1a3a4a; font-weight:500; }
+    .booking-items { display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-bottom:20px; }
+    .item-card {
+      background:linear-gradient(135deg,#f0f9ff 0%,#e0f7ff 100%);
+      padding:20px;
+      border-radius:8px;
+      text-align:center;
+      border:2px solid #00d9ff;
+    }
+    .item-emoji { font-size:32px; margin-bottom:8px; }
+    .item-count { font-size:24px; font-weight:700; color:#00a8e8; margin-bottom:4px; }
+    .item-name { font-size:12px; color:#7a8fa3; text-transform:uppercase; font-weight:600; margin-bottom:8px; }
+    .item-price { font-size:14px; color:#1a3a4a; font-weight:600; }
+    .date-section {
+      background:#fff3e0;
+      padding:15px;
+      border-radius:8px;
+      border-left:4px solid #ffc400;
+      margin-bottom:20px;
+    }
+    .date-label { font-size:12px; color:#856404; font-weight:600; text-transform:uppercase; margin-bottom:4px; }
+    .date-value { font-size:16px; color:#1a3a4a; font-weight:700; }
+    .divider { height:1px; background:linear-gradient(90deg,transparent,#00d9ff,transparent); margin:20px 0; }
+    .summary {
+      background:linear-gradient(135deg,#f0f9ff 0%,#e0f7ff 100%);
+      padding:20px;
+      border-radius:8px;
+      border:2px solid #00a8e8;
+    }
+    .summary-row { display:flex; justify-content:space-between; margin-bottom:12px; font-size:14px; }
+    .summary-row:last-child { margin-bottom:0; }
+    .summary-label { color:#7a8fa3; font-weight:500; }
+    .summary-price { color:#1a3a4a; font-weight:600; }
+    .total-row { border-top:2px solid #00d9ff; padding-top:12px; font-size:16px; font-weight:700; }
+    .total-row .summary-label { color:#00a8e8; }
+    .total-row .summary-price { color:#00a8e8; font-size:18px; }
+    .notes-section {
+      background:#f8f9fa;
+      padding:15px;
+      border-radius:8px;
+      border-left:4px solid #00d9ff;
+      margin:20px 0;
+    }
+    .notes-title { font-size:12px; color:#7a8fa3; text-transform:uppercase; font-weight:600; margin-bottom:8px; }
+    .notes-text { font-size:13px; color:#1a3a4a; line-height:1.5; }
+    .booking-id {
+      background:#f0f9ff;
+      padding:12px;
+      border-radius:6px;
+      text-align:center;
+      margin:20px 0;
+      border:1px dashed #00d9ff;
+    }
+    .booking-id-label { font-size:11px; color:#7a8fa3; text-transform:uppercase; font-weight:600; margin-bottom:4px; }
+    .booking-id-value { font-size:14px; font-weight:700; color:#00a8e8; font-family:'Courier New', monospace; }
+    .footer {
+      background:#1a3a4a;
+      color:#fff;
+      padding:20px;
+      text-align:center;
+      font-size:12px;
+      border-top:3px solid #00a8e8;
+    }
+    .footer-text { margin-bottom:8px; }
+    .footer-contact { font-size:11px; color:#00d9ff; }
+    @media (max-width:480px){
+      .customer-info,.booking-items{ grid-template-columns:1fr; }
+      .header h1{ font-size:22px; }
+      .content{ padding:20px 15px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="email-container">
+    <div class="header">
+      <h1>🎉 Prenotazione Confermata</h1>
+      <p>Isola Lido - Piscina e Relax</p>
+    </div>
+
+    <div class="content">
+      <div class="section">
+        <h2 class="section-title">👤 Dati Cliente</h2>
+        <div class="customer-info">
+          <div class="info-item">
+            <div class="info-label">Nome</div>
+            <div class="info-value">{{customer_name}}</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Email</div>
+            <div class="info-value">{{customer_email}}</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Telefono</div>
+            <div class="info-value">{{customer_phone}}</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">ID Prenotazione</div>
+            <div class="info-value" style="color:#00a8e8; font-family:monospace;">{{booking_id}}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="date-section">
+          <div class="date-label">📅 Data della Prenotazione</div>
+          <div class="date-value">{{booking_date}}</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title">📋 Articoli Prenotati</h2>
+        <div class="booking-items">
+          <div class="item-card">
+            <div class="item-emoji">🍽️</div>
+            <div class="item-name">Tavoli</div>
+            <div class="item-count">{{tables_count}}</div>
+            <div class="item-price">€ {{tables_price}}</div>
+          </div>
+          <div class="item-card">
+            <div class="item-emoji">☀️</div>
+            <div class="item-name">Sdraio/Ombrelloni</div>
+            <div class="item-count">{{chairs_count}}</div>
+            <div class="item-price">€ {{chairs_price}}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="notes-section">
+          <div class="notes-title">📝 Note Aggiuntive</div>
+          <div class="notes-text">{{booking_notes}}</div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="section">
+        <h2 class="section-title">💰 Riepilogo Prenotazione</h2>
+        <div class="summary">
+          <div class="summary-row">
+            <span class="summary-label">Tavoli ({{tables_count}} × €8,00):</span>
+            <span class="summary-price">€ {{tables_price}}</span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-label">Sdraio ({{chairs_count}} × €5,00):</span>
+            <span class="summary-price">€ {{chairs_price}}</span>
+          </div>
+          <div class="summary-row total-row">
+            <span class="summary-label">TOTALE PRENOTAZIONE:</span>
+            <span class="summary-price">€ {{total_price}}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="booking-id">
+        <div class="booking-id-label">Numero Prenotazione</div>
+        <div class="booking-id-value">{{booking_id}}</div>
+      </div>
+
+      <div class="section" style="background:#f8f9fa; padding:15px; border-radius:8px; border-left:4px solid #ffc400;">
+        <p style="font-size:12px; color:#7a8fa3; margin-bottom:8px; font-weight:600;">⏰ PROSSIMI PASSI</p>
+        <ul style="font-size:13px; color:#1a3a4a; line-height:1.8; padding-left:20px;">
+          <li>Riceverai una conferma via email entro 24 ore</li>
+          <li>Presenta il tuo ID prenotazione al nostro check-in</li>
+          <li>Ti consigliamo di arrivare 15 minuti prima dell'orario prenotato</li>
+          <li>Per modifiche o cancellazioni contattaci al 333-499-3469</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-text"><strong>Isola Lido</strong> - Piscina e Relax per tutta la famiglia</div>
+      <div class="footer-contact">
+        📍 Via Rivolta, 20062 - Cassano d'Adda (MI)<br>
+        📞 333-499-3469<br>
+        📧 postamaster@isolalido.it
+      </div>
+      <div class="footer-text" style="margin-top:12px; font-size:11px; opacity:0.8;">
+        Prenotazione ricevuta il: {{booking_timestamp}}
+      </div>
+    </div>
+  </div>
+</body>
+</html>

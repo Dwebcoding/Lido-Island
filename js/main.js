@@ -494,6 +494,7 @@ function initializeApp() {
     initSmoothScroll();
     initCardHoverEffects();
     initCounterAnimation();
+    initBookingForm();
 
     log('Applicazione caricata con successo!');
 }
@@ -518,3 +519,43 @@ window.addEventListener('resize', function() {
         updateActiveNavLink();
     }, 250);
 });
+
+function initBookingForm() {
+    const bookingForm = document.getElementById('bookingForm');
+    if (!bookingForm) return;
+
+    bookingForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        // Raccogli dati
+        const formData = new FormData(bookingForm);
+        const data = {
+            nome: formData.get('nome'),
+            email: formData.get('email'),
+            telefono: formData.get('telefono'),
+            data: formData.get('data'),
+            persone: formData.get('persone'),
+            messaggio: formData.get('messaggio')
+        };
+        // Validazione base
+        if (!data.nome || !data.email || !data.data) {
+            alert('Compila tutti i campi obbligatori!');
+            return;
+        }
+        try {
+            const res = await fetch('http://localhost:3001/api/prenotazioni', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+            if (res.ok) {
+                bookingForm.reset();
+                alert('Prenotazione inviata con successo!');
+            } else {
+                const err = await res.json();
+                alert('Errore: ' + (err.error || 'Impossibile inviare la prenotazione.'));
+            }
+        } catch (err) {
+            alert('Errore di connessione al server.');
+        }
+    });
+}
