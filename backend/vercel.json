@@ -6,9 +6,5 @@
   "routes": [
     { "src": "/api/(.*)", "dest": "server.cjs" },
     { "src": "/(.*)", "dest": "server.cjs" }
-  ],
-  "ignore": [
-    "node_modules/*",
-    "*.sqlite"
   ]
 }
