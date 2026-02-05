@@ -90,6 +90,7 @@ function renderFooter() {
                         <li><a href="${getPrivacyPath()}">Privacy Policy</a></li>
                         <li><a href="${getCookiePath()}">Cookie Policy</a></li>
                         <li><a href="${getTermsPath()}">Termini e Condizioni</a></li>
+                        <li><button class="link-button" id="openConsent">Gestisci preferenze cookie</button></li>
                     </ul>
                 </div>
 

@@ -186,6 +186,14 @@ a:hover {
     font-weight: 600;
     color: var(--color-text);
     position: relative;
+
+    .cookie-banner__content {
+        grid-template-columns: 1fr;
+    }
+
+    .cookie-banner__actions {
+        justify-content: flex-start;
+    }
     transition: color 0.3s ease;
 }
 
@@ -1520,6 +1528,20 @@ main {
         flex: 0 0 190px;
     }
 
+    .cookie-banner {
+        width: calc(100vw - 20px);
+        bottom: 10px;
+        padding: var(--spacing-sm) var(--spacing-md);
+    }
+
+    .cookie-banner__text {
+        font-size: 0.9rem;
+    }
+
+    .consent-modal__dialog {
+        width: 100%;
+    }
+
     .services-grid.single-row {
         gap: var(--spacing-md);
         padding: 0 var(--spacing-sm) var(--spacing-sm);
@@ -2033,6 +2055,118 @@ main {
     gap: var(--spacing-md);
     justify-content: center;
     flex-wrap: wrap;
+}
+
+/* ============ COOKIE CONSENT ============ */
+.cookie-banner {
+    position: fixed;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(1080px, 92vw);
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-lg);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-md);
+    z-index: 2000;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.cookie-banner.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.cookie-banner__content {
+    display: grid;
+    gap: var(--spacing-md);
+    grid-template-columns: 1fr auto;
+    align-items: center;
+}
+
+.cookie-banner__text {
+    color: var(--color-text);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.cookie-banner__text a {
+    color: var(--color-primary);
+    text-decoration: underline;
+}
+
+.cookie-banner__actions {
+    display: flex;
+    gap: var(--spacing-sm);
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.cookie-banner .ghost {
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+    background: var(--color-light);
+}
+
+.consent-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2100;
+    padding: var(--spacing-md);
+}
+
+.consent-modal.open {
+    display: flex;
+}
+
+.consent-modal__dialog {
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    width: min(520px, 100%);
+    box-shadow: var(--shadow-lg);
+    padding: var(--spacing-md);
+    border: 1px solid var(--color-border);
+}
+
+.consent-modal__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+}
+
+.consent-modal__close {
+    background: none;
+    border: none;
+    font-size: 1.4rem;
+    cursor: pointer;
+    color: var(--color-text);
+}
+
+.consent-modal__body {
+    display: grid;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+}
+
+.consent-toggle {
+    display: flex;
+    gap: var(--spacing-sm);
+    align-items: center;
+    font-size: 0.98rem;
+}
+
+.consent-modal__footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--spacing-sm);
 }
 
 .cta-buttons .primary-button,

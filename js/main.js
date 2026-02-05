@@ -43,6 +43,152 @@ function initMenuToggle() {
     });
 }
 
+// ============ CONSENSO COOKIE/PRIVACY ============
+const CONSENT_KEY = 'isolaLidoConsent';
+
+function getStoredConsent() {
+    try {
+        const raw = localStorage.getItem(CONSENT_KEY);
+        return raw ? JSON.parse(raw) : null;
+    } catch (e) {
+        console.warn('Impossibile leggere il consenso salvato', e);
+        return null;
+    }
+}
+
+function saveConsent(consent) {
+    try {
+        localStorage.setItem(CONSENT_KEY, JSON.stringify(consent));
+    } catch (e) {
+        console.warn('Impossibile salvare il consenso', e);
+    }
+}
+
+function applyConsent(consent) {
+    document.documentElement.setAttribute('data-consent-analytics', consent.analytics);
+    document.documentElement.setAttribute('data-consent-marketing', consent.marketing);
+    // Qui potresti inizializzare/ bloccare script di terze parti in base al consenso
+}
+
+function renderConsentUI() {
+    if (document.getElementById('cookieBanner')) return;
+
+    const banner = document.createElement('div');
+    banner.id = 'cookieBanner';
+    banner.className = 'cookie-banner';
+    banner.innerHTML = `
+        <div class="cookie-banner__content">
+            <div class="cookie-banner__text">
+                Usiamo cookie tecnici e, con il tuo consenso, cookie di statistica e marketing per migliorare l'esperienza. 
+                Leggi la <a href="html/cookie.html">Cookie Policy</a> e la <a href="html/privacy.html">Privacy Policy</a>.
+            </div>
+            <div class="cookie-banner__actions">
+                <button class="secondary-button ghost" id="cookieReject">Rifiuta</button>
+                <button class="secondary-button" id="cookiePrefs">Gestisci</button>
+                <button class="primary-button" id="cookieAccept">Accetta tutti</button>
+            </div>
+        </div>
+    `;
+
+    const modal = document.createElement('div');
+    modal.id = 'cookieModal';
+    modal.className = 'consent-modal';
+    modal.innerHTML = `
+        <div class="consent-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="consentTitle">
+            <div class="consent-modal__header">
+                <h3 id="consentTitle">Preferenze cookie</h3>
+                <button class="consent-modal__close" id="cookieModalClose" aria-label="Chiudi">×</button>
+            </div>
+            <div class="consent-modal__body">
+                <label class="consent-toggle">
+                    <input type="checkbox" checked disabled>
+                    <span>Cookie tecnici necessari (sempre attivi)</span>
+                </label>
+                <label class="consent-toggle">
+                    <input type="checkbox" id="consentAnalytics">
+                    <span>Cookie di statistica/analitici</span>
+                </label>
+                <label class="consent-toggle">
+                    <input type="checkbox" id="consentMarketing">
+                    <span>Cookie di marketing</span>
+                </label>
+            </div>
+            <div class="consent-modal__footer">
+                <button class="secondary-button" id="cookieModalReject">Rifiuta non essenziali</button>
+                <button class="primary-button" id="cookieModalSave">Salva preferenze</button>
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(banner);
+    document.body.appendChild(modal);
+
+    const stored = getStoredConsent();
+    if (stored) {
+        document.getElementById('consentAnalytics').checked = !!stored.analytics;
+        document.getElementById('consentMarketing').checked = !!stored.marketing;
+        banner.classList.add('is-hidden');
+    }
+
+    const hideModal = () => modal.classList.remove('open');
+    document.getElementById('cookiePrefs').addEventListener('click', () => {
+        modal.classList.add('open');
+    });
+    document.getElementById('cookieModalClose').addEventListener('click', hideModal);
+    document.getElementById('cookieModalReject').addEventListener('click', () => {
+        const consent = { necessary: true, analytics: false, marketing: false, ts: Date.now() };
+        saveConsent(consent);
+        applyConsent(consent);
+        hideModal();
+        banner.classList.add('is-hidden');
+    });
+    document.getElementById('cookieModalSave').addEventListener('click', () => {
+        const consent = {
+            necessary: true,
+            analytics: document.getElementById('consentAnalytics').checked,
+            marketing: document.getElementById('consentMarketing').checked,
+            ts: Date.now()
+        };
+        saveConsent(consent);
+        applyConsent(consent);
+        hideModal();
+        banner.classList.add('is-hidden');
+    });
+    document.getElementById('cookieAccept').addEventListener('click', () => {
+        const consent = { necessary: true, analytics: true, marketing: true, ts: Date.now() };
+        document.getElementById('consentAnalytics').checked = true;
+        document.getElementById('consentMarketing').checked = true;
+        saveConsent(consent);
+        applyConsent(consent);
+        banner.classList.add('is-hidden');
+        hideModal();
+    });
+    document.getElementById('cookieReject').addEventListener('click', () => {
+        const consent = { necessary: true, analytics: false, marketing: false, ts: Date.now() };
+        document.getElementById('consentAnalytics').checked = false;
+        document.getElementById('consentMarketing').checked = false;
+        saveConsent(consent);
+        applyConsent(consent);
+        banner.classList.add('is-hidden');
+        hideModal();
+    });
+
+    const footerConsent = document.getElementById('openConsent');
+    if (footerConsent) {
+        footerConsent.addEventListener('click', () => {
+            document.getElementById('cookiePrefs').click();
+        });
+    }
+}
+
+function initConsentManager() {
+    renderConsentUI();
+    const consent = getStoredConsent();
+    if (consent) {
+        applyConsent(consent);
+    }
+}
+
 // ============ GESTIONE LINK ATTIVI ============
 
 /**
@@ -330,6 +476,7 @@ function initializeApp() {
     log('Applicazione in fase di caricamento...');
 
     // Inizializza i componenti
+    initConsentManager();
     initMenuToggle();
     updateActiveNavLink();
     initContactForm();
