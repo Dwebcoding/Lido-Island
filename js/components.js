@@ -52,9 +52,7 @@ function renderFooter() {
                 <!-- Sezione Azienda -->
                 <div class="footer-section">
                     <h4>Isola Lido</h4>
-                    <p class="footer-description">
-                        Piscina e relax per tutta la famiglia. Vieni a scoprire i nostri servizi!
-                    </p>
+
                     <div class="footer-contact-info">
                         <p>
                             <strong>📍 Indirizzo:</strong><br>
@@ -98,9 +96,8 @@ function renderFooter() {
                 <div class="footer-section">
                     <h4>Orari di Apertura</h4>
                     <ul class="footer-hours">
-                        <li><strong>Lun-Ven:</strong> 9:30 - 20:00</li>
-                        <li><strong>Sab-Dom:</strong> 9:30 - 21:00</li>
-                        <li class="footer-note">Aperto tutto l'anno*</li>
+                        <li><strong>Mar-Dom:</strong> 9:30 - 18:00</li>
+                        <li><span class="small">Chiuso il Lunedì</span></li>
                     </ul>
                 </div>
             </div>
