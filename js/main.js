@@ -16,19 +16,30 @@ function initMenuToggle() {
     
     if (!menuToggle || !navMenu) return;
 
+    // Evita di agganciare più volte gli stessi listener quando il componente viene reinizializzato
+    if (menuToggle.dataset.bound === 'true') return;
+    menuToggle.dataset.bound = 'true';
+
+    const setMenuState = (isOpen) => {
+        navMenu.classList.toggle('active', isOpen);
+        menuToggle.classList.toggle('active', isOpen);
+        document.body.classList.toggle('nav-open', isOpen);
+        menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    };
+
+    const closeMenu = () => setMenuState(false);
+
     // Toggle del menu al click del bottone hamburger
-    menuToggle.addEventListener('click', function() {
-        navMenu.classList.toggle('active');
-        menuToggle.classList.toggle('active');
+    menuToggle.addEventListener('click', function(event) {
+        event.stopPropagation();
+        const isOpen = !navMenu.classList.contains('active');
+        setMenuState(isOpen);
     });
 
     // Chiude il menu quando si clicca su un link
     const navLinks = navMenu.querySelectorAll('.nav-link');
     navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            navMenu.classList.remove('active');
-            menuToggle.classList.remove('active');
-        });
+        link.addEventListener('click', closeMenu);
     });
 
     // Chiude il menu quando si clicca fuori
@@ -37,8 +48,7 @@ function initMenuToggle() {
         const isClickOnToggle = menuToggle.contains(event.target);
         
         if (!isClickInsideMenu && !isClickOnToggle && navMenu.classList.contains('active')) {
-            navMenu.classList.remove('active');
-            menuToggle.classList.remove('active');
+            closeMenu();
         }
     });
 }
