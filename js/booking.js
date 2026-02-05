@@ -22,6 +22,7 @@ function fetchAvailability(date) {
             return data;
         });
 }
+// Logica disponibilità rimossa
 /* ============================================
    ISOLA LIDO - BOOKING SYSTEM
    Sistema di Prenotazione Tavoli e Sdraio
@@ -135,13 +136,8 @@ function incrementTable() {
         availableTables: getAvailableTables()
     });
     const availableTables = getAvailableTables();
-    if (currentBooking.tables < availableTables) {
         currentBooking.tables++;
         updateDisplay();
-        console.log('[Booking] incrementTable - Dopo:', currentBooking.tables);
-    } else {
-        console.log('[Booking] incrementTable - BLOCCATO: non ci sono altri tavoli disponibili');
-    }
 }
 
 /**
@@ -162,13 +158,8 @@ function incrementChair() {
     });
     
     const availableChairs = getAvailableChairs();
-    if (currentBooking.chairs < availableChairs) {
         currentBooking.chairs++;
         updateDisplay();
-        console.log('[Booking] incrementChair - Dopo:', currentBooking.chairs);
-    } else {
-        console.log('[Booking] incrementChair - BLOCCATO: non ci sono altre sdraio disponibili');
-    }
 }
 
 /**
@@ -266,8 +257,20 @@ function updateAvailability() {
     const date = currentBooking.date;
     if (!date) {
         // Se la data non è selezionata, mostra i massimali statici
-        document.getElementById('tableAvailability').textContent = `Disponibili: 110 tavoli`;
-        document.getElementById('chairAvailability').textContent = `Disponibili: 65 sdraio`;
+            document.getElementById('tableAvailability').textContent = `Disponibili: 110 tavoli`;
+            document.getElementById('chairAvailability').textContent = `Disponibili: 65 sdraio`;
+            // Banner avviso
+            const banner = document.getElementById('bookingWarningBanner');
+            if (banner) {
+                banner.style.display = 'none';
+                if (110 - currentBooking.tables <= 10) {
+                    banner.textContent = 'Attenzione: rimangono meno di 10 tavoli disponibili!';
+                    banner.style.display = 'block';
+                } else if (65 - currentBooking.chairs <= 10) {
+                    banner.textContent = 'Attenzione: rimangono meno di 10 sdraio disponibili!';
+                    banner.style.display = 'block';
+                }
+            }
         return;
     }
     fetchAvailability(date)
