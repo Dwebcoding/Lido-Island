@@ -1599,6 +1599,12 @@ main {
 @media (max-width: 480px) {
     :root {
         font-size: 14px;
+        /* Palette mobile leggermente più contrastata per leggibilità */
+        --color-primary: #1f9ad6;
+        --color-secondary: #8be7ff;
+        --color-accent: #ffc866;
+        --color-light: #f6fbff;
+        --color-text: #1f2f3d;
     }
 
     .brand-name {
