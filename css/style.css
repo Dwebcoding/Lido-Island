@@ -821,7 +821,7 @@ main {
     flex-wrap: nowrap;
     gap: var(--spacing-lg);
     overflow-x: auto;
-    padding-bottom: var(--spacing-sm);
+    padding: 0 var(--spacing-sm) var(--spacing-sm);
     scroll-snap-type: x proximity;
 }
 
@@ -1159,6 +1159,26 @@ main {
 
 /* ============ RESPONSIVE DESIGN ============ */
 
+/* Wide desktop (>=1440px) */
+@media (min-width: 1440px) {
+    .container {
+        max-width: 1320px;
+    }
+
+    .hero-layout {
+        width: min(1280px, 90vw);
+        gap: 20px;
+    }
+
+    .services-grid.single-row {
+        gap: var(--spacing-xl);
+    }
+
+    .services-grid.single-row .service-card {
+        flex: 0 0 240px;
+    }
+}
+
 /* Desktop medium (<=1200px) */
 @media (max-width: 1200px) {
     .glassmorphism-hero {
@@ -1489,6 +1509,26 @@ main {
     .secondary-button {
         width: 100%;
         text-align: center;
+    }
+
+    .services-grid.single-row {
+        gap: var(--spacing-sm);
+        padding: 0 var(--spacing-sm) var(--spacing-sm);
+        scroll-snap-type: x mandatory;
+    }
+
+    .services-grid.single-row .service-card {
+        flex: 0 0 190px;
+    }
+
+    .services-grid.single-row {
+        gap: var(--spacing-md);
+        padding: 0 var(--spacing-sm) var(--spacing-sm);
+        scroll-snap-type: x mandatory;
+    }
+
+    .services-grid.single-row .service-card {
+        flex: 0 0 210px;
     }
 }
 
