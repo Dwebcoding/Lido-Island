@@ -7,8 +7,8 @@
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.emailjs.com https://cdn.jsdelivr.net">
     <title>Isola Lido - Piscina e Relax</title>
     
-    <!-- Google Font - Poppins per modernità e Playfair Display per titoli eleganti -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts & Icons: Bricolage Grotesque, Space Grotesk, Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Material+Symbols+Rounded:wght@400;500;600&display=swap" rel="stylesheet">
     
     <!-- Stylesheet principale -->
     <link rel="stylesheet" href="css/style.css">
@@ -20,61 +20,60 @@
     <!-- ============ MAIN CONTENT ============ -->
     <main>
         <!-- GLASSMORPHISM HERO SECTION -->
-        <section class="glassmorphism-hero">
-            <div class="hero-content-card">
-                <h2 class="hero-title animate-fade-in">Isola Lido</h2>
-                <p class="hero-subtitle animate-fade-in">Piscina e relax per tutta la famiglia</p>
-                <a href="html/prenotazioni.html" class="cta-button animate-fade-in">Prenota Ora</a>
+        <section class="glassmorphism-hero split-hero">
+            <div class="hero-layout">
+                <div class="hero-content-card hero-copy-card animate-fade-in">
+                    <p class="hero-eyebrow">Estate 2026 · Piscina & sapori</p>
+                    <h1 class="hero-title">Sole, piscina e relax</h1>
+                    <p class="hero-subtitle">Servizio continuo, piatti freschi e vista sul tramonto, tutti i giorni.</p>
+                    <div class="hero-actions">
+                        <a href="html/prenotazioni.html" class="cta-button">Prenota ora</a>
+                        <a href="html/servizi.html" class="ghost-button">Scopri i nostri servizi</a>
+                    </div>
+                    <div class="hero-meta">
+                        <span class="meta-chip">Aperto 7/7</span>
+                        <span class="meta-chip">Area bimbi</span>
+                        <span class="meta-chip">Bar & cucina</span>
+                        <span class="meta-chip">Postazioni barbecue</span>
+                    </div>
+                </div>
+
+                <div class="hero-visual animate-fade-in">
+                    <div class="slider-3d smooth-slider">
+                        <div class="slider-track">
+                            <div class="slide-card"><img src="images/banner%20index/pool%201.png" alt="Piscina principale Isola Lido"></div>
+                            <div class="slide-card"><img src="images/banner%20index/pool%202.png" alt="Area relax ombreggiata Isola Lido"></div>
+                            <div class="slide-card"><img src="images/banner%20index/pool%203.png" alt="Dettaglio bordo piscina Isola Lido"></div>
+                            <div class="slide-card"><img src="images/banner%20index/lido%201.png" alt="Veduta Lido 1"></div>
+                            <div class="slide-card"><img src="images/banner%20index/lido%202.png" alt="Veduta Lido 2"></div>
+                            <div class="slide-card"><img src="images/banner%20index/pic%20nic%201.png" alt="Area picnic Isola Lido"></div>
+                            <div class="slide-card"><img src="images/banner%20index/pic%20nic%202.png" alt="Area picnic ombreggiata"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- COUNTER STATS GLASSMORPHISM -->
             <div class="counter-stats-glass">
                 <div class="stat-card">
-                    <div class="stat-icon icon-tables">🍽️</div>
+                    <div class="stat-icon icon-tables material-symbols-rounded">table_restaurant</div>
                     <div class="stat-number" data-target="110">0</div>
                     <div class="stat-label">Tavoli</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-icon icon-chairs">☀️</div>
+                    <div class="stat-icon icon-chairs material-symbols-rounded">beach_access</div>
                     <div class="stat-number" data-target="65">0</div>
                     <div class="stat-label">Sdraio</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-icon icon-services">⭐</div>
+                    <div class="stat-icon icon-services material-symbols-rounded">auto_awesome</div>
                     <div class="stat-number" data-target="9">0</div>
                     <div class="stat-label">Servizi</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-icon icon-hours">🕐</div>
+                    <div class="stat-icon icon-hours material-symbols-rounded">schedule</div>
                     <div class="stat-number" data-target="12">0</div>
                     <div class="stat-label">Ore Aperto</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- GALLERIA SEZIONE -->
-        <section class="gallery-section">
-            <div class="container">
-                <h2 class="section-title">La Nostra Galleria</h2>
-                <div class="gallery-grid">
-                    <div class="gallery-item">
-                        <img src="images/banner%20index/pool%201.png" alt="Piscina principale - Isola Lido">
-                    </div>
-                    <div class="gallery-item">
-                        <img src="images/banner%20index/pool%202.png" alt="Area relax - Isola Lido">
-                    </div>
-                    <div class="gallery-item">
-                        <img src="images/banner%20index/pool%203.png" alt="Zona ombra - Isola Lido">
-                    </div>
-                    <div class="gallery-item">
-                        <img src="images/banner%20index/lido%201.png" alt="Vista esterna - Isola Lido">
-                    </div>
-                    <div class="gallery-item">
-                        <img src="images/banner%20index/lido%202.png" alt="Area giochi bambini - Isola Lido">
-                    </div>
-                    <div class="gallery-item">
-                        <img src="images/banner%20index/pic%20nic%201.png" alt="Area picnic - Isola Lido">
-                    </div>
                 </div>
             </div>
         </section>
@@ -108,24 +107,29 @@
         <section class="services-preview">
             <div class="container">
                 <h2 class="section-title">I Nostri Servizi</h2>
-                <div class="services-grid">
+                <div class="services-grid single-row">
                     <div class="service-card">
-                        <div class="service-icon">🏊</div>
+                        <div class="service-icon material-symbols-rounded">waves</div>
                         <h3>Piscina</h3>
                         <p>Piscina principale con profondità regolamentare</p>
                     </div>
                     <div class="service-card">
-                        <div class="service-icon">☀️</div>
+                        <div class="service-icon material-symbols-rounded">spa</div>
                         <h3>Area Relax</h3>
                         <p>Zona ombra con lettini e sedie a sdraio</p>
                     </div>
                     <div class="service-card">
-                        <div class="service-icon">🍹</div>
+                        <div class="service-icon material-symbols-rounded">local_bar</div>
                         <h3>Bar</h3>
                         <p>Bevande e snack durante tutta la giornata</p>
                     </div>
                     <div class="service-card">
-                        <div class="service-icon">👶</div>
+                        <div class="service-icon material-symbols-rounded">outdoor_grill</div>
+                        <h3>Barbecue</h3>
+                        <p>Diverse postazioni barbecue prenotabili per grigliate in compagnia</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon material-symbols-rounded">child_friendly</div>
                         <h3>Area Bambini</h3>
                         <p>Zona sicura e divertente per i più piccoli</p>
                     </div>

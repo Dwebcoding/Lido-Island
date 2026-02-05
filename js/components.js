@@ -12,8 +12,10 @@ function renderHeader(activePage = 'home') {
     const headerHTML = `
         <div class="header-container">
             <div class="logo-section">
-                <img src="${getLogoPath()}" alt="Logo Isola Lido" class="logo">
-                <h1 class="brand-name">Isola Lido</h1>
+                <div class="brand-block" aria-label="Isola Lido">
+                    <h1 class="brand-name"><span class="brand-main">Isola</span><span class="brand-highlight">Lido</span></h1>
+                    <span class="brand-tagline">Pool · Grill · Relax</span>
+                </div>
             </div>
             
             <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">

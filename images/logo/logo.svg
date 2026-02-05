@@ -1,66 +1,35 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 64" role="img" aria-labelledby="title desc">
+  <title id="title">Isola Lido icon</title>
+  <desc id="desc">Sun, waves and grill combined in a clean badge</desc>
   <defs>
-    <linearGradient id="oceanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#1e90ff;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#00bfff;stop-opacity:1" />
-    </linearGradient>
     <linearGradient id="sunGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#ffd700;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#ffa500;stop-opacity:1" />
+      <stop offset="0%" stop-color="#ffd580" />
+      <stop offset="100%" stop-color="#ffb347" />
+    </linearGradient>
+    <linearGradient id="waveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#32b8f0" />
+      <stop offset="100%" stop-color="#7fe3ff" />
     </linearGradient>
   </defs>
-  
-  <!-- Background Circle -->
-  <circle cx="200" cy="200" r="190" fill="url(#oceanGrad)" opacity="0.1"/>
-  
-  <!-- Sun -->
-  <circle cx="200" cy="120" r="50" fill="url(#sunGrad)">
-    <animate attributeName="opacity" values="1;0.8;1" dur="3s" repeatCount="indefinite"/>
-  </circle>
-  
-  <!-- Sun Rays -->
-  <g stroke="#ffa500" stroke-width="3" opacity="0.6">
-    <line x1="200" y1="50" x2="200" y2="30"/>
-    <line x1="260" y1="80" x2="275" y2="65"/>
-    <line x1="270" y1="120" x2="290" y2="120"/>
-    <line x1="260" y1="160" x2="275" y2="175"/>
-    <line x1="140" y1="80" x2="125" y2="65"/>
-    <line x1="130" y1="120" x2="110" y2="120"/>
-    <line x1="140" y1="160" x2="125" y2="175"/>
+
+  <!-- Soft pill background -->
+  <rect x="4" y="6" width="212" height="52" rx="16" ry="16" fill="rgba(127, 227, 255, 0.1)" stroke="#bfe6ff" stroke-width="2.5" />
+
+  <!-- Sun + horizon (minimal offset arcs) -->
+  <g transform="translate(46 22)">
+    <circle r="11" fill="url(#sunGrad)" />
+    <path d="M-13 0a13 13 0 0 1 26 0" fill="none" stroke="#ffb347" stroke-width="3" stroke-linecap="round" opacity="0.65" />
+    <path d="M-9 -10l-4 -3m22 3l4 -3m0 17l4 3m-30 -3l-4 3" stroke="#ffb347" stroke-width="3" stroke-linecap="round" />
   </g>
-  
-  <!-- Waves -->
-  <path d="M 50 250 Q 100 230, 150 250 T 250 250 T 350 250" 
-        fill="none" stroke="#1e90ff" stroke-width="4" opacity="0.7">
-    <animate attributeName="d" 
-             values="M 50 250 Q 100 230, 150 250 T 250 250 T 350 250;
-                     M 50 250 Q 100 270, 150 250 T 250 250 T 350 250;
-                     M 50 250 Q 100 230, 150 250 T 250 250 T 350 250"
-             dur="4s" repeatCount="indefinite"/>
-  </path>
-  
-  <path d="M 50 270 Q 100 250, 150 270 T 250 270 T 350 270" 
-        fill="none" stroke="#00bfff" stroke-width="3" opacity="0.5">
-    <animate attributeName="d" 
-             values="M 50 270 Q 100 250, 150 270 T 250 270 T 350 270;
-                     M 50 270 Q 100 290, 150 270 T 250 270 T 350 270;
-                     M 50 270 Q 100 250, 150 270 T 250 270 T 350 270"
-             dur="3s" repeatCount="indefinite"/>
-  </path>
-  
-  <!-- Umbrella -->
-  <path d="M 200 200 Q 150 180, 150 220 L 155 220 Q 155 185, 200 205 Q 245 185, 245 220 L 250 220 Q 250 180, 200 200" 
-        fill="#ff6b6b" stroke="#c0392b" stroke-width="2"/>
-  <rect x="197" y="200" width="6" height="60" fill="#8b4513" rx="2"/>
-  <path d="M 203 255 Q 210 265, 205 270" fill="none" stroke="#8b4513" stroke-width="3" stroke-linecap="round"/>
-  
-  <!-- Text -->
-  <text x="200" y="330" font-family="'Comfortaa', cursive" font-size="48" font-weight="700" 
-        fill="#1e90ff" text-anchor="middle">
-    Lido
-  </text>
-  <text x="200" y="365" font-family="'Comfortaa', cursive" font-size="36" font-weight="500" 
-        fill="#00bfff" text-anchor="middle">
-    Azzurro
-  </text>
+  <path d="M22 32c8-6 16 6 24 0s16 6 24 0" fill="none" stroke="url(#waveGrad)" stroke-width="4" stroke-linecap="round" />
+  <path d="M28 40c7-5 14 5 21 0s14 5 21 0" fill="none" stroke="#32b8f0" stroke-width="3" stroke-linecap="round" opacity="0.8" />
+
+  <!-- Grill badge -->
+  <g transform="translate(124 12)">
+    <rect x="0" y="0" width="52" height="40" rx="12" ry="12" fill="rgba(255, 213, 128, 0.12)" stroke="#32b8f0" stroke-width="3" />
+    <path d="M12 13h28M12 21h28M12 29h28" stroke="#1a3a4a" stroke-width="3" stroke-linecap="round" />
+    <path d="M14 7c0-4 4-7 7-7" stroke="#ffb347" stroke-width="3" stroke-linecap="round" />
+    <path d="M38 7c0-4-4-7-7-7" stroke="#ffb347" stroke-width="3" stroke-linecap="round" />
+    <path d="M18 40v8m16-8v8" stroke="#1a3a4a" stroke-width="3" stroke-linecap="round" />
+  </g>
 </svg>

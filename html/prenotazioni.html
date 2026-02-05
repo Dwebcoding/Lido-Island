@@ -7,8 +7,8 @@
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.emailjs.com https://unpkg.com">
     <title>Prenotazioni - Isola Lido</title>
     
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Material+Symbols+Rounded:wght@400;500;600&display=swap" rel="stylesheet">
     
     <!-- Stylesheet principale -->
     <link rel="stylesheet" href="../css/style.css">
@@ -21,11 +21,12 @@
     <!-- ============ MAIN CONTENT ============ -->
     <main>
         <!-- HERO SECTION PRENOTAZIONI -->
-        <section class="hero" style="background-image: url('../images/banner%20index/pool%201.png');">
-            <div class="hero-overlay"></div>
-            <div class="hero-content">
-                <h2 class="hero-title">Prenota Ora</h2>
-                <p class="hero-subtitle">Tavoli e Sdraio - Riserva i tuoi posti</p>
+        <section class="page-hero prenota-hero">
+            <div class="page-hero-inner">
+                <span class="page-hero-chip"><span class="material-symbols-rounded">event_available</span> Prenota</span>
+                <h2 class="page-hero-title">Prenota Ora</h2>
+                <p class="page-hero-subtitle">Tavoli, sdraio e ombrelloni: scegli cosa ti serve e blocca il tuo posto.</p>
+                <span class="page-hero-badge"><span class="material-symbols-rounded">schedule</span> Conferma immediata via email</span>
             </div>
         </section>
 
@@ -38,7 +39,7 @@
                     <!-- SINISTRA: FORM -->
                     <div class="booking-form-column">
                         <div class="booking-card">
-                            <h3>📅 Seleziona Data</h3>
+                            <h3><span class="material-symbols-rounded">event</span> Seleziona Data</h3>
                             <input 
                                 type="date" 
                                 id="bookingDate" 
@@ -51,7 +52,7 @@
 
                         <!-- TAVOLI -->
                         <div class="booking-card">
-                            <h3>🍽️ Tavoli (8 persone)</h3>
+                            <h3><span class="material-symbols-rounded">table_restaurant</span> Tavoli (8 persone)</h3>
                             <p class="booking-price">€ 8,00 per tavolo</p>
                             <div class="booking-quantity">
                                 <button type="button" class="qty-btn" id="tableMinus">−</button>
@@ -72,7 +73,7 @@
 
                         <!-- SDRAIO E OMBRELLONI -->
                         <div class="booking-card">
-                            <h3>☀️ Sdraio e Ombrelloni</h3>
+                            <h3><span class="material-symbols-rounded">beach_access</span> Sdraio e Ombrelloni</h3>
                             <p class="booking-price">€ 5,00 per sdraio</p>
                             <div class="booking-quantity">
                                 <button type="button" class="qty-btn" id="chairMinus">−</button>
@@ -93,7 +94,7 @@
 
                         <!-- RIEPILOGO TOTALE -->
                         <div class="booking-card booking-summary">
-                            <h3>💰 Riepilogo Prenotazione</h3>
+                            <h3><span class="material-symbols-rounded">payments</span> Riepilogo Prenotazione</h3>
                             <div class="summary-row">
                                 <span>Tavoli (<span id="summaryTableQty">0</span>):</span>
                                 <strong id="summaryTablePrice">€ 0,00</strong>
@@ -113,7 +114,7 @@
                     <!-- DESTRA: DATI PERSONALI -->
                     <div class="booking-form-column">
                         <form id="bookingForm" class="booking-form">
-                            <h3>👤 Tuoi Dati</h3>
+                            <h3><span class="material-symbols-rounded">person</span> Tuoi Dati</h3>
 
                             <div class="form-group">
                                 <label for="bookingName">Nome Completo *</label>
@@ -163,7 +164,7 @@
 
                             <!-- INFORMATIVE -->
                             <div class="booking-info">
-                                <p><strong>📌 Importante:</strong></p>
+                                <p><strong><span class="material-symbols-rounded">info</span> Importante:</strong></p>
                                 <ul>
                                     <li>Prenotazione valida fino a 2 ore prima dell'arrivo</li>
                                     <li>Conferma via email dopo la prenotazione</li>
@@ -174,7 +175,7 @@
 
                             <!-- PULSANTE SUBMIT -->
                             <button type="submit" class="booking-submit" id="submitBooking">
-                                ✓ Conferma Prenotazione
+                                <span class="material-symbols-rounded">check</span> Conferma Prenotazione
                             </button>
 
                             <p class="form-disclaimer">
@@ -190,7 +191,7 @@
         <section class="booking-messages" id="bookingMessages">
             <div class="container">
                 <div id="successMessage" class="booking-success-message hidden">
-                    <h3>✅ Prenotazione Confermata!</h3>
+                    <h3><span class="material-symbols-rounded">task_alt</span> Prenotazione Confermata!</h3>
                     <p>La tua prenotazione è stata registrata. Riceverai una email di conferma a breve.</p>
                     <p>ID Prenotazione: <strong id="bookingId"></strong></p>
                     <button type="button" class="primary-button" onclick="window.location.href='../index.html'">
