@@ -101,6 +101,9 @@ function renderFooter() {
                     <ul class="footer-hours">
                         <li><strong>Lun-Dom:</strong> 9:30 - 18:00</li>
                     </ul>
+                    <div style="margin-top:10px; text-align:center;">
+                        <img src="${getLogoPath('png')}" alt="Logo Isola Lido" style="width:60px;height:60px;object-fit:contain;">
+                    </div>
                 </div>
             </div>
 
