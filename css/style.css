@@ -1,3 +1,28 @@
+.special-chip-fixed {
+    position: absolute;
+    top: 24px;
+    right: 32px;
+    z-index: 20;
+    pointer-events: none;
+}
+@media (max-width: 900px) {
+    .special-chip-fixed {
+        top: 12px;
+        right: 8px;
+        max-width: 95vw;
+    }
+}
+@media (max-width: 600px) {
+    .special-chip-fixed {
+        position: static;
+        margin: 0 auto 10px auto;
+        display: flex;
+        justify-content: center;
+    }
+}
+.glassmorphism-hero.split-hero {
+    position: relative;
+}
 /* ============ CHIP PROMOZIONALI SPECIALI ============ */
 .special-chip-banner {
     margin: 18px 0 0 0;
