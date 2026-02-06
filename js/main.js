@@ -524,38 +524,14 @@ function initBookingForm() {
     const bookingForm = document.getElementById('bookingForm');
     if (!bookingForm) return;
 
-    bookingForm.addEventListener('submit', async function(e) {
-        e.preventDefault();
-        // Raccogli dati
-        const formData = new FormData(bookingForm);
-        const data = {
-            nome: formData.get('nome'),
-            email: formData.get('email'),
-            telefono: formData.get('telefono'),
-            data: formData.get('data'),
-            persone: formData.get('persone'),
-            messaggio: formData.get('messaggio')
-        };
-        // Validazione base
-        if (!data.nome || !data.email || !data.data) {
-            alert('Compila tutti i campi obbligatori!');
-            return;
-        }
-        try {
-            const res = await fetch('https://lido-island-production.up.railway.app/api/prenotazioni', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            });
-            if (res.ok) {
-                bookingForm.reset();
-                alert('Prenotazione inviata con successo!');
-            } else {
-                const err = await res.json();
-                alert('Errore: ' + (err.error || 'Impossibile inviare la prenotazione.'));
-            }
-        } catch (err) {
-            alert('Errore di connessione al server.');
+    // Evita di agganciare più volte il listener se la pagina viene reinizializzata
+    if (bookingForm.dataset.bound === 'true') return;
+    bookingForm.dataset.bound = 'true';
+
+    // Delego la logica di invio/validazione al booking.js
+    bookingForm.addEventListener('submit', function(e) {
+        if (typeof handleBookingSubmit === 'function') {
+            handleBookingSubmit(e);
         }
     });
 }
