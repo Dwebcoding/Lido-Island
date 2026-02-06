@@ -1,3 +1,29 @@
+/* ============ CHIP PROMOZIONALI SPECIALI ============ */
+.special-chip-banner {
+    margin: 18px 0 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.special-chip {
+    background: linear-gradient(90deg, #fffbe7 0%, #ffe0b2 100%);
+    color: #b26a00;
+    border-radius: 2rem;
+    padding: 0.5rem 1.2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(255, 193, 7, 0.08);
+    border: 1.5px solid #ffd580;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    letter-spacing: 0.01em;
+    transition: background 0.2s;
+}
+.special-chip strong {
+    color: #ff9800;
+    margin-right: 0.3em;
+}
 /* ============================================
    ISOLA LIDO - STYLESHEET PRINCIPALE
    Author: Web Developer Professionista
