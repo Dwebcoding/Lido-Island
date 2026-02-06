@@ -349,7 +349,8 @@ main {
 }
 
 .glassmorphism-hero {
-    height: clamp(540px, 100vh, 1100px);
+    min-height: 780px;
+    height: auto;
     background: linear-gradient(135deg, rgba(50, 184, 240, 0.82) 0%, rgba(127, 227, 255, 0.72) 50%, rgba(22, 208, 255, 0.5) 100%);
     position: relative;
     display: flex;
@@ -1295,7 +1296,8 @@ main {
 /* Desktop medium (<=1200px) */
 @media (max-width: 1200px) {
     .glassmorphism-hero {
-        height: clamp(500px, 60vh, 620px);
+        min-height: 700px;
+        height: auto;
         padding-top: 50px;
     }
 
@@ -1354,7 +1356,8 @@ main {
 /* Laptop / Tablet-landscape (<=1024px) */
 @media (max-width: 1024px) {
     .glassmorphism-hero {
-        height: clamp(540px, 68vh, 660px);
+        min-height: 700px;
+        height: auto;
         padding-top: 54px;
     }
 
@@ -1420,7 +1423,8 @@ main {
 /* Narrow laptop / large tablet (<=900px) */
 @media (max-width: 900px) {
     .glassmorphism-hero {
-        height: clamp(540px, 80vh, 700px);
+        min-height: 700px;
+        height: auto;
         padding-top: 52px;
     }
 
@@ -1479,7 +1483,8 @@ main {
 /* Tablet (768px e inferiori) */
 @media (max-width: 768px) {
     .glassmorphism-hero {
-        height: clamp(780px, 110vh, 980px);
+        min-height: 900px;
+        height: auto;
         padding-top: 68px;
         justify-content: flex-start;
     }
@@ -1689,7 +1694,8 @@ main {
 /* Phablet (<=640px) */
 @media (max-width: 640px) {
     .glassmorphism-hero {
-        height: clamp(760px, 110vh, 930px);
+        min-height: 900px;
+        height: auto;
         padding-top: 64px;
     }
 
@@ -1783,7 +1789,8 @@ main {
     }
 
     .glassmorphism-hero {
-        height: clamp(740px, 112vh, 920px);
+        min-height: 900px;
+        height: auto;
         padding-top: 62px;
     }
 
