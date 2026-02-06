@@ -8,6 +8,12 @@
    ============================================ */
 
 // ============ CONFIGURAZIONE ============
+// ============ CONFIGURAZIONE EMAILJS ============
+const EMAILJS_CONFIG = {
+    SERVICE_ID: 'service_ln6w547',
+    TEMPLATE_ID: 'template_gqbalv6',
+    PUBLIC_KEY: 'WmW6GZu0mgbFXIXgw'
+};
 
 const BOOKING_CONFIG = {
     TABLES: {
@@ -556,29 +562,18 @@ function sendBookingEmail(booking) {
         
         console.log('[Email] Invio email...');
         
-        // Chiama l'API REST di EmailJS
-        fetch('https://lido-island-production.up.railway.app/api/email/send', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(emailData)
-        })
-        .then(response => {
-            if (response.ok) {
-                console.log('[Email] ✅ Email inviata con successo!');
-                return response.text();
-            } else {
-                return response.text().then(text => {
-                    throw new Error(`Errore ${response.status}: ${text}`);
-                });
-            }
-        })
-        .then(data => {
-            console.log('[Email] Response:', data);
-        })
-        .catch(error => {
-            console.error('[Email] ❌ Errore nell\'invio:', error);
+        // Invio email tramite EmailJS lato client
+        emailjs.send(
+            EMAILJS_CONFIG.SERVICE_ID,
+            EMAILJS_CONFIG.TEMPLATE_ID,
+            emailData.template_params,
+            EMAILJS_CONFIG.PUBLIC_KEY
+        ).then(function(response) {
+            console.log('[EmailJS] Email inviata!', response);
+            alert('Prenotazione inviata con successo! Riceverai una conferma via email.');
+        }, function(error) {
+            console.error('[EmailJS] Errore invio:', error);
+            alert('Errore nell\'invio della prenotazione. Riprova o contatta la struttura.');
         });
         
     } catch (error) {
