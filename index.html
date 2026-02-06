@@ -164,25 +164,6 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             initializePageComponents('home');
-            // Switch foto/info eventi
-            const btnPhotos = document.getElementById('switchPhotos');
-            const btnInfo = document.getElementById('switchInfo');
-            const slider = document.getElementById('heroSliderSwitch');
-            const info = document.getElementById('heroInfoSwitch');
-            if (btnPhotos && btnInfo && slider && info) {
-                btnPhotos.addEventListener('click', function() {
-                    btnPhotos.classList.add('active');
-                    btnInfo.classList.remove('active');
-                    slider.style.display = '';
-                    info.style.display = 'none';
-                });
-                btnInfo.addEventListener('click', function() {
-                    btnInfo.classList.add('active');
-                    btnPhotos.classList.remove('active');
-                    slider.style.display = 'none';
-                    info.style.display = '';
-                });
-            }
         });
     </script>
     <!-- Script JavaScript Principale -->
