@@ -1,2 +1,4 @@
-// Use template.cjs for CommonJS compatibility
-module.exports = require('./template.cjs');
+// Email template (ESM)
+export default {
+  // ...template logic...
+};
