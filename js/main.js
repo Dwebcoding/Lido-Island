@@ -416,32 +416,6 @@ function initCardHoverEffects() {
     });
 }
 
-// ============ HERO SWITCHER FOTO/INFO ============
-
-function initHeroSwitcher() {
-    const btnPhotos = document.getElementById('switchPhotos');
-    const btnInfo = document.getElementById('switchInfo');
-    const slider = document.getElementById('heroSliderSwitch');
-    const info = document.getElementById('heroInfoSwitch');
-
-    if (!btnPhotos || !btnInfo || !slider || !info) return;
-    if (btnPhotos.dataset.bound === 'true') return;
-    btnPhotos.dataset.bound = 'true';
-
-    const activate = (mode) => {
-        const showPhotos = mode === 'photos';
-        btnPhotos.classList.toggle('active', showPhotos);
-        btnInfo.classList.toggle('active', !showPhotos);
-        slider.hidden = !showPhotos;
-        info.hidden = showPhotos;
-    };
-
-    btnPhotos.addEventListener('click', () => activate('photos'));
-    btnInfo.addEventListener('click', () => activate('info'));
-
-    // Stato iniziale: foto
-    activate('photos');
-}
 
 // ============ UTILITY: LOGGER ============
 
@@ -521,7 +495,6 @@ function initializeApp() {
     initSmoothScroll();
     initCardHoverEffects();
     initCounterAnimation();
-    initHeroSwitcher();
     initBookingForm();
 
     log('Applicazione caricata con successo!');
