@@ -14,7 +14,7 @@ function renderHeader(activePage = 'home') {
             <div class="logo-section">
                     <a class="brand-block" aria-label="Isola Lido" href="${getHomePath()}">
                         <span style="display:flex;align-items:center;gap:10px;">
-                            <img src="images/logo/Logo Lido Island no background.png" alt="Logo Isola Lido" style="width:50px;height:50px;object-fit:contain;">
+                            <img src="${getLogoPath('png')}" alt="Logo Isola Lido" style="width:50px;height:50px;object-fit:contain;">
                             <h4 style="margin:0;display:inline;vertical-align:middle;">Isola Lido</h4>
                         </span>
                     <span class="brand-tagline" style="margin-top:-10px;display:block;">Pool · Grill · Relax</span>
@@ -132,14 +132,19 @@ function renderFooter() {
 /**
  * Determina il percorso del logo in base alla pagina corrente
  */
-function getLogoPath() {
+function getLogoPath(type = 'svg') {
     const currentPath = window.location.pathname;
-    
-    // Se siamo in una sottocartella (html/), il percorso è diverso
-    if (currentPath.includes('/html/')) {
-        return '../images/logo/logo.svg';
+    if (type === 'png') {
+        if (currentPath.includes('/html/')) {
+            return '../images/logo/Logo Lido Island no background.png';
+        }
+        return 'images/logo/Logo Lido Island no background.png';
+    } else {
+        if (currentPath.includes('/html/')) {
+            return '../images/logo/logo.svg';
+        }
+        return 'images/logo/logo.svg';
     }
-    return 'images/logo/logo.svg';
 }
 
 /**
