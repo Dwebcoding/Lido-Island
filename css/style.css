@@ -1,3 +1,17 @@
+/* Oscura il counter Tavoli quando la tendina chip è espansa */
+.stat-card-obscured {
+    position: relative;
+}
+.stat-card-obscured::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255,255,255,0.82);
+    z-index: 10;
+    border-radius: 18px;
+    pointer-events: none;
+    transition: background 0.2s;
+}
 /* ============ CHIP PROMOZIONALI SPECIALI ============ */
 .special-chip-banner {
     margin: 18px 0 0 0;

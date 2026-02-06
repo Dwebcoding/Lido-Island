@@ -8,6 +8,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (other !== chip) other.classList.remove('expanded');
             });
             chip.classList.toggle('expanded');
+
+            // Se il chip è espanso, oscura il counter Tavoli
+            const statCardTavoli = document.getElementById('statCardTavoli');
+            if (chip.classList.contains('expanded')) {
+                statCardTavoli && statCardTavoli.classList.add('stat-card-obscured');
+            } else {
+                statCardTavoli && statCardTavoli.classList.remove('stat-card-obscured');
+            }
         });
         // Espansione su tastiera (Enter/Space)
         chip.addEventListener('keydown', function(e) {
@@ -19,6 +27,9 @@ document.addEventListener('DOMContentLoaded', function() {
         // Chiudi su click fuori
         document.addEventListener('click', function(e) {
             if (!chip.contains(e.target)) chip.classList.remove('expanded');
+            // Rimuovi oscuramento se chiuso
+            const statCardTavoli = document.getElementById('statCardTavoli');
+            if (statCardTavoli) statCardTavoli.classList.remove('stat-card-obscured');
         });
     });
 });
