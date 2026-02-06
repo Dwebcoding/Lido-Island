@@ -96,8 +96,7 @@ function renderFooter() {
                 <div class="footer-section">
                     <h4>Orari di Apertura</h4>
                     <ul class="footer-hours">
-                        <li><strong>Mar-Dom:</strong> 9:30 - 18:00</li>
-                        <li><span class="small">Chiuso il Lunedì</span></li>
+                        <li><strong>Lun-Dom:</strong> 9:30 - 18:00</li>
                     </ul>
                 </div>
             </div>
