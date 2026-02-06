@@ -9,10 +9,11 @@
 
 // ============ CONFIGURAZIONE ============
 // ============ CONFIGURAZIONE EMAILJS ============
+
 const EMAILJS_CONFIG = {
-    SERVICE_ID: 'service_ln6w547',
-    TEMPLATE_ID: 'template_gqbalv6',
-    PUBLIC_KEY: 'WmW6GZu0mgbFXIXgw'
+    SERVICE_ID: 'service_mylrmf4',
+    TEMPLATE_ID: 'template_r63dlwf',
+    PUBLIC_KEY: 'ZV2oWjSAL_5W1omKq'
 };
 
 const BOOKING_CONFIG = {
