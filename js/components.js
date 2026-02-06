@@ -12,9 +12,12 @@ function renderHeader(activePage = 'home') {
     const headerHTML = `
         <div class="header-container">
             <div class="logo-section">
-                <a class="brand-block" aria-label="Isola Lido" href="${getHomePath()}">
-                    <h1 class="brand-name"><span class="brand-main">Isola</span><span class="brand-highlight">Lido</span></h1>
-                    <span class="brand-tagline">Pool · Grill · Relax</span>
+                    <a class="brand-block" aria-label="Isola Lido" href="${getHomePath()}">
+                        <span style="display:flex;align-items:center;gap:10px;">
+                            <img src="images/logo/Logo Lido Island no background.png" alt="Logo Isola Lido" style="width:50px;height:50px;object-fit:contain;">
+                            <h4 style="margin:0;display:inline;vertical-align:middle;">Isola Lido</h4>
+                        </span>
+                    <span class="brand-tagline" style="margin-top:-10px;display:block;">Pool · Grill · Relax</span>
                 </a>
             </div>
             
