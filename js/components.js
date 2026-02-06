@@ -102,7 +102,7 @@ function renderFooter() {
                         <li><strong>Lun-Dom:</strong> 9:30 - 18:00</li>
                     </ul>
                     <div style="margin-top:10px; text-align:center;">
-                        <img src="${getLogoPath('png')}" alt="Logo Isola Lido" style="width:180px;height:180px;object-fit:contain;">
+                        <img src="${getLogoPath('png')}" alt="Logo Isola Lido" style="width:260px;height:260px;object-fit:contain;background:none;box-shadow:none;border:none;">
                     </div>
                 </div>
             </div>
