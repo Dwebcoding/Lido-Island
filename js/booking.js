@@ -557,7 +557,9 @@ function sendBookingEmail(booking) {
                 chairs_price: chairsTotal.toFixed(2),
                 total_price: total.toFixed(2),
                 booking_notes: booking.notes || 'Nessuna nota',
-                booking_timestamp: new Date(booking.timestamp).toLocaleString('it-IT')
+                booking_timestamp: new Date(booking.timestamp).toLocaleString('it-IT'),
+                // SUBJECT personalizzato per EmailJS
+                subject: `Prenotazione Isola Lido per ${booking.name} - ${formatDate(booking.date)}`
             }
         };
         
