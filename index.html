@@ -39,15 +39,32 @@
                 </div>
 
                 <div class="hero-visual animate-fade-in">
-                    <div class="slider-3d smooth-slider">
-                        <div class="slider-track">
-                            <div class="slide-card"><img src="images/banner%20index/pool%201.png" alt="Piscina principale Isola Lido"></div>
-                            <div class="slide-card"><img src="images/banner%20index/pool%202.png" alt="Area relax ombreggiata Isola Lido"></div>
-                            <div class="slide-card"><img src="images/banner%20index/pool%203.png" alt="Dettaglio bordo piscina Isola Lido"></div>
-                            <div class="slide-card"><img src="images/banner%20index/lido%201.png" alt="Veduta Lido 1"></div>
-                            <div class="slide-card"><img src="images/banner%20index/lido%202.png" alt="Veduta Lido 2"></div>
-                            <div class="slide-card"><img src="images/banner%20index/pic%20nic%201.png" alt="Area picnic Isola Lido"></div>
-                            <div class="slide-card"><img src="images/banner%20index/pic%20nic%202.png" alt="Area picnic ombreggiata"></div>
+                    <div class="hero-switcher">
+                        <div class="hero-switch-buttons">
+                            <button class="hero-switch-btn active" id="switchPhotos" type="button">Foto</button>
+                            <button class="hero-switch-btn" id="switchInfo" type="button">Info Eventi</button>
+                        </div>
+                        <div class="hero-switch-content">
+                            <div class="hero-slider-switch" id="heroSliderSwitch">
+                                <div class="slider-3d smooth-slider">
+                                    <div class="slider-track">
+                                        <div class="slide-card"><img src="images/banner%20index/pool%201.png" alt="Piscina principale Isola Lido"></div>
+                                        <div class="slide-card"><img src="images/banner%20index/pool%202.png" alt="Area relax ombreggiata Isola Lido"></div>
+                                        <div class="slide-card"><img src="images/banner%20index/pool%203.png" alt="Dettaglio bordo piscina Isola Lido"></div>
+                                        <div class="slide-card"><img src="images/banner%20index/lido%201.png" alt="Veduta Lido 1"></div>
+                                        <div class="slide-card"><img src="images/banner%20index/lido%202.png" alt="Veduta Lido 2"></div>
+                                        <div class="slide-card"><img src="images/banner%20index/pic%20nic%201.png" alt="Area picnic Isola Lido"></div>
+                                        <div class="slide-card"><img src="images/banner%20index/pic%20nic%202.png" alt="Area picnic ombreggiata"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hero-info-switch" id="heroInfoSwitch" style="display:none;">
+                                <div class="special-info-banner">
+                                    <span class="material-symbols-rounded" style="vertical-align:middle;font-size:1.5em;color:#ff9800;">outdoor_grill</span>
+                                    <strong>Barbecue &amp; Piscina</strong> prenotabili:
+                                    <span style="color:#ff9800;">Pasqua</span>, <span style="color:#ff9800;">Pasquetta</span>, <span style="color:#ff9800;">25 aprile</span>, <span style="color:#ff9800;">1 maggio</span>, <span style="color:#ff9800;">tutte le domeniche di aprile</span>!
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -143,14 +160,31 @@
 
     <!-- Script Componenti Dinamici -->
     <script src="js/components.js"></script>
-    
     <!-- Script Inizializzazione Pagina -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             initializePageComponents('home');
+            // Switch foto/info eventi
+            const btnPhotos = document.getElementById('switchPhotos');
+            const btnInfo = document.getElementById('switchInfo');
+            const slider = document.getElementById('heroSliderSwitch');
+            const info = document.getElementById('heroInfoSwitch');
+            if (btnPhotos && btnInfo && slider && info) {
+                btnPhotos.addEventListener('click', function() {
+                    btnPhotos.classList.add('active');
+                    btnInfo.classList.remove('active');
+                    slider.style.display = '';
+                    info.style.display = 'none';
+                });
+                btnInfo.addEventListener('click', function() {
+                    btnInfo.classList.add('active');
+                    btnPhotos.classList.remove('active');
+                    slider.style.display = 'none';
+                    info.style.display = '';
+                });
+            }
         });
     </script>
-
     <!-- Script JavaScript Principale -->
     <script src="js/main.js"></script>
 </body>
