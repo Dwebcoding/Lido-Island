@@ -24,6 +24,93 @@
     color: #ff9800;
     margin-right: 0.3em;
 }
+
+/* ============ CHIP INFORMATIVI ESPANDIBILI ============ */
+.info-chips-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 22px 0 0 0;
+    justify-content: flex-start;
+}
+.info-chip {
+    position: relative;
+    background: linear-gradient(90deg, #e3f0ff 0%, #d1eaff 100%);
+    color: #1a3a4a;
+    border-radius: 2rem;
+    padding: 0.5rem 1.3rem 0.5rem 1.1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    box-shadow: 0 2px 10px rgba(50, 184, 240, 0.08);
+    border: 1.5px solid #7fe3ff;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6em;
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s;
+    outline: none;
+}
+.info-chip-blue {
+    background: linear-gradient(90deg, #e3f0ff 0%, #d1eaff 100%);
+    border-color: #7fe3ff;
+}
+.info-chip-green {
+    background: linear-gradient(90deg, #e6ffe3 0%, #c8ffd1 100%);
+    border-color: #7fffbe;
+}
+.info-chip-purple {
+    background: linear-gradient(90deg, #f0e3ff 0%, #e1d1ff 100%);
+    border-color: #b97fff;
+}
+.info-chip .material-symbols-rounded {
+    font-size: 1.2em;
+    margin-right: 0.2em;
+}
+.info-chip-content {
+    position: absolute;
+    left: 0;
+    top: 110%;
+    min-width: 220px;
+    background: #fff;
+    color: #1a3a4a;
+    border-radius: 1.2rem;
+    box-shadow: 0 8px 32px rgba(50, 184, 240, 0.13);
+    border: 1.5px solid #e0e8f0;
+    padding: 1.1em 1.2em;
+    font-size: 0.98em;
+    font-weight: 500;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(10px) scale(0.98);
+    transition: opacity 0.22s, transform 0.22s;
+    z-index: 20;
+}
+.info-chip.expanded .info-chip-content,
+.info-chip:focus .info-chip-content,
+.info-chip:hover .info-chip-content {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0) scale(1);
+}
+@media (max-width: 700px) {
+    .info-chips-row {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .info-chip {
+        width: 100%;
+        min-width: 0;
+        justify-content: flex-start;
+    }
+    .info-chip-content {
+        left: 0;
+        right: 0;
+        min-width: unset;
+        width: 98%;
+        margin: 0 auto;
+        top: 105%;
+    }
+}
 /* ============================================
    ISOLA LIDO - STYLESHEET PRINCIPALE
    Author: Web Developer Professionista

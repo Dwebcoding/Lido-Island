@@ -1,3 +1,27 @@
+// Gestione chip informativi espandibili (hover/click/tap)
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.info-chip').forEach(function(chip) {
+        // Espansione su click/tap (mobile)
+        chip.addEventListener('click', function(e) {
+            // Chiudi altri chip
+            document.querySelectorAll('.info-chip.expanded').forEach(function(other) {
+                if (other !== chip) other.classList.remove('expanded');
+            });
+            chip.classList.toggle('expanded');
+        });
+        // Espansione su tastiera (Enter/Space)
+        chip.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                chip.click();
+            }
+        });
+        // Chiudi su click fuori
+        document.addEventListener('click', function(e) {
+            if (!chip.contains(e.target)) chip.classList.remove('expanded');
+        });
+    });
+});
 /* ============================================
    ISOLA LIDO - JAVASCRIPT PRINCIPALE
    Author: Web Developer Professionista
