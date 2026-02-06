@@ -66,10 +66,11 @@
     font-size: 1.2em;
     margin-right: 0.2em;
 }
+/* Espansione sopra i counter */
 .info-chip-content {
     position: absolute;
     left: 0;
-    top: 110%;
+    bottom: 110%;
     min-width: 220px;
     background: #fff;
     color: #1a3a4a;
@@ -81,9 +82,9 @@
     font-weight: 500;
     opacity: 0;
     pointer-events: none;
-    transform: translateY(10px) scale(0.98);
+    transform: translateY(-10px) scale(0.98);
     transition: opacity 0.22s, transform 0.22s;
-    z-index: 20;
+    z-index: 50;
 }
 .info-chip.expanded .info-chip-content,
 .info-chip:focus .info-chip-content,
@@ -108,7 +109,8 @@
         min-width: unset;
         width: 98%;
         margin: 0 auto;
-        top: 105%;
+        bottom: 105%;
+        top: auto;
     }
 }
 /* ============================================
