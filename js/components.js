@@ -15,9 +15,28 @@ function renderHeader(activePage = 'home') {
                     <a class="brand-block" aria-label="Isola Lido" href="${getHomePath()}">
                         <span style="display:flex;align-items:center;gap:10px;">
                             <img src="${getLogoPath('png')}" alt="Logo Isola Lido" style="width:50px;height:50px;object-fit:contain;">
-                            <h4 style="margin:0;display:inline;vertical-align:middle;">Isola Lido</h4>
+                            <span class="brand-text">
+                                <h4 style="margin:0;display:inline;vertical-align:middle;">Isola Lido</h4>
+                                <span class="brand-tagline" style="margin-top:4px;display:block;">Pool · Grill · Relax</span>
+                            </span>
+                            <span class="header-social" aria-label="Social Isola Lido">
+                                <a class="header-social-icon" href="https://www.instagram.com/isola_lido/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                                        <path d="M12 7.3a4.7 4.7 0 1 0 0 9.4 4.7 4.7 0 0 0 0-9.4Zm0 7.7a3 3 0 1 1 0-6 3 3 0 0 1 0 6Zm6.1-7.9a1.1 1.1 0 1 1-2.2 0 1.1 1.1 0 0 1 2.2 0ZM12 4.7c2.4 0 2.7 0 3.6.1.9.1 1.4.2 1.8.4.5.2.9.5 1.3.9.4.4.7.8.9 1.3.2.4.3.9.4 1.8.1.9.1 1.2.1 3.6s0 2.7-.1 3.6c-.1.9-.2 1.4-.4 1.8-.2.5-.5.9-.9 1.3-.4.4-.8.7-1.3.9-.4.2-.9.3-1.8.4-.9.1-1.2.1-3.6.1s-2.7 0-3.6-.1c-.9-.1-1.4-.2-1.8-.4-.5-.2-.9-.5-1.3-.9-.4-.4-.7-.8-.9-1.3-.2-.4-.3-.9-.4-1.8-.1-.9-.1-1.2-.1-3.6s0-2.7.1-3.6c.1-.9.2-1.4.4-1.8.2-.5.5-.9.9-1.3.4-.4.8-.7 1.3-.9.4-.2.9-.3 1.8-.4.9-.1 1.2-.1 3.6-.1Zm0-1.7c-2.4 0-2.8 0-3.7.1-1 .1-1.7.3-2.3.6-.6.3-1.2.7-1.7 1.2-.5.5-.9 1.1-1.2 1.7-.3.6-.5 1.3-.6 2.3C2 9.2 2 9.6 2 12s0 2.8.1 3.7c.1 1 .3 1.7.6 2.3.3.6.7 1.2 1.2 1.7.5.5 1.1.9 1.7 1.2.6.3 1.3.5 2.3.6.9.1 1.3.1 3.7.1s2.8 0 3.7-.1c1-.1 1.7-.3 2.3-.6.6-.3 1.2-.7 1.7-1.2.5-.5.9-1.1 1.2-1.7.3-.6.5-1.3.6-2.3.1-.9.1-1.3.1-3.7s0-2.8-.1-3.7c-.1-1-.3-1.7-.6-2.3-.3-.6-.7-1.2-1.2-1.7-.5-.5-1.1-.9-1.7-1.2-.6-.3-1.3-.5-2.3-.6C14.8 3 14.4 3 12 3Z" />
+                                    </svg>
+                                </a>
+                                <a class="header-social-icon" href="https://www.facebook.com/lidocassano/?locale=it_IT" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                                        <path d="M13.4 21v-8.2h2.7l.4-3.1h-3.1V7.6c0-.9.3-1.5 1.6-1.5h1.7V3.4c-.8-.1-1.7-.2-2.5-.2-2.5 0-4.2 1.5-4.2 4.3v2.2H7.2v3.1h2.7V21h3.5Z" />
+                                    </svg>
+                                </a>
+                                <a class="header-social-icon" href="https://wa.me/393334993469" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                                        <path d="M12 3.2a8.8 8.8 0 0 0-7.6 13.2L3 21l4.7-1.2A8.8 8.8 0 1 0 12 3.2Zm0 15.9a7.2 7.2 0 0 1-3.6-1l-.3-.2-2.7.7.7-2.6-.2-.3a7.2 7.2 0 1 1 6.1 3.4Zm3.9-5.4c-.2-.1-1.3-.6-1.5-.6s-.3-.1-.5.1l-.7.9c-.1.2-.2.2-.4.1-.2-.1-.9-.3-1.7-1.1-.6-.5-1.1-1.2-1.2-1.4-.1-.2 0-.3.1-.4l.3-.4.2-.3c.1-.1.1-.2.2-.3.1-.1 0-.3 0-.4 0-.1-.5-1.2-.7-1.6-.2-.4-.4-.3-.5-.3h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2.9 2.4c.1.2 1.6 2.5 3.9 3.5.5.2.9.3 1.3.4.5.1.9.1 1.2.1.4-.1 1.3-.5 1.5-1 .2-.5.2-.9.1-1 0-.1-.2-.2-.4-.3Z" />
+                                    </svg>
+                                </a>
+                            </span>
                         </span>
-                    <span class="brand-tagline" style="margin-top:-10px;display:block;">Pool · Grill · Relax</span>
                 </a>
             </div>
             
@@ -82,6 +101,23 @@ function renderFooter() {
                         <li><a href="${getBookingsPath()}">Prenotazioni</a></li>
                         <li><a href="${getContactsPath()}">Contatti</a></li>
                     </ul>
+                    <div class="footer-social" aria-label="Social Isola Lido">
+                        <a class="social-icon" href="https://www.instagram.com/isola_lido/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                                <path d="M12 7.3a4.7 4.7 0 1 0 0 9.4 4.7 4.7 0 0 0 0-9.4Zm0 7.7a3 3 0 1 1 0-6 3 3 0 0 1 0 6Zm6.1-7.9a1.1 1.1 0 1 1-2.2 0 1.1 1.1 0 0 1 2.2 0ZM12 4.7c2.4 0 2.7 0 3.6.1.9.1 1.4.2 1.8.4.5.2.9.5 1.3.9.4.4.7.8.9 1.3.2.4.3.9.4 1.8.1.9.1 1.2.1 3.6s0 2.7-.1 3.6c-.1.9-.2 1.4-.4 1.8-.2.5-.5.9-.9 1.3-.4.4-.8.7-1.3.9-.4.2-.9.3-1.8.4-.9.1-1.2.1-3.6.1s-2.7 0-3.6-.1c-.9-.1-1.4-.2-1.8-.4-.5-.2-.9-.5-1.3-.9-.4-.4-.7-.8-.9-1.3-.2-.4-.3-.9-.4-1.8-.1-.9-.1-1.2-.1-3.6s0-2.7.1-3.6c.1-.9.2-1.4.4-1.8.2-.5.5-.9.9-1.3.4-.4.8-.7 1.3-.9.4-.2.9-.3 1.8-.4.9-.1 1.2-.1 3.6-.1Zm0-1.7c-2.4 0-2.8 0-3.7.1-1 .1-1.7.3-2.3.6-.6.3-1.2.7-1.7 1.2-.5.5-.9 1.1-1.2 1.7-.3.6-.5 1.3-.6 2.3C2 9.2 2 9.6 2 12s0 2.8.1 3.7c.1 1 .3 1.7.6 2.3.3.6.7 1.2 1.2 1.7.5.5 1.1.9 1.7 1.2.6.3 1.3.5 2.3.6.9.1 1.3.1 3.7.1s2.8 0 3.7-.1c1-.1 1.7-.3 2.3-.6.6-.3 1.2-.7 1.7-1.2.5-.5.9-1.1 1.2-1.7.3-.6.5-1.3.6-2.3.1-.9.1-1.3.1-3.7s0-2.8-.1-3.7c-.1-1-.3-1.7-.6-2.3-.3-.6-.7-1.2-1.2-1.7-.5-.5-1.1-.9-1.7-1.2-.6-.3-1.3-.5-2.3-.6C14.8 3 14.4 3 12 3Z" />
+                            </svg>
+                        </a>
+                        <a class="social-icon" href="https://www.facebook.com/lidocassano/?locale=it_IT" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                                <path d="M13.4 21v-8.2h2.7l.4-3.1h-3.1V7.6c0-.9.3-1.5 1.6-1.5h1.7V3.4c-.8-.1-1.7-.2-2.5-.2-2.5 0-4.2 1.5-4.2 4.3v2.2H7.2v3.1h2.7V21h3.5Z" />
+                            </svg>
+                        </a>
+                        <a class="social-icon" href="https://wa.me/393334993469" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+                            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                                <path d="M12 3.2a8.8 8.8 0 0 0-7.6 13.2L3 21l4.7-1.2A8.8 8.8 0 1 0 12 3.2Zm0 15.9a7.2 7.2 0 0 1-3.6-1l-.3-.2-2.7.7.7-2.6-.2-.3a7.2 7.2 0 1 1 6.1 3.4Zm3.9-5.4c-.2-.1-1.3-.6-1.5-.6s-.3-.1-.5.1l-.7.9c-.1.2-.2.2-.4.1-.2-.1-.9-.3-1.7-1.1-.6-.5-1.1-1.2-1.2-1.4-.1-.2 0-.3.1-.4l.3-.4.2-.3c.1-.1.1-.2.2-.3.1-.1 0-.3 0-.4 0-.1-.5-1.2-.7-1.6-.2-.4-.4-.3-.5-.3h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2.9 2.4c.1.2 1.6 2.5 3.9 3.5.5.2.9.3 1.3.4.5.1.9.1 1.2.1.4-.1 1.3-.5 1.5-1 .2-.5.2-.9.1-1 0-.1-.2-.2-.4-.3Z" />
+                            </svg>
+                        </a>
+                    </div>
                 </div>
 
                 <!-- Sezione Legale -->
