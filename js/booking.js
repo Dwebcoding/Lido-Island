@@ -13,7 +13,8 @@
 const EMAILJS_CONFIG = {
     SERVICE_ID: 'service_mylrmf4',
     TEMPLATE_ID: 'template_r63dlwf',
-    PUBLIC_KEY: 'ZV2oWjSAL_5W1omKq'
+    PUBLIC_KEY: 'ZV2oWjSAL_5W1omKq',
+    OWNER_EMAIL: 'isolalido@outlook.com'
 };
 
 const BOOKING_CONFIG = {
@@ -544,7 +545,9 @@ function sendBookingEmail(booking) {
                 // Parametri standard EmailJS
                 from_name: booking.name,
                 to_name: 'Isola Lido',
+                to_email: EMAILJS_CONFIG.OWNER_EMAIL,
                 reply_to: booking.email,
+                owner_email: EMAILJS_CONFIG.OWNER_EMAIL,
                 // Parametri personalizzati prenotazione
                 customer_name: booking.name,
                 customer_email: booking.email,
