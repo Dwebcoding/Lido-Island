@@ -544,10 +544,8 @@ function sendBookingEmail(booking) {
             template_params: {
                 // Parametri standard EmailJS
                 from_name: booking.name,
-                to_name: 'Isola Lido',
                 to_email: EMAILJS_CONFIG.OWNER_EMAIL,
                 reply_to: booking.email,
-                owner_email: EMAILJS_CONFIG.OWNER_EMAIL,
                 // Parametri personalizzati prenotazione
                 customer_name: booking.name,
                 customer_email: booking.email,
