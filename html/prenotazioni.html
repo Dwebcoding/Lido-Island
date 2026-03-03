@@ -8,8 +8,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Sistema di Prenotazione - Isola Lido">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://lido-island-production.up.railway.app https://unpkg.com https://dwebcoding.github.io https://api.emailjs.com">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' http://localhost:3000 https://lido-island-production.up.railway.app https://backend-beige-nu-33.vercel.app https://*.vercel.app https://unpkg.com https://dwebcoding.github.io https://api.emailjs.com">
     <title>Prenotazioni - Isola Lido</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../images/logo/tabs/Logo Lido Island no background copy.png">
+        <!-- Structured Data for Google -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Isola Lido",
+            "url": "https://www.isolalido.it/",
+            "logo": "https://www.isolalido.it/images/logo/tabs/Logo%20Lido%20Island%20no%20background%20copy.png"
+        }
+        </script>
     
     <!-- Google Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Material+Symbols+Rounded:wght@400;500;600&display=swap" rel="stylesheet">
@@ -29,31 +41,37 @@
             <div class="page-hero-inner">
                 <span class="page-hero-chip"><span class="material-symbols-rounded">event_available</span> Prenota</span>
                 <h2 class="page-hero-title">Prenota Ora</h2>
-                <p class="page-hero-subtitle">Tavoli, sdraio e ombrelloni: scegli cosa ti serve e blocca il tuo posto.</p>
+                <p class="page-hero-subtitle">Tavoli, sdraio: scegli cosa ti serve e blocca il tuo posto.</p>
                 <span class="page-hero-badge"><span class="material-symbols-rounded">schedule</span> Conferma immediata via email</span>
+            </div><tr>
+            <div class="hero-availability-note" role="status">
+                </span><span class="material-symbols-rounded" aria-hidden="true">chat</span>
+                <p>In questo momento le prenotazioni vengono gestite solo su <a href="https://wa.me/393334993469" target="_blank" rel="noreferrer">WhatsApp</a>. Rispondiamo appena possibile.</p>
             </div>
         </section>
-
+        
         <!-- SEZIONE PRENOTAZIONI -->
         <section class="booking-section">
             <div class="container">
                 <h2 class="section-title">Sistema di Prenotazione</h2>
-
+                
                 <div class="booking-container">
                     <!-- SINISTRA: FORM -->
                     <div class="booking-form-column">
                         <div class="booking-card">
                             <h3><span class="material-symbols-rounded">event</span> Seleziona Data</h3>
                             <input 
-                                type="date" 
-                                id="bookingDate" 
-                                class="booking-date-input"
-                                min=""
-                                required
+                            type="date" 
+                            id="bookingDate" 
+                            name="date"
+                            class="booking-date-input"
+                            min=""
+                            required
+                            autocomplete="off"
                             >
                             <p class="booking-hint">Scegli una data da domani in poi</p>
                         </div>
-
+                        
                         <!-- TAVOLI -->
                         <div class="booking-card">
                             <h3><span class="material-symbols-rounded">table_restaurant</span> Tavoli (8 persone)</h3>
@@ -68,10 +86,10 @@
                             <p class="availability-timestamp" id="availabilityTimestamp" style="font-size:0.9em;color:#888;"></p>
                             <div id="bookingWarningBanner" class="booking-warning-banner" style="display:none;margin-top:10px;padding:8px;background:#ffe0e0;color:#b00;font-weight:bold;border-radius:6px;"></div>
                         </div>
-
+                        
                         <!-- SDRAIO E OMBRELLONI -->
                         <div class="booking-card">
-                            <h3><span class="material-symbols-rounded">beach_access</span> Sdraio e Ombrelloni</h3>
+                            <h3><span class="material-symbols-rounded">beach_access</span> Sdraio </h3>
                             <p class="booking-price">€ 5,00 per sdraio</p>
                             <div class="booking-quantity">
                                 <button type="button" class="qty-btn" id="chairMinus">−</button>
@@ -79,9 +97,12 @@
                                 <button type="button" class="qty-btn" id="chairPlus">+</button>
                             </div>
                             <p class="availability" id="chairAvailability">Disponibili: 65 sdraio</p>
-                            <p class="booking-subtotal" id="chairSubtotal">Subtotale: € 0,00</p>
+                            
+                            
+                            
+                            <p class="booking-subtotal" id="chairsUmbrellasSubtotal">Subtotale: € 0,00</p>
                         </div>
-
+                        
                         <!-- RIEPILOGO TOTALE -->
                         <div class="booking-card booking-summary">
                             <h3><span class="material-symbols-rounded">payments</span> Riepilogo Prenotazione</h3>
@@ -93,6 +114,7 @@
                                 <span>Sdraio (<span id="summaryChairQty">0</span>):</span>
                                 <strong id="summaryChairPrice">€ 0,00</strong>
                             </div>
+
                             <div class="summary-divider"></div>
                             <div class="summary-row total">
                                 <span>TOTALE:</span>
@@ -100,61 +122,65 @@
                             </div>
                         </div>
                     </div>
-
+                    
                     <!-- DESTRA: DATI PERSONALI -->
                     <div class="booking-form-column">
                         <form id="bookingForm" class="booking-form">
                             <h3><span class="material-symbols-rounded">person</span> Tuoi Dati</h3>
-
+                            
                             <div class="form-group">
                                 <label for="bookingName">Nome Completo *</label>
-                                <input 
+                                    <input 
                                     type="text" 
                                     id="bookingName" 
                                     name="name" 
                                     placeholder="Es: Mario Rossi"
+                                    autocomplete="name"
                                     required
-                                >
-                                <span class="form-error"></span>
-                            </div>
+                                    >
+                                    <span class="form-error"></span>
+                                </div>
 
-                            <div class="form-group">
-                                <label for="bookingEmail">Email *</label>
-                                <input 
+                                <div class="form-group">
+                                    <label for="bookingEmail">Email *</label>
+                                    <input 
                                     type="email" 
                                     id="bookingEmail" 
                                     name="email" 
                                     placeholder="Es: mario@example.com"
+                                    autocomplete="email"
                                     required
-                                >
-                                <span class="form-error"></span>
-                            </div>
+                                    >
+                                    <span class="form-error"></span>
+                                </div>
 
-                            <div class="form-group">
-                                <label for="bookingPhone">Telefono *</label>
-                                <input 
+                                <div class="form-group">
+                                    <label for="bookingPhone">Telefono *</label>
+                                    <input 
                                     type="tel" 
                                     id="bookingPhone" 
                                     name="phone" 
                                     placeholder="Es: +39 3501234567"
+                                    autocomplete="tel"
                                     required
-                                >
-                                <span class="form-error"></span>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="bookingNotes">Note Speciali (opzionale)</label>
-                                <textarea 
+                                    >
+                                    <span class="form-error"></span>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="bookingNotes">Note Speciali (opzionale)</label>
+                                    <textarea 
                                     id="bookingNotes" 
                                     name="notes" 
                                     placeholder="Es: Vogliamo i tavoli vicino alla piscina"
                                     rows="4"
-                                ></textarea>
-                            </div>
-
-                            <!-- INFORMATIVE -->
-                            <div class="booking-info">
-                                <p><strong><span class="material-symbols-rounded">info</span> Importante:</strong></p>
+                                    autocomplete="off"
+                                    ></textarea>
+                                </div>
+                                
+                                <!-- INFORMATIVE -->
+                                <div class="booking-info">
+                                    <p><strong><span class="material-symbols-rounded">info</span> Importante:</strong></p>
                                 <ul>
                                     <li>Prenotazione valida fino a 2 ore prima dell'arrivo</li>
                                     <li>Conferma via email dopo la prenotazione</li>
@@ -162,12 +188,14 @@
                                     <li>Cancellazione gratuita fino a 48 ore prima</li>
                                 </ul>
                             </div>
-
+                            
                             <!-- PULSANTE SUBMIT -->
-                            <button type="submit" class="booking-submit" id="submitBooking">
+                            
+                            <!-- <button type="submit" class="booking-submit" id="submitBooking">
                                 <span class="material-symbols-rounded">check</span> Conferma Prenotazione
-                            </button>
-
+                            </button> */-->
+                            
+                            
                             <p class="form-disclaimer">
                                 Compilando il form accetti i nostri <a href="termini.html">termini e condizioni</a>
                             </p>
@@ -176,7 +204,7 @@
                 </div>
             </div>
         </section>
-
+        
         <!-- SEZIONE MESSAGGI -->
         <section class="booking-messages" id="bookingMessages">
             <div class="container">
@@ -188,7 +216,7 @@
                         Torna alla Home
                     </button>
                 </div>
-
+                
                 <div id="errorMessage" class="booking-error-message hidden">
                     <h3>⚠️ Errore nella Prenotazione</h3>
                     <p id="errorText"></p>
@@ -198,7 +226,82 @@
                 </div>
             </div>
         </section>
-
+        <!-- SEZIONE DONAZIONI -->
+        <section class="donation-section" aria-labelledby="donationTitle">
+            <div class="container">
+                <div class="donation-card">
+                    <div class="donation-card__header">
+                        <span class="material-symbols-rounded">volunteer_activism</span>
+                        <div>
+                            <p class="donation-card__eyebrow">Supporta Isola Lido</p>
+                            <h3 id="donationTitle">Donazioni digitali e test live</h3>
+                        </div>
+                    </div>
+                    <p class="donation-card__text">
+                        Vuoi contribuire al mantenimento dell'oasi? Puoi farlo con una donazione digitale: è semplice, veloce e sarebbe per noi un gesto di gradito.
+                    </p>
+                    <form id="donationForm" class="donation-form" autocomplete="on">
+                        <div class="form-group">
+                            <label for="donationAmount">Importo (€) *</label>
+                            <input
+                                type="number"
+                                id="donationAmount"
+                                name="amount"
+                                min="1"
+                                step="0.5"
+                                inputmode="decimal"
+                                value="10"
+                                autocomplete="off"
+                                required
+                            >
+                            <span class="form-hint">Puoi donare qualsiasi cifra a partire da 1,00 € (perfetto per testare con 1 €).</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="donationEmail">Email *</label>
+                            <input
+                                type="email"
+                                id="donationEmail"
+                                name="email"
+                                placeholder="es: mario@example.com"
+                                autocomplete="email"
+                                required
+                            >
+                        </div>
+                        <div class="form-group">
+                            <label for="donationName">Nome (facoltativo)</label>
+                            <input
+                                type="text"
+                                id="donationName"
+                                name="name"
+                                placeholder="Es: Marco Gentili"
+                                autocomplete="name"
+                            >
+                        </div>
+                        <div class="form-group">
+                            <label for="donationMessage">Messaggio (facoltativo)</label>
+                            <textarea
+                                id="donationMessage"
+                                name="message"
+                                rows="2"
+                                placeholder="Grazie per la tua visita :)"
+                                autocomplete="off"
+                            ></textarea>
+                        </div>
+                        <p class="donation-form-note">Per un test live usa 1,00 €: il pagamento arriverà su Stripe, riceverai la conferma e noi verifichiamo webhook e mail prima di aprire ufficialmente.</p>
+                        <button type="submit" class="primary-button donation-button">
+                            <span class="material-symbols-rounded">payments</span>
+                            <span class="donation-button__label">Procedi con la donazione digitale</span>
+                        </button>
+                    </form>
+                    <br>
+                    <p class="donation-note">
+                        Ogni donazione mantiene in piedi il lido e la squadra che lavora ogni giorno per garantirti sicurezza, comfort e divertimento.
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        
         <!-- SEZIONE INFO PRENOTAZIONI -->
         <section class="booking-info-section">
             <div class="container">

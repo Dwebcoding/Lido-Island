@@ -531,6 +531,7 @@ function initializeApp() {
     initCardHoverEffects();
     initCounterAnimation();
     initBookingForm();
+    initDonationForm();
 
     log('Applicazione caricata con successo!');
 }
@@ -568,6 +569,20 @@ function initBookingForm() {
     bookingForm.addEventListener('submit', function(e) {
         if (typeof handleBookingSubmit === 'function') {
             handleBookingSubmit(e);
+        }
+    });
+}
+
+function initDonationForm() {
+    const donationForm = document.getElementById('donationForm');
+    if (!donationForm) return;
+
+    if (donationForm.dataset.bound === 'true') return;
+    donationForm.dataset.bound = 'true';
+
+    donationForm.addEventListener('submit', function(e) {
+        if (typeof handleDonationSubmit === 'function') {
+            handleDonationSubmit(e);
         }
     });
 }
