@@ -32,7 +32,7 @@ const corsOptions = {
 	preflightContinue: false
 };
 app.use(cors(corsOptions));
-app.options('*', cors(corsOptions));
+app.options(/.*/, cors(corsOptions));
 
 // Parser JSON globale, ma salta il webhook Stripe per evitare qualunque
 // alterazione del corpo che invaliderebbe la firma.

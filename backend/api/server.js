@@ -32,7 +32,7 @@ app.use(cors(corsOptions));
 // Handle preflight explicitly (some Vercel setups require a concrete matcher)
 app.options('/api/payment/create-checkout-session', cors(corsOptions));
 app.options('/api/payment/webhook', cors(corsOptions));
-app.options('*', cors(corsOptions));
+app.options(/.*/, cors(corsOptions));
 // Salta il parser JSON per il webhook per evitare che il body venga alterato
 app.use((req, res, next) => {
   if (req.originalUrl.startsWith('/api/payment/webhook')) return next();
