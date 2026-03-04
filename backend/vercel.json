@@ -1,9 +1,11 @@
 {
   "version": 2,
   "builds": [
+    { "src": "api/payment/create-checkout-session.js", "use": "@vercel/node" },
     { "src": "api/server.js", "use": "@vercel/node" }
   ],
   "routes": [
+    { "src": "/api/payment/create-checkout-session", "methods": ["POST", "OPTIONS"], "dest": "/api/payment/create-checkout-session.js" },
     { "src": "/api/(.*)", "methods": ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"], "dest": "/api/server.js" }
   ]
 }
