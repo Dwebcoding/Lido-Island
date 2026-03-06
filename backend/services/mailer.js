@@ -27,7 +27,7 @@ const SMTP_PORT = process.env.SMTP_PORT ? Number(process.env.SMTP_PORT) : 587;
 const SMTP_USER = process.env.SMTP_USER || null;
 const SMTP_PASS = process.env.SMTP_PASS || null;
 const FROM_EMAIL = process.env.FROM_EMAIL || 'postamaster@isolalido.it';
-const OWNER_EMAIL = process.env.OWNER_EMAIL || 'isolalido@outlook.com';
+const OWNER_EMAIL = process.env.OWNER_EMAIL || 'info@isolalido.it';
 const SMTP_PLACEHOLDER = (SMTP_PASS || '').includes('PUT_YOUR_OUTLOOK_APP_PASSWORD_HERE');
 
 function formatCentsToEuro(cents) {
@@ -73,7 +73,7 @@ const transporter = makeTransporter();
 
 export default {
   // Invia una mail al proprietario dopo una prenotazione
-  async sendOwnerNotification({ booking = {}, amount = 0 }) {
+  async sendOwnerNotification({ booking = {}, amount = 0, notifyCustomer = true }) {
     try {
       await twilioInitPromise;
       console.log('[MAILER] sendOwnerNotification start');
@@ -90,6 +90,9 @@ export default {
         booking_id: booking._id || booking.id || booking.booking_id || '—',
         booking_date: booking.date || booking.booking_date || '—',
         booking_notes: booking.notes || booking.booking_notes || '—',
+        table_numbers: (booking.tableNumbers && Array.isArray(booking.tableNumbers) && booking.tableNumbers.length > 0) 
+          ? booking.tableNumbers.join(', ') 
+          : 'Nessun numero specificato',
         tables_count,
         chairs_count,
         tables_price: (typeof tables_price === 'number') ? (tables_price / 100).toFixed(2).replace('.', ',') : tables_price,
@@ -113,12 +116,14 @@ export default {
       });
       console.log('[MAILER] Owner notification sent:', info.messageId || info);
       // Optionally send a confirmation to the customer
-      try {
-        if (vars.customer_email && vars.customer_email.includes('@')) {
-          await this.sendCustomerConfirmation({ to: vars.customer_email, booking, amount });
+      if (notifyCustomer) {
+        try {
+          if (vars.customer_email && vars.customer_email.includes('@')) {
+            await this.sendCustomerConfirmation({ to: vars.customer_email, booking, amount });
+          }
+        } catch (e) {
+          console.warn('[MAILER] sendCustomerConfirmation failed:', e);
         }
-      } catch (e) {
-        console.warn('[MAILER] sendCustomerConfirmation failed:', e);
       }
 
       // Optionally send SMS if Twilio is configured and phone present
@@ -175,8 +180,8 @@ export default {
         booking_timestamp: new Date().toLocaleString('it-IT'),
       };
 
-      // usa lo stesso template CSS del proprietario
-      let html = await renderTemplate(vars, TEMPLATE_PATH).catch(() => '');
+      // Usa il template dedicato al cliente
+      let html = await renderTemplate(vars, TEMPLATE_CUSTOMER_PATH).catch(() => '');
 
       if (!html || html.trim() === '') {
         html = `

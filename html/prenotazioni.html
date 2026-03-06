@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="it">
 <head>
         <!-- Flatpickr Calendar -->
@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Sistema di Prenotazione - Isola Lido">
-    <meta name="lido-api-base" content="https://lido-island-i708r3x6v-dwebcodings-projects-ab095673.vercel.app">
+    <meta name="lido-api-base" content="https://backend-two-phi-89.vercel.app">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' http://localhost:3000 https://api.isolalido.it https://lido-island-production.up.railway.app https://backend-beige-nu-33.vercel.app https://*.vercel.app https://unpkg.com https://dwebcoding.github.io https://api.emailjs.com">
     <title>Prenotazioni - Isola Lido</title>
     <!-- Favicon -->
@@ -77,6 +77,7 @@
                         <div class="booking-card">
                             <h3><span class="material-symbols-rounded">table_restaurant</span> Tavoli (8 persone)</h3>
                             <p class="booking-price">&euro; 8,00 per tavolo</p>
+                            <p class="booking-hint">Apri il menù a tendina, scegli una zona e seleziona uno o più tavoli tramite i numeri che preferisci.</p>
                             <div class="form-group">
                                 <label for="tablePickerButton">Scegli il numero tavolo</label>
                                 <div class="table-picker" id="tablePicker">
@@ -90,9 +91,9 @@
                                     <input type="hidden" id="tableNumberSelect" value="">
                                 </div>
                             </div>
-                            <p class="availability" id="tableAvailability">Disponibili: 121 tavoli</p>
+                            <p class="availability" id="tableAvailability">Disponibili: 110 tavoli</p>
                             <p class="booking-subtotal" id="tableSubtotal">Subtotale: &euro; 0,00</p>
-                            <p class="booking-hint" id="selectedTableLabel">Tavolo selezionato: nessuno</p>
+                            <p class="booking-hint" id="selectedTableLabel">Tavoli selezionati: nessuno</p>
                             <p class="availability-timestamp" id="availabilityTimestamp" style="font-size:0.9em;color:#888;"></p>
                             <div id="bookingWarningBanner" class="booking-warning-banner" style="display:none;margin-top:10px;padding:8px;background:#ffe0e0;color:#b00;font-weight:bold;border-radius:6px;"></div>
                         </div>
@@ -100,7 +101,7 @@
                         <!-- SDRAIO E OMBRELLONI -->
                         <div class="booking-card">
                             <h3><span class="material-symbols-rounded">beach_access</span> Sdraio </h3>
-                            <p class="booking-price">€ 5,00 per sdraio</p>
+                            <p class="booking-price">&euro; 5,00 per sdraio</p>
                             <div class="booking-quantity">
                                 <button type="button" class="qty-btn" id="chairMinus">−</button>
                                 <span id="chairQty" class="qty-span">0</span>
@@ -110,7 +111,7 @@
                             
                             
                             
-                            <p class="booking-subtotal" id="chairsUmbrellasSubtotal">Subtotale: € 0,00</p>
+                            <p class="booking-subtotal" id="chairsUmbrellasSubtotal">Subtotale: &euro; 0,00</p>
                         </div>
                         
                         <!-- RIEPILOGO TOTALE -->
@@ -118,17 +119,17 @@
                             <h3><span class="material-symbols-rounded">payments</span> Riepilogo Prenotazione</h3>
                             <div class="summary-row">
                                 <span>Tavoli (<span id="summaryTableQty">0</span>):</span>
-                                <strong id="summaryTablePrice">€ 0,00</strong>
+                                <strong id="summaryTablePrice">&euro; 0,00</strong>
                             </div>
                             <div class="summary-row">
                                 <span>Sdraio (<span id="summaryChairQty">0</span>):</span>
-                                <strong id="summaryChairPrice">€ 0,00</strong>
+                                <strong id="summaryChairPrice">&euro; 0,00</strong>
                             </div>
 
                             <div class="summary-divider"></div>
                             <div class="summary-row total">
                                 <span>TOTALE:</span>
-                                <strong id="summaryTotal">€ 0,00</strong>
+                                <strong id="summaryTotal">&euro; 0,00</strong>
                             </div>
                         </div>
                     </div>
@@ -179,7 +180,7 @@
                                 
                                 <div class="form-group">
                                     <label for="bookingNotes">Note Speciali (opzionale)</label>
-                                    <textarea 
+                                    <textarea
                                     id="bookingNotes" 
                                     name="notes" 
                                     placeholder="Es: Vogliamo i tavoli vicino alla piscina"
@@ -197,6 +198,12 @@
                                     <li>È possibile modificare la prenotazione fino a 24 ore prima</li>
                                     <li>Cancellazione gratuita fino a 48 ore prima</li>
                                 </ul>
+                            </div>
+                            
+                            <!-- NOTA CAMINI -->
+                            <div class="booking-info" style="background-color:#fff3e0; border-left:4px solid #ffc400;">
+                                <p><strong><span class="material-symbols-rounded">outdoor_grill</span> CAMINI BARBECUE:</strong></p>
+                                <p>I 36 punti fuoco barbecue <strong>NON sono prenotabili</strong> e sono disponibili in ordine di arrivo. È possibile portare il proprio barbecue.</p>
                             </div>
                             
                             <!-- PULSANTE SUBMIT -->
@@ -228,7 +235,7 @@
                 </div>
                 
                 <div id="errorMessage" class="booking-error-message hidden">
-                    <h3>⚠️ Errore nella Prenotazione</h3>
+                    <h3>! Errore nella Prenotazione</h3>
                     <p id="errorText"></p>
                     <button type="button" class="primary-button" onclick="this.parentElement.classList.add('hidden')">
                         Chiudi
@@ -248,11 +255,11 @@
                         </div>
                     </div>
                     <p class="donation-card__text">
-                        Vuoi contribuire al mantenimento dell'oasi? Puoi farlo con una donazione digitale: è semplice, veloce e sarebbe per noi un gesto gradito.
+                        Vuoi contribuire al mantenimento dell'oasi Puoi farlo con una donazione digitale: è semplice, veloce e sarebbe per noi un gesto gradito.
                     </p>
                     <form id="donationForm" class="donation-form" autocomplete="on">
                         <div class="form-group">
-                            <label for="donationAmount">Importo (€) *</label>
+                            <label for="donationAmount">Importo (&euro;) *</label>
                             <input
                                 type="number"
                                 id="donationAmount"
@@ -264,7 +271,7 @@
                                 autocomplete="off"
                                 required
                             >
-                            <span class="form-hint">Puoi donare qualsiasi cifra a partire da 1,00 €.</span>
+                            <span class="form-hint">Puoi donare qualsiasi cifra a partire da 1,00 &euro;.</span>
                         </div>
                         <div class="form-group">
                             <label for="donationEmail">Email *</label>
@@ -315,25 +322,25 @@
                 <h2 class="section-title">Informazioni Utili</h2>
                 <div class="info-grid">
                     <div class="info-card">
-                        <h3>🍽️ Tavoli</h3>
+                        <h3>◆ Tavoli</h3>
                         <p><strong>Capacità:</strong> 8 persone per tavolo</p>
                         <p><strong>Disponibili:</strong> 121 tavoli</p>
-                        <p><strong>Prezzo:</strong> €8,00 per tavolo</p>
+                        <p><strong>Prezzo:</strong> &euro;8,00 per tavolo</p>
                     </div>
                     <div class="info-card">
-                        <h3>☀️ Sdraio e Ombrelloni</h3>
+                        <h3>◆ Sdraio e Ombrelloni</h3>
                         <p><strong>Tipo:</strong> Sdraio con ombrellone incluso</p>
                         <p><strong>Disponibili:</strong> 65 sdraio</p>
-                        <p><strong>Prezzo:</strong> €5,00 per sdraio</p>
+                        <p><strong>Prezzo:</strong> &euro;5,00 per sdraio</p>
                     </div>
                     <div class="info-card">
-                        <h3>⏰ Orari</h3>
-                        <p><strong>Lun-Dom:</strong> 9:30 - 18:00</p>
+                        <h3>◆ Orari</h3>
+                        <p><strong>Lun-Dom:</strong> 9:30 - 19:00</p>
                         <p><strong>Check-in:</strong> 15/30 min prima dell'orario</p>
                     </div>
                     <div class="info-card">
-                        <h3>❓ Domande Frequenti</h3>
-                        <p><strong>Cancellamene:</strong> Gratuito fino a 48 ore</p>
+                        <h3>◆ Domande Frequenti</h3>
+                        <p><strong>Cancellazione:</strong> Gratuito fino a 48 ore</p>
                         <p><strong>Modifiche:</strong> Permesse fino a 24 ore</p>
                         <p><strong>Conferma:</strong> Via email e SMS</p>
                     </div>
@@ -391,5 +398,8 @@
     </script>
 </body>
 </html>
+
+
+
 
 

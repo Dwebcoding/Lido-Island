@@ -4,8 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Isola Lido - Piscina e relax per tutta la famiglia. Scopri i nostri servizi e il nostro listino prezzi.">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://lido-island-production.up.railway.app https://cdn.jsdelivr.net">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://lido-island-production.up.railway.app https://api.emailjs.com https://cdn.jsdelivr.net http://localhost:3000 https://*.vercel.app">
     <title>Isola Lido - Piscina e Relax</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/logo/tabs/Logo Lido Island no background copy.png">
+        <!-- Structured Data for Google -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Isola Lido",
+            "url": "https://www.isolalido.it/",
+            "logo": "https://www.isolalido.it/images/logo/tabs/Logo%20Lido%20Island%20no%20background%20copy.png"
+        }
+        </script>
     
     <!-- Google Fonts & Icons: Bricolage Grotesque, Space Grotesk, Material Symbols -->
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Material+Symbols+Rounded:wght@400;500;600&display=swap" rel="stylesheet">
@@ -31,6 +43,10 @@
                         <a href="html/prenotazioni.html" class="cta-button">Prenota ora</a>
                         <a href="html/servizi.html" class="ghost-button">Scopri i nostri servizi</a>
                     </div>
+                    <div class="hero-availability-note" role="status">
+                        <span class="material-symbols-rounded" aria-hidden="true">chat</span>
+                        <p>In questo momento le prenotazioni vengono gestite solo su <a href="https://wa.me/393334993469" target="_blank" rel="noreferrer">WhatsApp</a>. Rispondiamo appena possibile.</p>
+                    </div>
                     <div class="hero-meta">
                         <span class="meta-chip">Aperto 7/7</span>
                         <span class="meta-chip">Area bimbi</span>
@@ -46,13 +62,17 @@
                             </div>
                         </div>
                         <div class="info-chip info-chip-purple" tabindex="0">
-                            <span class="info-chip-label"><span class="material-symbols-rounded">event</span> Grigliate & Piscina</span>
+                            <span class="info-chip-label"><span class="material-symbols-rounded">event</span> Grigliate</span>
                             <div class="info-chip-content">
-                                A Pasqua, Pasquetta, 25 aprile, 1 maggio e tutte le domeniche di aprile puoi prenotare per giornate di barbecue e piscina!<br><br>
-                                Posti limitati: prenota in anticipo per assicurarti la tua grigliata e il relax in acqua.
+                                A Pasqua, Pasquetta, 25 aprile, 1 maggio e tutte le domeniche di aprile puoi prenotare per giornate di barbecue!<br><br>
+                                <strong>Prezzi ingresso:</strong><br>
+                                • Adulti: €6,00<br>
+                                • Ragazzi sotto 1,40m: €3,00<br><br>
+                                Posti limitati: prenota in anticipo per assicurarti la tua grigliata.
                             </div>
                         </div>
                     </div>
+                    <p style="font-size:13px; color:#7a8fa3; margin-top:8px; font-style:italic;"><span class="material-symbols-rounded" style="font-size:16px; vertical-align:middle;">touch_app</span> Clicca sulle chip per maggiori informazioni</p>
                 </div>
 
                 <div class="hero-visual animate-fade-in">
@@ -89,7 +109,7 @@
                 </div>
                 <div class="stat-card">
                     <div class="stat-icon icon-hours material-symbols-rounded">schedule</div>
-                    <div class="stat-number" data-target="12">0</div>
+                    <div class="stat-number" data-target="10">0</div>
                     <div class="stat-label">Ore Aperto</div>
                 </div>
             </div>
@@ -101,7 +121,7 @@
                 <h2 class="section-title">Benvenuti a Isola Lido</h2>
                 <p class="about-text">
                     Isola Lido è il luogo perfetto dove rilassarsi e divertirsi in famiglia. 
-                    Con le nostre moderne piscine, aree verdi ombreggiate e servizi completi, 
+                    Con le nostre piscine, aree verdi ombreggiate e servizi completi, 
                     offriamo un'esperienza indimenticabile per adulti e bambini.
                 </p>
                 <p class="about-text">
@@ -110,14 +130,14 @@
                     Isola Lido è la destinazione ideale per ogni occasione.
                 </p>
                 <p class="about-text">
-                    Disponibilità di bar, spogliatoi moderni, docce e servizi igienici di prima qualità 
+                    Disponibilità di bar, spogliatoi, docce e servizi igienici 
                     rendono la tua visita ancora più confortevole.
                 </p>
                 <div class="about-cta">
                     <a href="html/servizi.html" class="primary-button">Vedi Listino Prezzi</a>
                     <a href="html/contatti.html" class="secondary-button">Contattaci</a>
                 </div>
-            </div>
+                <div>
         </section>
 
         <!-- SERVIZI OFFERTI -->

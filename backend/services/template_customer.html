@@ -1,69 +1,72 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <style>
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:'Poppins',Arial,sans-serif;background:#f5f5f5;padding:18px;color:#1a3a4a}
-    .card{max-width:560px;margin:0 auto;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,0.06)}
-    .hdr{background:linear-gradient(135deg,#00a8e8,#00d9ff);color:#fff;padding:20px;text-align:center}
-    .hdr h1{font-size:20px}
-    .body{padding:18px}
-    .summary{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #eef6fb}
-    .summary .left{color:#7a8fa3;font-size:13px}
-    .summary .right{font-weight:700;color:#00a8e8}
-    .items{margin-top:12px;display:flex;gap:10px}
-    .item{flex:1;background:#f0f9ff;padding:10px;border-radius:8px;text-align:center;border:1px solid #dff6ff}
-    .item .count{font-size:18px;font-weight:700;color:#00a8e8}
-    .notes{margin-top:14px;padding:12px;background:#f8f9fa;border-left:4px solid #00a8e8;border-radius:6px}
-    .footer{padding:14px;background:#1a3a4a;color:#fff;text-align:center;font-size:13px}
-    .muted{font-size:12px;color:#7a8fa3}
-    @media(max-width:480px){.items{flex-direction:column}}
-  </style>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body>
-  <div class="card">
-    <div class="hdr">
-      <h1>Conferma ricezione prenotazione</h1>
-      <div class="muted">Isola Lido - Prenotazione ricevuta</div>
-    </div>
-    <div class="body">
-      <div style="margin-bottom:12px">Ciao {{customer_name}}, abbiamo ricevuto la tua prenotazione. Di seguito un breve riepilogo:</div>
-
-      <div class="summary">
-        <div class="left">Numero prenotazione</div>
-        <div class="right">{{booking_id}}</div>
-      </div>
-
-      <div class="summary">
-        <div class="left">Data</div>
-        <div class="right">{{booking_date}}</div>
-      </div>
-
-      <div class="items">
-        <div class="item">
-          <div class="count">{{tables_count}}</div>
-          <div class="muted">Tavoli</div>
-        </div>
-        <div class="item">
-          <div class="count">{{chairs_count}}</div>
-          <div class="muted">Sdraio/Ombrelloni</div>
-        </div>
-      </div>
-
-      <div style="margin-top:14px" class="summary">
-        <div class="left">Totale</div>
-        <div class="right">€ {{total_price}}</div>
-      </div>
-
-      <div class="notes" style="margin-top:14px">
-        Riceverai una conferma dal gestore appena la prenotazione sarà elaborata. Se hai bisogno di modificare qualcosa contattaci al numero indicato nella mail del proprietario.
-      </div>
-
-      <div style="margin-top:14px" class="muted">Ricevuta il: {{booking_timestamp}}</div>
-    </div>
-    <div class="footer">Isola Lido — 📞 333-499-3469 — 📧 postamaster@isolalido.it</div>
-  </div>
+<body style="margin:0; padding:0; font-family:Arial,sans-serif; background-color:#f5f5f5;">
+	<table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f5f5f5; padding:20px 0;">
+		<tr>
+			<td align="center">
+				<table width="560" cellpadding="0" cellspacing="0" border="0" style="background-color:#ffffff; border-radius:8px;">
+					<!-- Header -->
+					<tr>
+						<td style="background-color:#1a3a4a; padding:20px; text-align:center;">
+							<h1 style="margin:0 0 5px 0; color:#ffffff; font-size:20px;">Conferma ricezione prenotazione</h1>
+							<p style="margin:0; color:#ffffff; font-size:12px;">Isola Lido - Prenotazione ricevuta</p>
+						</td>
+					</tr>
+					<!-- Content -->
+					<tr>
+						<td style="padding:20px;">
+							<p style="margin:0 0 15px 0; color:#1a3a4a; font-size:14px;">Ciao {{customer_name}}, abbiamo ricevuto la tua prenotazione. Di seguito un breve riepilogo:</p>
+							
+							<!-- Info rows -->
+							<table width="100%" cellpadding="10" cellspacing="0" border="0" style="margin-bottom:15px;">
+								<tr style="border-bottom:1px solid #eef6fb;">
+									<td style="color:#7a8fa3; font-size:13px;">Numero prenotazione</td>
+									<td align="right" style="color:#00a8e8; font-size:13px; font-weight:bold;">{{booking_id}}</td>
+								</tr>
+								<tr style="border-bottom:1px solid #eef6fb;">
+									<td style="color:#7a8fa3; font-size:13px;">Data</td>
+									<td align="right" style="color:#00a8e8; font-size:13px; font-weight:bold;">{{booking_date}}</td>
+								</tr>
+							</table>
+							
+							<!-- Items -->
+							<table width="100%" cellpadding="0" cellspacing="10" border="0" style="margin-bottom:15px;">
+								<tr>
+									<td width="50%" style="background-color:#f0f9ff; border:1px solid #dff6ff; padding:12px; text-align:center;">
+										<div style="font-size:18px; color:#00a8e8; font-weight:bold; margin-bottom:4px;">{{tables_count}}</div>
+										<div style="font-size:12px; color:#7a8fa3;">Tavoli</div>
+									</td>
+									<td width="50%" style="background-color:#f0f9ff; border:1px solid #dff6ff; padding:12px; text-align:center;">
+										<div style="font-size:18px; color:#00a8e8; font-weight:bold; margin-bottom:4px;">{{chairs_count}}</div>
+										<div style="font-size:12px; color:#7a8fa3;">Sdraio/Ombrelloni</div>
+									</td>
+								</tr>
+							</table>
+							
+							<!-- Total -->
+							<table width="100%" cellpadding="10" cellspacing="0" border="0" style="margin-bottom:15px; border-bottom:1px solid #eef6fb;">
+								<tr>
+									<td style="color:#7a8fa3; font-size:13px;">Totale</td>
+									<td align="right" style="color:#00a8e8; font-size:13px; font-weight:bold;">€ {{total_price}}</td>
+								</tr>
+							</table>
+							
+							<p style="margin:0; color:#7a8fa3; font-size:12px;">Ricevuta il: {{booking_timestamp}}</p>
+						</td>
+					</tr>
+					<!-- Footer -->
+					<tr>
+						<td style="background-color:#00a8e8; padding:15px; text-align:center;">
+							<p style="margin:0; color:#ffffff; font-size:13px;">Isola Lido — 📞 333-499-3469 — 📧 info@isolalido.it</p>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
 </body>
 </html>
