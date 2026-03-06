@@ -59,5 +59,20 @@ mongoose.connect(MONGO_URI)
 
 // Handler export per Vercel serverless
 export default function handler(req, res) {
+  // Set CORS headers manually for Vercel
+  const origin = req.headers.origin;
+  const allowedOrigins = ['https://www.isolalido.it', 'https://isolalido.it', 'http://localhost:3000', 'http://127.0.0.1:5500'];
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  }
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE,OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Authorization,x-admin-key');
+  
+  if (req.method === 'OPTIONS') {
+    res.status(204).end();
+    return;
+  }
+  
   return app(req, res);
 }
